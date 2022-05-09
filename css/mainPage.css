@@ -88,6 +88,10 @@ h6 {
   font-weight: inherit;
 }
 
+div, a, h1 {
+  font-family: "Roboto";
+}
+
 .wrapper {
   min-height: 100%;
 }
