@@ -9,6 +9,7 @@
 </head>
 <body>
     <div class="wrapper">
+        
         <header class="header">
             <div class="header__container container">
                 <div class="header__content">
@@ -19,10 +20,11 @@
                         <a href="#" class="nav-btn">Новостройки</a>
                         <a href="#" class="nav-btn">Дома и участки</a>
                     </nav>
-                    <a class="header__btn" href="#">Войти</a>
+                    <button class="header__btn">Войти</button>
                 </div>
             </div>
         </header>
+        
         <div class="ad">
             <div class="ad__container container">
                 <div class="ad__navigation">
@@ -218,5 +220,27 @@
             </div>
         </footer>
     </div>
+    <div id="entryForm" class="modal">
+        <form class="modal-content animate" action="">
+          <div class="imgcontainer">
+            <span class="close" title="Close Modal">×</span>
+          </div>
+      
+          <div class="container1">
+              <div class="h2__enter">
+                 <span class="entr">Вход </span> 
+                  / 
+                 <span class="reg">Регистрация</span> 
+                </div>
+            <input type="text" placeholder="Email" name="Email" required>
+      
+            <input type="password" placeholder="Пароль" name="psw" required>
+              
+            <button type="submit" class="btn__submit">Вход</button>
+          </div>
+      
+        </form>
+    </div>
+    <script src="../js/entry.js"></script>
 </body>
 </html>
