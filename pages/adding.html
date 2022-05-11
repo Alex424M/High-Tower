@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,6 +8,7 @@
     <title>Разместить объявление</title>
     <link rel="stylesheet" href="../css/adding.css">
 </head>
+
 <body>
     <div class="wrapper">
         <header class="header">
@@ -32,109 +34,116 @@
                 </div>
                 <div class="main__row">
                     <div class="left-block">
-                    </form>
                         <div class="left-block__title">Новое объявление</div>
-                        <div class="left-block__first">
-                            <div class="left-block__subtitle subtitle">Название объявления</div>
-                            <input type="text" class="input__name">
-                            <div class="left-block__subtitle subtitle">Описание объявления</div>
-                            <input type="text" class="input__description">
-                            <div class="left-block__subtitle subtitle">Цена</div>
-                            <div class="left-block__cost-row">
-                                <label for="cost">Цена</label>
-                                <input type="text" name="cost" class="input__cost">
-                                <label for="cost">руб.</label>
+                        <form action="" method="post" class="left-block__form">
+                            <div class="left-block__first">
+                                <div class="left-block__subtitle subtitle">Название объявления</div>
+                                <input type="text" class="input__name">
+                                <div class="left-block__subtitle subtitle">Описание объявления</div>
+                                <textarea type="text" class="input__description"
+                                    placeholder="Расскажите в каком состоянии квартира, была ли перепланировка, сколько было хозяев, какие соседи и т.д."></textarea>
+                                <div class="left-block__subtitle subtitle">Цена</div>
+                                <div class="left-block__cost-row">
+                                    <label for="cost" class="row__cost">Цена</label>
+                                    <input type="text" name="cost" class="input__cost">
+                                    <label for="cost" class="row__cost">руб.</label>
+                                </div>
                             </div>
-                        </div>
-                        <div class="left-block__second">
-                            <div class="left-block__subtitle subtitle">Тип объявления</div>
-                            <div class="left-block__characteristics">
-                                <ul class="characteristic-ul">
-                                    <li class="characteristic-li">
-                                        <span>Тип сделки</span>
-                                        <span>аренда</span>
-                                    </li>
-                                    <li class="characteristic-li">
-                                        <span>Тип недвижимости</span>
-                                        <span>жилая</span>
-                                    </li>
-                                    <li class="characteristic-li">
-                                        <span>Недвижимость</span>
-                                        <span>Квартира</span>
-                                        <span>Новостройка</span>
-                                        <span>Комната</span>
-                                        <span>Дом</span>
-                                        <span>Участок</span>
-                                    </li>
-                                    
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="left-block__third">
-                            <div class="left-block__subtitle subtitle">Адрес</div>
-                            <input type="text" name="address" class="input__address">
-                            <div class="left-block__map">
+                            <div class="left-block__second">
+                                <div class="left-block__subtitle subtitle">Тип объявления</div>
+                                <div class="left-block__characteristics">
+                                    <ul class="characteristic-ul">
+                                        <li class="characteristic-li">
+                                            <span>Тип сделки</span>
+                                            <span>Аренда</span>
+                                            <span>Продажа</span>
+                                        </li>
+                                        <li class="characteristic-li">
+                                            <span>Тип недвижимости</span>
+                                            <span>Жилая</span>
+                                            <span>Продажа</span>
+                                        </li>
+                                        <li class="characteristic-li">
+                                            <span>Недвижимость</span>
+                                            <span>Квартира</span>
+                                            <span>Новостройка</span>
+                                            <span>Комната</span>
+                                            <span>Дом</span>
+                                            <span>Участок</span>
+                                        </li>
 
+                                    </ul>
+                                </div>
                             </div>
-                            <div class="left-block__metro">
-                                <div class="metro__row">
-                                    <div class="metro__station">
-                                        <div class="station__metro">Станция метро</div>
-                                        <div class="metro__input">
-                                            <input type="text" name="station">
+                            <div class="left-block__third">
+                                <div class="left-block__subtitle subtitle">Адрес</div>
+                                <input type="text" name="address" class="input__address">
+                                <div class="left-block__map">
+
+                                </div>
+                                <div class="left-block__metro">
+                                    <div class="metro__row">
+                                        <div class="metro__station">
+                                            <div class="station__metro">Станция метро</div>
+                                            <div>
+                                                <input type="text" class="metro__input" name="station">
+                                            </div>
+                                        </div>
+                                        <div class="metro__foot">
+                                            <div class="foot__metro">Минут до метро(пешком)</div>
+                                            <div>
+                                                <input type="text" class="foot__input" name="foot">
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="metro__foot">
-                                        <div class="foot__metro">Минут до метро(пешком)</div>
-                                        <div class="foot__input">
-                                            <input type="text" name="foot">
-                                        </div>
+                                </div>
+                            </div>
+                            <div class="left-block__fourth">
+                                <div class="left-block__subtitle subtitle">Параметр</div>
+                                <div class="params__container">
+                                    <div class="params__row">
+                                        <label for="quantity">Количество комнат</label>
+                                        <input type="text" name="quantity" id="">
+                                    </div>
+                                    <div class="params__row">
+                                        <label for="square">Площадь</label>
+                                        <input type="text" name="square" id="">
+                                    </div>
+                                    <div class="params__row">
+                                        <label for="floor">Этаж</label>
+                                        <input type="text" name="floor" id="">
+                                    </div>
+                                    <div class="params__row">
+                                        <label for="totalFloor">Этажей в доме</label>
+                                        <input type="text" name="totalFloor" id="">
+                                    </div>
+                                    <div class="params__row">
+                                        <label for="ceilHeight">Высота потолков</label>
+                                        <input type="text" name="ceilHeight" id="">
+                                    </div>
+                                </div>
+                                <div class="params__row">
+                                    <div class="params__renovation">Ремонт</div>
+                                    <span>Требуется</span>
+                                    <span>Евро</span>
+                                    <span>Косметический</span>
+                                </div>
+                            </div>
+                            <div class="left-block__fifth">
+                                <div class="left-block__subtitle subtitle">Фотографии</div>
+                                <div class="photo__description">Не допускаются к размещению фотографии с водяными
+                                    знаками, чужих объектов и рекламные баннеры.
+                                    JPG, PNG или GIF. Максимальный размер файла 10 мб</div>
+                                <div class="photo__content">
+                                    <div class="photo__img"><img src="../img/icons/photo.svg" alt=""></div>
+                                    <div>
+
+                                        <button class="photo__btn">Добавить фотографии</button>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="left-block__fourth">
-                            <div class="left-block__subtitle subtitle">Параметр</div>
-                            <div class="params__container">
-                                <div class="params__row">
-                                    <label for="quantity">Количество комнат</label>
-                                    <input type="text" name="quantity" id="">
-                                </div>
-                                <div class="params__row">
-                                    <label for="square">Площадь</label>
-                                    <input type="text" name="square" id="">
-                                </div>
-                                <div class="params__row">
-                                    <label for="floor">Этаж</label>
-                                    <input type="text" name="floor" id="">
-                                </div>
-                                <div class="params__row">
-                                    <label for="totalFloor">Этажей в доме</label>
-                                    <input type="text" name="totalFloor" id="">
-                                </div>
-                                <div class="params__row">
-                                    <label for="ceilHeight">Высота потолков</label>
-                                    <input type="text" name="ceilHeight" id="">
-                                </div>
-                            </div>
-                            <div class="params__row">
-                                <div class="params__renovation">Ремонт</div>
-                                <span>Требуется</span>
-                                <span>Евро</span>
-                                <span>Косметический</span>
-                            </div>
-                        </div>
-                        <div class="left-block__fifth">
-                            <div class="left-block__subtitle subtitle">Фотографии</div>
-                            <div class="photo__description">Не допускаются к размещению фотографии с водяными знаками, чужих объектов и рекламные баннеры. 
-                                JPG, PNG или GIF. Максимальный размер файла 10 мб</div>
-                            <div class="photo__content">
-                                <div class="photo__img"><img src="" alt=""></div>
-                                <button class="photo__btn">Добавить фотографии</button>
-                            </div>
-                        </div>
-                        <button class="submit" type="submit">Опубликовать</button>
-                    </form>
+                            <button class="submit" type="submit">Опубликовать</button>
+                        </form>
                     </div>
                     <div class="right-block">
                         <div class="right-block__container">
@@ -190,4 +199,5 @@
         </footer>
     </div>
 </body>
+
 </html>
