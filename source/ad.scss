@@ -390,11 +390,8 @@ color: #000000;
 }
 .contacts__icon img{
 }   
-input[type=text]{
+input{
     margin-bottom: 16px;
-}
-input[type=password]{
-    margin-bottom: 40px;
 }
 /* Full-width input fields */
 input[type=text], input[type=password] {
@@ -424,6 +421,7 @@ input[type=text], input[type=password] {
     font-size: 20px;
     line-height: 23px;
     cursor: pointer;
+    margin-top: 40px;
 }
 
 button:hover {
@@ -479,7 +477,6 @@ button:hover {
 }
 .notActive{
     color: rgba(0, 0, 0, 0.5);
-    
 }
 /* The Close Button (x) */
 .close {

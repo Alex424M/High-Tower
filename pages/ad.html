@@ -230,7 +230,7 @@
               <div class="h2__enter">
                  <span class="entr">Вход </span> 
                   / 
-                 <span class="reg">Регистрация</span> 
+                 <span class="reg  notActive">Регистрация</span> 
                 </div>
             <input type="text" placeholder="Email" name="Email" required>
       
@@ -238,7 +238,29 @@
               
             <button type="submit" class="btn__submit">Вход</button>
           </div>
+        </form>
+    </div>
+    <div id="regForm" class="modal">
+        <form class="modal-content animate" action="">
+          <div class="imgcontainer">
+            <span class="close" title="Close Modal">×</span>
+          </div>
       
+          <div class="container1">
+              <div class="h2__enter">
+                 <span class="entr notActive">Вход </span> 
+                  / 
+                 <span class="reg">Регистрация</span> 
+                </div>
+            <input type="text" placeholder="Имя" name="Name" required>
+            <input type="text" placeholder="Email" name="Email" required>
+            <input type="text" placeholder="Номер телефона" name="Number" required>
+      
+            <input type="password" placeholder="Пароль" name="psw" required>
+            <input type="password" placeholder="Повторите пароль" name="psw2" required>
+              
+            <button type="submit" class="btn__submit">Регистрация</button>
+          </div>
         </form>
     </div>
     <script src="../js/entry.js"></script>
