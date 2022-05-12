@@ -552,6 +552,8 @@ h6 {
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
+  position: sticky;
+  top: 8px;
 }
 
 .list__link {
@@ -566,6 +568,15 @@ h6 {
 }
 .list__link:last-child {
   padding-bottom: 0;
+}
+
+.selectedSection {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #000000;
 }
 
 .footer {
