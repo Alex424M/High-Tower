@@ -16,12 +16,12 @@
                 <div class="header__content">
                     <a href="../index.html" class="header__logo">High Tower</a>
                     <nav class="header__nav">
-                        <a href="pages/ads.html" class="nav-btn">Аренда</a>
+                        <a href="ads.html" class="nav-btn">Аренда</a>
                         <a href="#" class="nav-btn">Продажа</a>
                         <a href="#" class="nav-btn">Новостройки</a>
                         <a href="#" class="nav-btn">Дома и участки</a>
                     </nav>
-                    <button class="header__btn">Разместить объявление</button>
+                    <a href="adding.html" class="header__btn">Разместить объявление</a>
                 </div>
             </div>
         </header>
@@ -55,13 +55,25 @@
                                     <ul class="characteristic-ul">
                                         <li class="characteristic-li">
                                             <span>Тип сделки</span>
-                                            <span>Аренда</span>
-                                            <span>Продажа</span>
+                                            <div class="li__radio">
+                                                <input id="radio-1" type="radio" name="radio" value="1" checked>
+                                                <label for="radio-1">Аренда</label>
+                                            </div>
+                                            <div class="li__radio">
+                                                <input id="radio-2" type="radio" name="radio" value="1">
+                                                <label for="radio-2">Продажа</label>
+                                            </div>
                                         </li>
                                         <li class="characteristic-li">
                                             <span>Тип недвижимости</span>
-                                            <span>Жилая</span>
-                                            <span>Продажа</span>
+                                            <div class="li__radio">
+                                                <input id="radio-3" type="radio" name="radio1" value="1" checked>
+                                                <label for="radio-3">Жилая</label>
+                                            </div>
+                                            <div class="li__radio">
+                                                <input id="radio-4" type="radio" name="radio1" value="2">
+                                                <label for="radio-4">Новостройка</label>
+                                            </div>
                                         </li>
                                         <li class="characteristic-li">
                                             <div class="li__items">
@@ -69,17 +81,32 @@
                                             </div>
                                             <div class="li__items li__items2">
                                                 <div class="item__row">
-                                                    <div>Квартира</div>
-                                                    <div>Новостройка</div>
+                                                    <div class="li__radio"><input id="radio-5" type="radio"
+                                                            name="radio3" value="3" checked>
+                                                        <label for="radio-5">Квартира</label>
+                                                    </div>
+                                                    <div class="li__radio"><input id="radio-6" type="radio"
+                                                            name="radio3" value="4">
+                                                        <label for="radio-6">Новостройка</label>
+                                                    </div>
                                                 </div>
                                                 <div class="break"></div>
                                                 <div class="item__row">
-                                                    <div>Комната</div>
-                                                    <div>Дом</div>
+                                                    <div class="li__radio"><input id="radio-7" type="radio"
+                                                            name="radio3" value="5">
+                                                        <label for="radio-7">Комната</label>
+                                                    </div>
+                                                    <div class="li__radio"><input id="radio-8" type="radio"
+                                                            name="radio3" value="6  ">
+                                                        <label for="radio-8">Дом</label>
+                                                    </div>
                                                 </div>
                                                 <div class="break"></div>
-                                                <div class="">
-                                                    <div>Участок</div>
+                                                <div>
+                                                    <div class="li__radio"><input id="radio-9" type="radio"
+                                                            name="radio3" value="1">
+                                                        <label for="radio-9">Участок</label>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </li>
@@ -135,9 +162,18 @@
                                     </div>
                                     <div class="params__row">
                                         <div class="params__renovation">Ремонт</div>
-                                        <span>Требуется</span>
-                                        <span>Евро</span>
-                                        <span>Косметический</span>
+                                        <div class="li__radio">
+                                            <input id="radio-10" type="radio" name="radio10" value="2" checked>
+                                            <label for="radio-10">Требуется</label>
+                                        </div>
+                                        <div class="li__radio">
+                                            <input id="radio-11" type="radio" name="radio10" value="2">
+                                            <label for="radio-11">Евро</label>
+                                        </div>
+                                        <div class="li__radio">
+                                            <input id="radio-12" type="radio" name="radio10" value="2">
+                                            <label for="radio-12">Косметический</label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

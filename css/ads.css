@@ -45,6 +45,8 @@ input,
 button,
 textarea {
   font-family: inherit;
+  padding: 0;
+  margin: 0;
 }
 
 input::-ms-clear {
@@ -124,6 +126,9 @@ h6 {
       -ms-flex-pack: justify;
           justify-content: space-between;
 }
+.header__content a[href="ad.html"] {
+  color: white;
+}
 
 .header__logo {
   font-size: 25px;
@@ -154,7 +159,7 @@ h6 {
   font-family: "Roboto";
   font-weight: 400;
   background: linear-gradient(45deg, #FF4D62, #E96200);
-  padding: 10px 50px;
+  padding: 8px 50px;
   border-radius: 10px;
   color: white;
 }
@@ -247,12 +252,21 @@ h6 {
   opacity: 0.8;
 }
 
+.left-block__metro select {
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  padding: 8px 24px;
+}
+
 .left-block__cost {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
 
+.cost-item {
+  margin-right: 8px;
+}
 .cost-item input {
   max-width: 106px;
   font-family: "Roboto";
@@ -260,6 +274,9 @@ h6 {
   border-radius: 5px;
   font-weight: 300;
   font-size: 20px;
+}
+.cost-item :last-child {
+  margin-right: 0px;
 }
 
 .right-block__sort {
@@ -402,7 +419,7 @@ h6 {
   font-size: 20px;
   color: #FFFFFF;
   background: linear-gradient(45deg, #FF4D62, #E96200);
-  padding: 10px 50px;
+  padding: 10px 40px;
   border-radius: 10px;
   float: right;
 }
@@ -467,4 +484,151 @@ h6 {
 
 .contacts__column {
   padding: 0 20px;
+}
+
+/* Full-width input fields */
+input[type=text] {
+  margin-bottom: 24px;
+}
+
+input[type=text],
+input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border-radius: 5px;
+  font-size: 22px;
+  font-family: "Roboto";
+  font-weight: 300;
+}
+
+/* Set a style for all buttons */
+.btn__submit {
+  background-image: linear-gradient(45deg, #FF4D62, #E96200);
+  border-radius: 10px;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  width: 100%;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 23px;
+  cursor: pointer;
+  margin-top: 40px;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+/* Center the image and position the close button */
+.imgcontainer {
+  position: relative;
+}
+
+.container1 {
+  padding: 32px 70px 50px;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: black;
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */
+  padding-top: 60px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto 15% auto;
+  /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+  width: 493px;
+  /* Could be more or less, depending on screen size */
+  border-radius: 5px;
+}
+
+.h2__enter {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 42px;
+  margin-bottom: 56px;
+  color: #000000;
+}
+
+.entr {
+  cursor: pointer;
+}
+
+.reg {
+  cursor: pointer;
+}
+
+.notActive {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+/* The Close Button (x) */
+.close {
+  position: absolute;
+  right: 25px;
+  top: 0;
+  color: #000;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: red;
+  cursor: pointer;
+}
+
+/* Add Zoom Animation */
+.animate {
+  -webkit-animation: animatezoom 0.6s;
+  animation: animatezoom 0.6s;
+}
+
+@-webkit-keyframes animatezoom {
+  from {
+    -webkit-transform: scale(0);
+  }
+  to {
+    -webkit-transform: scale(1);
+  }
+}
+@keyframes animatezoom {
+  from {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  }
+  to {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
 }

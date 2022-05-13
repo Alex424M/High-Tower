@@ -45,6 +45,8 @@ input,
 button,
 textarea {
   font-family: inherit;
+  padding: 0;
+  margin: 0;
 }
 
 input::-ms-clear {
@@ -154,7 +156,7 @@ h6 {
   font-family: "Roboto";
   font-weight: 400;
   background: linear-gradient(45deg, #FF4D62, #E96200);
-  padding: 10px 50px;
+  padding: 8px 50px;
   border-radius: 10px;
   color: white;
 }
@@ -534,7 +536,8 @@ input {
 }
 
 /* Full-width input fields */
-input[type=text], input[type=password] {
+input[type=text],
+input[type=password] {
   width: 100%;
   padding: 12px 20px;
   display: inline-block;

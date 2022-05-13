@@ -2,9 +2,16 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
-div,a,h1{
+
+$gradient: linear-gradient(45deg, #FF4D62, #E96200);
+$opacity: .7;
+
+div,
+a,
+h1 {
     font-family: 'Roboto';
 }
+
 .wrapper {
 
     min-height: 100%;
@@ -15,10 +22,12 @@ div,a,h1{
     width: 100%;
     padding: 15px 0;
 }
-.container{
+
+.container {
     max-width: 1140px;
     margin: 0 auto;
 }
+
 .header__container {
     max-width: 1400px;
     margin: 0 auto;
@@ -57,9 +66,10 @@ div,a,h1{
     font-size: 20px;
     font-family: "Roboto";
     font-weight: 400;
-    background-color: #ffef40;
-    padding: 10px 50px;
+    background-image: $gradient;
+    padding: 8px 50px;
     border-radius: 10px;
+    color: white;
 }
 
 .search {
@@ -101,9 +111,11 @@ div,a,h1{
     height: 27px;
     display: flex;
 }
-.search__btn a{
+
+.search__btn a {
     display: block;
 }
+
 .btn__buy {}
 
 .btn__rent {}
@@ -121,66 +133,102 @@ div,a,h1{
     border-radius: 10px;
     transition: all 0.3s ease;
 }
+
 .btn-search:hover {
     background-color: #dfdfdf;
 }
+
 .search__row {
     position: relative;
     display: flex;
     align-items: center;
-    height: 50px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 100;
+    font-size: 20px;
+
+    & a[href="pages/ads.html"] {
+        color: white;
+    }
 }
 
 .search__apartment {
     position: relative;
 }
-.row__apart{
+
+.row__apart {
     flex-basis: 20%;
-    height: 50px;
+    padding: 12px 10px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 20px;
+    max-width: 195px;
+    border-radius: 5px 0 0 5px;
+}
+
+.row__room {
+    flex-basis: 20%;
+    padding: 12px 10px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 20px;
     max-width: 195px;
 }
-.row__room{
+
+.row__dist {
     flex-basis: 20%;
-    height: 50px;
+    padding: 12px 10px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 20px;
     max-width: 195px;
 }
-.row__dist{
-    flex-basis: 20%;
-    height: 50px;
-    max-width: 195px;
-}
+
 .btn-cost {
     background-color: #fff;
-    height: 50px;
+    padding: 15px 10px;
+    height: 50.26px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 20px;
     flex-basis: 20%;
     text-align: center;
-    padding: 19px 0px;
+    display: block;
+    border-radius: 0 5px 5px 0;
 }
 
 .btn__search {
     font-size: 20px;
     font-family: "Roboto";
     font-weight: 400;
-    background-color: #ffef40;
+    background-image: $gradient;
     padding: 10px 50px;
     border-radius: 10px;
     margin-left: 30px;
+
 }
 
 /*--------------------*/
 .buy {
-   position: relative;
+    position: relative;
 }
+
 .buy__container {
 
     margin-top: 300px;
 }
+
 .buy__content {
     max-width: 1140px;
     margin: 0 auto;
 }
-.buy__logo {
-}
+
+.buy__logo {}
+
 .logo {
     font-size: 41.667px;
     font-family: "Roboto";
@@ -191,18 +239,22 @@ div,a,h1{
 .offers {
     padding: 40px 0px 30px;
 }
+
 .offer__row {
     display: flex;
     margin: 0 -15px 50px;
     flex-wrap: wrap;
 }
-.offer__column{
+
+.offer__column {
     padding: 0 15px;
     flex: 0 1 25%;
 }
+
 .offer__item {
     background-color: #f2f2f2;
 }
+
 .offer__img {
     width: 261px;
     height: 152px;
@@ -211,187 +263,218 @@ div,a,h1{
     justify-content: center;
     align-items: center;
 }
-.offer__img img{
+
+.offer__img img {
     height: 100%;
     width: auto;
 }
-.offer__title {
-}
+
+.offer__title {}
+
 .title {
     font-size: 24px;
     font-family: "Roboto";
     color: #000;
 }
+
 .offer__cost {
     margin-bottom: 30px;
 }
-.offer__content{
+
+.offer__content {
     padding: 30px 10px 20px;
 }
+
 .cost {
     font-size: 12px;
     font-family: "Roboto";
     color: #000;
 }
+
 .location__row {
     display: flex;
     justify-content: space-between;
 }
-.location__metro {
-}
+
+.location__metro {}
+
 .metro {
-        font-size: 12px;
-        font-family: "Roboto";
-        color: #000;
+    font-size: 12px;
+    font-family: "Roboto";
+    color: #000;
 }
-.location__foot {
-}
+
+.location__foot {}
+
 .foot {
     font-size: 12px;
     font-family: "Roboto";
     color: #000;
 }
+
 /*-------------------------*/
-.rent{
+.rent {
     position: relative;
 }
-.rent__content{
+
+.rent__content {
     max-width: 1140px;
     margin: 0 auto;
 }
-.rent__logo{
 
-}
+.rent__logo {}
+
 /*------------------------------*/
 
 .hypothec {
     background-color: #f2f2f2;
 }
+
 .hypothec__container {
     padding: 50px 0 65px;
 }
+
 .hypothec__content {
     max-width: 1140px;
     margin: 0 auto;
 }
+
 .hypothec__logo {
     padding: 0px 0px 30px;
 }
+
 .hypothec__rowTitle {
     display: flex;
     justify-content: end;
 }
+
 .hypothec__title {
     flex: 0 1 40%;
-        font-size: 20px;
-        font-family: "Roboto";
-        color: rgb(50, 50, 50);
-        line-height: 1.15;
-        font-weight: 400;
-        margin-bottom: 57px;
+    font-size: 20px;
+    font-family: "Roboto";
+    color: rgb(50, 50, 50);
+    line-height: 1.15;
+    font-weight: 400;
+    margin-bottom: 57px;
 }
+
 .hypothec__row {
     display: flex;
     flex-wrap: wrap;
     margin: 0 -15px;
     align-items: stretch;
 }
+
 .hypothec__column {
     padding: 0 15px;
     flex: 0 1 25%;
 }
+
 .hypothec__item {
     background-color: #fff;
     padding: 20px 15px;
     height: 100%;
 }
+
 .item__icon {
     width: 52px;
     margin-bottom: 30px;
 }
+
 .item__title {
-        font-size: 15px;
-        font-family: "Roboto";
-        color: #000;
-        line-height: 1.667;
-        font-weight: 400;
-        margin-bottom: 10px;
+    font-size: 15px;
+    font-family: "Roboto";
+    color: #000;
+    line-height: 1.667;
+    font-weight: 400;
+    margin-bottom: 10px;
 }
-.item__subtitle {   
-        font-size: 13px;
-        font-family: "Roboto";
-        color: #323232;
-        line-height: 1.769;
-        font-weight: 300;
+
+.item__subtitle {
+    font-size: 13px;
+    font-family: "Roboto";
+    color: #323232;
+    line-height: 1.769;
+    font-weight: 300;
 }
 
 /*----------------------------*/
-.about {
-}
-.about__container {
-}
+.about {}
+
+.about__container {}
+
 .about__content {
     max-width: 1140px;
     margin: 0 auto;
     padding: 50px 0px 40px;
 }
+
 .about__logo {
     margin-bottom: 40px;
 }
+
 .about__text {
-        font-size: 21px;
-        font-family: "Roboto";
-        color: #323232;
-        line-height: 1.286;
-        font-weight: 400;
+    font-size: 21px;
+    font-family: "Roboto";
+    color: #323232;
+    line-height: 1.286;
+    font-weight: 400;
 }
-.about__text p{
+
+.about__text p {
     margin-bottom: 40px;
 }
-.about__text p:last-child{
+
+.about__text p:last-child {
     margin-bottom: 0px;
 }
+
 /*------------------*/
 .footer {
     background-color: #323232;
 }
-.footer__container {
-}
+
+.footer__container {}
 
 .footer__content {
     max-width: 930px;
     margin: 0 auto;
     padding: 100px 0 50px;
 }
+
 .footer__row {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     margin-bottom: 35px;
 }
-.footer__column {
-}
-.footer__item {
-}
+
+.footer__column {}
+
+.footer__item {}
+
 .column__title {
-        font-size: 29px;
-        font-family: "Roboto";
-        color: #fff;
-        font-weight: 600;
-        margin-bottom: 30px;
+    font-size: 29px;
+    font-family: "Roboto";
+    color: #fff;
+    font-weight: 600;
+    margin-bottom: 30px;
 }
+
 .item__subtitle {
-        font-size: 21px;
-        font-family: "Roboto";
-        color: #fff;
-        font-weight: 400;
-        margin-bottom: 35px;
+    font-size: 21px;
+    font-family: "Roboto";
+    color: #fff;
+    font-weight: 400;
+    margin-bottom: 35px;
 }
+
 .footer__arrow {
     border-top: #fff 1px solid;
     width: 66%;
     margin: 0 auto;
 }
+
 .conacts__row {
     display: flex;
     margin: 0 -20px;
@@ -399,8 +482,9 @@ div,a,h1{
     align-items: center;
     margin-top: 45px;
 }
+
 .contacts__column {
     padding: 0 20px;
 }
-.contacts__icon img{
-}
+
+.contacts__icon img {}

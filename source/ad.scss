@@ -15,14 +15,17 @@ $opacity: .7;
     position: relative;
     z-index: 2;
 }
-.container{
+
+.container {
     max-width: 1140px;
     margin: 0 auto;
 }
+
 .header__container {
     max-width: 1400px;
     margin: 0 auto;
 }
+
 .header__content {
     max-width: 1140px;
     margin: 0 auto;
@@ -48,16 +51,18 @@ $opacity: .7;
 .nav-btn {
     margin-right: 40px;
     color: black;
+
     &:last-child {
         margin-right: 0px;
-}}
+    }
+}
 
 .header__btn {
     font-size: 20px;
     font-family: "Roboto";
     font-weight: 400;
     background: $gradient;
-    padding: 10px 50px;
+    padding: 8px 50px;
     border-radius: 10px;
     color: white;
 }
@@ -70,6 +75,7 @@ $opacity: .7;
     height: 100%;
     padding: 27px 0 64px 0;
 }
+
 .ad__navigation {
     font-style: normal;
     font-family: 'Roboto';
@@ -78,104 +84,124 @@ $opacity: .7;
     line-height: 18px;
     padding: 16px 0 24px 0;
 }
-.navigation__link {
-}
+
+.navigation__link {}
+
 .navigation__arrow {
     opacity: $opacity;
 }
+
 .ad__row {
     display: flex;
 }
+
 .left-block {
     background: #FFFFFF;
     border-radius: 5px;
     padding: 24px 16px 32px;
 }
+
 .left-block__row {
     display: flex;
     justify-content: space-between;
 }
+
 .left-block__title {
     font-family: 'Roboto';
-font-style: normal;
-font-weight: 500;
-font-size: 30px;
-line-height: 35px;
-margin-bottom: 16px;
-color: #000000;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 35px;
+    margin-bottom: 16px;
+    color: #000000;
 }
-.left-block__icon img{
+
+.left-block__icon img {
     width: 28px;
     height: 23px;
 }
+
 .left-block__img {
-    border-radius: 5px;//????? нужно ли самому img? ?????? 
+    border-radius: 5px; //????? нужно ли самому img? ?????? 
     margin-bottom: 16px;
 }
+
 .left-block__line {
     display: flex;
 }
+
 .left-block__column {
     margin: 0 4px;
 }
+
 .left-block__item {
     padding: 0 -4px;
-    & img{
-        border-radius: 5px; 
+
+    & img {
+        border-radius: 5px;
         width: 56px;
         height: 56px; //????????? фикс.знач? ????????
     }
 }
+
 .left-block__params {
     padding: 19px 8px 28px;
     position: relative;
 
 }
+
 .params {
-    &::after{
+    &::after {
         content: "";
         width: 100%;
         position: absolute;
         bottom: 0;
         left: 0;
-        background-color: rgba(0, 0, 0, 0.25);;
+        background-color: rgba(0, 0, 0, 0.25);
+        ;
         height: 1px;
     }
 }
+
 .params__row {
     display: flex;
 }
+
 .params__column {
     margin: 0 16px;
     max-width: 67px;
 }
+
 .params__item {
     padding: 0 -16px;
 }
+
 .params__title {
     font-family: 'Roboto';
-font-style: normal;
-font-weight: 500;
-font-size: 30px;
-line-height: 35px;
-text-align: center;
-}
-.params__subtitle {
-    font-family: 'Roboto';
-font-style: normal;
-font-weight: 400;
-font-size: 15px;
-line-height: 18px;
-text-align: center;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 35px;
+    text-align: center;
 }
 
-.left-block__characteristic {
+.params__subtitle {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    text-align: center;
 }
-.characteristic {
-}
+
+.left-block__characteristic {}
+
+.characteristic {}
+
 .characteristic__title {
     padding: 28px 0 16px;
 }
+
 .title {
     font-family: 'Roboto';
     font-style: normal;
@@ -184,11 +210,13 @@ text-align: center;
     line-height: 23px;
     color: #000000;
 }
+
 .characteristic__characteristics {
     padding: 0 0 0 8px;
 }
-.characteristic-ul {
-}
+
+.characteristic-ul {}
+
 .characteristic-li {
     font-family: 'Roboto';
     font-style: normal;
@@ -198,34 +226,40 @@ text-align: center;
     color: rgba(0, 0, 0, 0.75);
     display: flex;
     margin-bottom: 4px;
-    & :last-child{
+
+    & :last-child {
         margin-bottom: 0;
     }
-    & span:first-child{
+
+    & span:first-child {
         flex: 1 1 220px;
         max-width: 220px;
         margin-right: 16px;
     }
 }
+
 .left-block__description {
     position: relative;
-    &::after{
+
+    &::after {
         content: "";
         width: 100%;
         position: absolute;
         bottom: 0;
         left: 0;
-        background-color: rgba(0, 0, 0, 0.25);;
+        background-color: rgba(0, 0, 0, 0.25);
+        ;
         height: 1px;
     }
 }
+
 .description {
     padding: 32px 0;
-    
+
 }
-.description__title {
-    
-}
+
+.description__title {}
+
 .description__text {
     font-family: 'Roboto';
     font-style: normal;
@@ -237,11 +271,13 @@ text-align: center;
     padding: 14px 0 0 8px;
     max-width: 686px;
 }
+
 .left-block__map {
     padding: 24px 0;
 }
-.map__title {
-}
+
+.map__title {}
+
 .map__addres {
     font-family: 'Roboto';
     font-style: normal;
@@ -250,8 +286,9 @@ text-align: center;
     line-height: 18px;
     color: #000000;
 }
-.map__container {
-}
+
+.map__container {}
+
 .right-block {
     margin-left: 16px;
     background: #FFFFFF;
@@ -259,6 +296,7 @@ text-align: center;
     padding: 28px 16px;
     height: fit-content;
 }
+
 .right-block__price {
     font-family: 'Roboto';
     font-style: normal;
@@ -267,6 +305,7 @@ text-align: center;
     line-height: 35px;
     color: #000000;
 }
+
 .right-block__costMeter {
     font-family: 'Roboto';
     font-style: normal;
@@ -275,6 +314,7 @@ text-align: center;
     line-height: 18px;
     color: rgba(0, 0, 0, 0.5);
 }
+
 .right-block__cotact {
     font-family: 'Roboto';
     font-style: normal;
@@ -289,6 +329,7 @@ text-align: center;
     margin: 24px 0;
     text-align: center;
 }
+
 .right-block__name {
     font-family: 'Roboto';
     font-style: normal;
@@ -297,6 +338,7 @@ text-align: center;
     line-height: 23px;
     color: #D35900;
 }
+
 .right-block__change {
     font-family: 'Roboto';
     font-style: normal;
@@ -306,78 +348,88 @@ text-align: center;
     color: #000000;
     margin: 24px 0 16px;
 }
+
 .right-block__address {
     font-family: 'Roboto';
-font-style: normal;
-font-weight: 300;
-font-size: 15px;
-line-height: 18px;
-color: #000000;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 18px;
+    color: #000000;
 
 }
+
 .right-block__row {
     display: flex;
     margin: 16px 0;
 }
+
 .right-block__metro {
     margin-right: 16px;
     font-family: 'Roboto';
-font-style: normal;
-font-weight: 300;
-font-size: 15px;
-line-height: 18px;
-color: #000000;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 18px;
+    color: #000000;
 
 }
+
 .right-block__time {
     font-family: 'Roboto';
-font-style: normal;
-font-weight: 300;
-font-size: 15px;
-line-height: 18px;
-color: #000000;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 18px;
+    color: #000000;
 
 }
+
 .footer {
     background-color: #323232;
 }
-.footer__container {
-}
+
+.footer__container {}
 
 .footer__content {
     max-width: 930px;
     margin: 0 auto;
     padding: 100px 0 50px;
 }
+
 .footer__row {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     margin-bottom: 35px;
 }
-.footer__column {
-}
-.footer__item {
-}
+
+.footer__column {}
+
+.footer__item {}
+
 .column__title {
-        font-size: 29px;
-        font-family: "Roboto";
-        color: #fff;
-        font-weight: 600;
-        margin-bottom: 30px;
+    font-size: 29px;
+    font-family: "Roboto";
+    color: #fff;
+    font-weight: 600;
+    margin-bottom: 30px;
 }
+
 .item__subtitle {
-        font-size: 21px;
-        font-family: "Roboto";
-        color: #fff;
-        font-weight: 400;
-        margin-bottom: 35px;
+    font-size: 21px;
+    font-family: "Roboto";
+    color: #fff;
+    font-weight: 400;
+    margin-bottom: 35px;
 }
+
 .footer__arrow {
     border-top: #fff 1px solid;
     width: 66%;
     margin: 0 auto;
 }
+
 .conacts__row {
     display: flex;
     margin: 0 -20px;
@@ -385,16 +437,20 @@ color: #000000;
     align-items: center;
     margin-top: 45px;
 }
+
 .contacts__column {
     padding: 0 20px;
 }
-.contacts__icon img{
-}   
-input{
+
+.contacts__icon img {}
+
+input {
     margin-bottom: 16px;
 }
+
 /* Full-width input fields */
-input[type=text], input[type=password] {
+input[type=text],
+input[type=password] {
     width: 100%;
     padding: 12px 20px;
     display: inline-block;
@@ -404,12 +460,12 @@ input[type=text], input[type=password] {
     font-size: 22px;
     font-family: "Roboto";
     font-weight: 300;
-    
 }
+
 /* Set a style for all buttons */
 .btn__submit {
     background-image: linear-gradient(45deg, #FF4D62, #E96200);
-	border-radius: 10px;
+    border-radius: 10px;
     color: white;
     padding: 14px 20px;
     margin: 8px 0;
@@ -434,33 +490,45 @@ button:hover {
     position: relative;
 }
 
-.container1  {
+.container1 {
     padding: 32px 70px 50px;
 }
+
 /* The Modal (background) */
 .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
     padding-top: 60px;
 }
 
 /* Modal Content/Box */
 .modal-content {
     background-color: #fefefe;
-    margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+    margin: 5% auto 15% auto;
+    /* 5% from the top, 15% from the bottom and centered */
     border: 1px solid #888;
-    width: 493px; /* Could be more or less, depending on screen size */
-	border-radius: 5px;
+    width: 493px;
+    /* Could be more or less, depending on screen size */
+    border-radius: 5px;
 }
-.h2__enter{
+
+.h2__enter {
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 400;
@@ -469,15 +537,19 @@ button:hover {
     margin-bottom: 56px;
     color: #000000;
 }
-.entr{
-  cursor: pointer;
+
+.entr {
+    cursor: pointer;
 }
-.reg{
-    cursor: pointer;    
+
+.reg {
+    cursor: pointer;
 }
-.notActive{
+
+.notActive {
     color: rgba(0, 0, 0, 0.5);
 }
+
 /* The Close Button (x) */
 .close {
     position: absolute;
@@ -501,11 +573,21 @@ button:hover {
 }
 
 @-webkit-keyframes animatezoom {
-    from {-webkit-transform: scale(0)} 
-    to {-webkit-transform: scale(1)}
+    from {
+        -webkit-transform: scale(0)
+    }
+
+    to {
+        -webkit-transform: scale(1)
+    }
 }
-    
+
 @keyframes animatezoom {
-    from {transform: scale(0)} 
-    to {transform: scale(1)}
+    from {
+        transform: scale(0)
+    }
+
+    to {
+        transform: scale(1)
+    }
 }

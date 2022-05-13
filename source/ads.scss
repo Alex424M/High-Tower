@@ -15,20 +15,27 @@ $opacity: .7;
     position: relative;
     z-index: 2;
 }
-.container{
+
+.container {
     max-width: 1140px;
     margin: 0 auto;
 }
+
 .header__container {
     max-width: 1400px;
     margin: 0 auto;
 }
+
 .header__content {
     max-width: 1140px;
     margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    & a[href="ad.html"] {
+        color: white;
+    }
 }
 
 .header__logo {
@@ -48,26 +55,30 @@ $opacity: .7;
 .nav-btn {
     margin-right: 40px;
     color: black;
+
     &:last-child {
         margin-right: 0px;
-}}
+    }
+}
 
 .header__btn {
     font-size: 20px;
     font-family: "Roboto";
     font-weight: 400;
     background: $gradient;
-    padding: 10px 50px;
+    padding: 8px 50px;
     border-radius: 10px;
-    color: white;//??????????
+    color: white; //??????????
 }
-.main{
+
+.main {
     background-color: #F7F7F7;
     position: relative;
     z-index: 1;
     height: 100%;
     padding: 27px 0 64px 0;
 }
+
 .main__navigation {
     font-style: normal;
     font-family: 'Roboto';
@@ -75,16 +86,19 @@ $opacity: .7;
     font-size: 15px;
     line-height: 18px;
 }
-.navigation__link {
-}
+
+.navigation__link {}
+
 .navigation__arrow {
     opacity: $opacity;
 }
+
 .main__row {
     display: flex;
     justify-content: space-between;
     max-width: 611px;
 }
+
 .main__title {
     font-family: 'Roboto';
     font-style: normal;
@@ -93,6 +107,7 @@ $opacity: .7;
     line-height: 47px;
     margin: 0 0 16px 0;
 }
+
 .main__quantity {
     font-family: 'Roboto';
     font-style: normal;
@@ -101,223 +116,270 @@ $opacity: .7;
     line-height: 47px;
     opacity: $opacity;
 }
+
 .main__ads {
     display: flex;
 }
-.left-block__item{
+
+.left-block__item {
     padding: 24px 0 0 0;
-    &:first-child{
+
+    &:first-child {
         padding: 0;
     }
 }
-.left-blok {//????????? fixed ?????????????
+
+.left-blok {
+    //????????? fixed ?????????????
     max-width: 259px;
     background-color: white;
     border-radius: 5px;
     padding: 15px 20px;
     height: fit-content;
 }
+
 .left-block__title {
     font-family: 'Roboto';
-font-style: normal;
-font-weight: 500;
-font-size: 20px;
-line-height: 23px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 23px;
 }
-.left-block__inputs {
-}
-.left-block__input{
+
+.left-block__inputs {}
+
+.left-block__input {
     font-family: 'Roboto';
-font-style: normal;
-font-weight: 300;
-font-size: 20px;
-line-height: 23px;
-opacity: .8;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 23px;
+    opacity: .8;
 }
+
 .left-block__metro {
+    & select {
+        border: 1px solid rgba(0, 0, 0, 0.25);
+        border-radius: 5px;
+        padding: 8px 24px;
+    }
 }
+
 .left-block__cost {
     display: flex;
 }
+
 .cost-item {
-    & input{
+    & input {
         max-width: 106px;
         font-family: 'Roboto';
         border: 1px solid rgba(0, 0, 0, 0.25);
         border-radius: 5px;
         font-weight: 300;
-        font-size: 20px;    
+        font-size: 20px;
     }
-    
+
+    margin-right: 8px;
+
+    & :last-child {
+        margin-right: 0px;
+    }
 }
-.right-block {
-    
-}
+
+.right-block {}
+
 .right-block__sort {
     padding: 11px 32px;
-    margin: 0 0 0 32px ;
+    margin: 0 0 0 32px;
 }
+
 .sort {
     display: flex;
     background-color: white;
     border-radius: 5px;
 }
+
 .sort__title {
     font-family: 'Roboto';
-font-style: normal;
-font-weight: 300;
-font-size: 15px;
-line-height: 18px;
-margin-right: 8px;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 18px;
+    margin-right: 8px;
 }
+
 .sort__select {
     font-family: 'Roboto';
-font-style: normal;
-font-weight: 300;
-font-size: 15px;
-line-height: 18px
+    font-style: normal;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 18px
 }
-.right-block__offers {
-}
+
+.right-block__offers {}
+
 .offers {
     margin: 16px 0 0 32px;
 }
+
 .offers__card {
     background-color: white;
     border-radius: 5px;
     padding: 8px 8px;
 }
+
 .card {
     min-width: 833px;
 }
+
 .card__row {
     display: flex;
 }
-.card__img{//?????????????s
+
+.card__img {
+    //?????????????s
 }
-.card__item {
-}
+
+.card__item {}
+
 .card-info {
     padding: 0 0 0 16px;
     width: 100%;
 }
+
 .card-info__row {
     display: flex;
     justify-content: space-between;
 }
-.card-info__item {
-}
+
+.card-info__item {}
+
 .item__title {
     font-family: 'Roboto';
-font-style: normal;
-font-weight: 500;
-font-size: 20px;
-line-height: 23px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 23px;
 }
+
 .item__price {
     font-family: 'Roboto';
-font-style: normal;
-font-weight: 500;
-font-size: 20px;
-line-height: 23px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 23px;
 }
+
 .card-info__room {
     font-family: 'Roboto';
-font-style: normal;
-font-weight: 300;
-font-size: 15px;
-line-height: 18px;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 18px;
 }
+
 .card-info__line {
     display: flex;
     margin: 38px 0 20px 0;
 }
+
 .card-info__column {
     max-width: 264px;
 }
+
 .item__metro {
     margin: 0 8px 0 0;
     font-family: 'Roboto';
-font-style: normal;
-font-weight: 400;
-font-size: 15px;
-line-height: 18px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
 }
+
 .item__foot {
     font-family: 'Roboto';
-font-style: normal;
-font-weight: 300;
-font-size: 15px;
-line-height: 18px;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 18px;
 }
+
 .card-info__description {
     font-family: 'Roboto';
-font-style: normal;
-font-weight: 300;
-font-size: 11px;
-line-height: 13px;
-max-width: 352px;
-opacity: $opacity;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 11px;
+    line-height: 13px;
+    max-width: 352px;
+    opacity: $opacity;
 }
+
 .card-info__btn {
     //height: 44px;
     margin: 12px 0px;
 
-    & a{
-    color: #FFFFFF;
+    & a {
+        color: #FFFFFF;
     }
 }
+
 .btn__buy {
     font-family: 'Roboto';
-font-style: normal;
-font-weight: 500;
-font-size: 20px;
-color: #FFFFFF;
-background: $gradient;
-padding: 10px 50px;
-border-radius: 10px;
-float: right;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    color: #FFFFFF;
+    background: $gradient;
+    padding: 10px 40px;
+    border-radius: 10px;
+    float: right;
 }
+
 .footer {
     background-color: #323232;
 }
-.footer__container {
-}
+
+.footer__container {}
 
 .footer__content {
     max-width: 930px;
     margin: 0 auto;
     padding: 100px 0 50px;
 }
+
 .footer__row {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     margin-bottom: 35px;
 }
-.footer__column {
-}
-.footer__item {
-}
+
+.footer__column {}
+
+.footer__item {}
+
 .column__title {
-        font-size: 29px;
-        font-family: "Roboto";
-        color: #fff;
-        font-weight: 600;
-        margin-bottom: 30px;
+    font-size: 29px;
+    font-family: "Roboto";
+    color: #fff;
+    font-weight: 600;
+    margin-bottom: 30px;
 }
+
 .item__subtitle {
-        font-size: 21px;
-        font-family: "Roboto";
-        color: #fff;
-        font-weight: 400;
-        margin-bottom: 35px;
+    font-size: 21px;
+    font-family: "Roboto";
+    color: #fff;
+    font-weight: 400;
+    margin-bottom: 35px;
 }
+
 .footer__arrow {
     border-top: #fff 1px solid;
     width: 66%;
     margin: 0 auto;
 }
+
 .conacts__row {
     display: flex;
     margin: 0 -20px;
@@ -325,8 +387,159 @@ float: right;
     align-items: center;
     margin-top: 45px;
 }
+
 .contacts__column {
     padding: 0 20px;
 }
-.contacts__icon img{
-}   
+
+.contacts__icon img {}
+
+/* Full-width input fields */
+input[type=text] {
+    margin-bottom: 24px;
+}
+
+input[type=text],
+input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 5px;
+    font-size: 22px;
+    font-family: "Roboto";
+    font-weight: 300;
+
+
+}
+
+/* Set a style for all buttons */
+.btn__submit {
+    background-image: linear-gradient(45deg, #FF4D62, #E96200);
+    border-radius: 10px;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    width: 100%;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 23px;
+    cursor: pointer;
+    margin-top: 40px;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+
+/* Center the image and position the close button */
+.imgcontainer {
+    position: relative;
+}
+
+.container1 {
+    padding: 32px 70px 50px;
+}
+
+/* The Modal (background) */
+.modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+    padding-top: 60px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto 15% auto;
+    /* 5% from the top, 15% from the bottom and centered */
+    border: 1px solid #888;
+    width: 493px;
+    /* Could be more or less, depending on screen size */
+    border-radius: 5px;
+}
+
+.h2__enter {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 42px;
+    margin-bottom: 56px;
+    color: #000000;
+}
+
+.entr {
+    cursor: pointer;
+}
+
+.reg {
+    cursor: pointer;
+}
+
+.notActive {
+    color: rgba(0, 0, 0, 0.5);
+}
+
+/* The Close Button (x) */
+.close {
+    position: absolute;
+    right: 25px;
+    top: 0;
+    color: #000;
+    font-size: 35px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: red;
+    cursor: pointer;
+}
+
+/* Add Zoom Animation */
+.animate {
+    -webkit-animation: animatezoom 0.6s;
+    animation: animatezoom 0.6s
+}
+
+@-webkit-keyframes animatezoom {
+    from {
+        -webkit-transform: scale(0)
+    }
+
+    to {
+        -webkit-transform: scale(1)
+    }
+}
+
+@keyframes animatezoom {
+    from {
+        transform: scale(0)
+    }
+
+    to {
+        transform: scale(1)
+    }
+}

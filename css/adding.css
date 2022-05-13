@@ -45,6 +45,8 @@ input,
 button,
 textarea {
   font-family: inherit;
+  padding: 0;
+  margin: 0;
 }
 
 input::-ms-clear {
@@ -124,6 +126,9 @@ h6 {
       -ms-flex-pack: justify;
           justify-content: space-between;
 }
+.header__content a[href="adding.html"] {
+  color: white;
+}
 
 .header__logo {
   font-size: 25px;
@@ -154,7 +159,7 @@ h6 {
   font-family: "Roboto";
   font-weight: 400;
   background: linear-gradient(45deg, #FF4D62, #E96200);
-  padding: 10px 50px;
+  padding: 8px 20px;
   border-radius: 10px;
   color: white;
 }
@@ -568,6 +573,34 @@ h6 {
 }
 .list__link:last-child {
   padding-bottom: 0;
+}
+
+.li__radio input[type=radio] {
+  display: none;
+}
+
+.li__radio label {
+  display: inline-block;
+  cursor: pointer;
+  padding: 0px 15px;
+  line-height: 34px;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  border-radius: 6px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+/* Checked */
+.li__radio input[type=radio]:checked + label {
+  background-image: linear-gradient(45deg, #FF4D62, #E96200);
+  color: white;
+}
+
+/* Hover */
+.li__radio label:hover {
+  color: #666;
 }
 
 .selectedSection {

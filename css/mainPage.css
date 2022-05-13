@@ -45,6 +45,8 @@ input,
 button,
 textarea {
   font-family: inherit;
+  padding: 0;
+  margin: 0;
 }
 
 input::-ms-clear {
@@ -88,7 +90,9 @@ h6 {
   font-weight: inherit;
 }
 
-div, a, h1 {
+div,
+a,
+h1 {
   font-family: "Roboto";
 }
 
@@ -152,9 +156,10 @@ div, a, h1 {
   font-size: 20px;
   font-family: "Roboto";
   font-weight: 400;
-  background-color: #ffef40;
-  padding: 10px 50px;
+  background-image: linear-gradient(45deg, #FF4D62, #E96200);
+  padding: 8px 50px;
   border-radius: 10px;
+  color: white;
 }
 
 .search {
@@ -229,7 +234,13 @@ div, a, h1 {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  height: 50px;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 100;
+  font-size: 20px;
+}
+.search__row a[href="pages/ads.html"] {
+  color: white;
 }
 
 .search__apartment {
@@ -239,38 +250,57 @@ div, a, h1 {
 .row__apart {
   -ms-flex-preferred-size: 20%;
       flex-basis: 20%;
-  height: 50px;
+  padding: 12px 10px;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 20px;
   max-width: 195px;
+  border-radius: 5px 0 0 5px;
 }
 
 .row__room {
   -ms-flex-preferred-size: 20%;
       flex-basis: 20%;
-  height: 50px;
+  padding: 12px 10px;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 20px;
   max-width: 195px;
 }
 
 .row__dist {
   -ms-flex-preferred-size: 20%;
       flex-basis: 20%;
-  height: 50px;
+  padding: 12px 10px;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 20px;
   max-width: 195px;
 }
 
 .btn-cost {
   background-color: #fff;
-  height: 50px;
+  padding: 15px 10px;
+  height: 50.26px;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 20px;
   -ms-flex-preferred-size: 20%;
       flex-basis: 20%;
   text-align: center;
-  padding: 19px 0px;
+  display: block;
+  border-radius: 0 5px 5px 0;
 }
 
 .btn__search {
   font-size: 20px;
   font-family: "Roboto";
   font-weight: 400;
-  background-color: #ffef40;
+  background-image: linear-gradient(45deg, #FF4D62, #E96200);
   padding: 10px 50px;
   border-radius: 10px;
   margin-left: 30px;
