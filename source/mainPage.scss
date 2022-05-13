@@ -13,8 +13,9 @@ h1 {
 }
 
 .wrapper {
-
-    min-height: 100%;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
 }
 
 
@@ -74,6 +75,7 @@ h1 {
 
 .search {
     position: relative;
+    height: 576px;
 }
 
 .search__container {
@@ -215,12 +217,10 @@ h1 {
 /*--------------------*/
 .buy {
     position: relative;
+    padding: 40px 0 0 0;
 }
 
-.buy__container {
-
-    margin-top: 300px;
-}
+.buy__container {}
 
 .buy__content {
     max-width: 1140px;
@@ -242,12 +242,12 @@ h1 {
 
 .offer__row {
     display: flex;
-    margin: 0 -15px 50px;
+    margin: 0 -8px 50px;
     flex-wrap: wrap;
 }
 
 .offer__column {
-    padding: 0 15px;
+    padding: 0 8px;
     flex: 0 1 25%;
 }
 
@@ -256,18 +256,16 @@ h1 {
 }
 
 .offer__img {
-    width: 261px;
     height: 152px;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 100%;
+
+    & img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
 }
 
-.offer__img img {
-    height: 100%;
-    width: auto;
-}
 
 .offer__title {}
 
@@ -390,12 +388,13 @@ h1 {
     margin-bottom: 10px;
 }
 
-.item__subtitle {
-    font-size: 13px;
-    font-family: "Roboto";
-    color: #323232;
-    line-height: 1.769;
+.item__text {
+    font-family: 'Roboto';
+    font-style: normal;
     font-weight: 300;
+    font-size: 13px;
+    line-height: 23px;
+    color: #323232;
 }
 
 /*----------------------------*/
@@ -488,3 +487,35 @@ h1 {
 }
 
 .contacts__icon img {}
+
+@media(max-width: 1200px) {
+    .container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 0 16px;
+    }
+
+    .header__nav {
+        align-items: center;
+    }
+
+    .offer__column {
+        flex: 0 1 50%;
+        margin: 0 0 24px 0;
+        padding: 0 24px;
+    }
+
+    .offer__row {
+        margin: 0 -24px;
+    }
+
+    .offer__img {
+        height: 180px;
+    }
+}
+
+@media(min-width: 992px) {}
+
+@media(min-width: 768px) {}
+
+@media(min-width: 576px) {}

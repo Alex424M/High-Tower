@@ -97,7 +97,9 @@ h1 {
 }
 
 .wrapper {
-  min-height: 100%;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
 }
 
 .header {
@@ -164,6 +166,7 @@ h1 {
 
 .search {
   position: relative;
+  height: 576px;
 }
 
 .search__container {
@@ -309,10 +312,7 @@ h1 {
 /*--------------------*/
 .buy {
   position: relative;
-}
-
-.buy__container {
-  margin-top: 300px;
+  padding: 40px 0 0 0;
 }
 
 .buy__content {
@@ -335,13 +335,13 @@ h1 {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  margin: 0 -15px 50px;
+  margin: 0 -8px 50px;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
 }
 
 .offer__column {
-  padding: 0 15px;
+  padding: 0 8px;
   -webkit-box-flex: 0;
       -ms-flex: 0 1 25%;
           flex: 0 1 25%;
@@ -352,23 +352,14 @@ h1 {
 }
 
 .offer__img {
-  width: 261px;
   height: 152px;
-  overflow: hidden;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  width: 100%;
 }
-
 .offer__img img {
   height: 100%;
-  width: auto;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .title {
@@ -500,12 +491,13 @@ h1 {
   margin-bottom: 10px;
 }
 
-.item__subtitle {
-  font-size: 13px;
+.item__text {
   font-family: "Roboto";
-  color: #323232;
-  line-height: 1.769;
+  font-style: normal;
   font-weight: 300;
+  font-size: 13px;
+  line-height: 23px;
+  color: #323232;
 }
 
 /*----------------------------*/
@@ -596,4 +588,34 @@ h1 {
 
 .contacts__column {
   padding: 0 20px;
+}
+
+@media (max-width: 1200px) {
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+
+  .header__nav {
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+
+  .offer__column {
+    -webkit-box-flex: 0;
+        -ms-flex: 0 1 50%;
+            flex: 0 1 50%;
+    margin: 0 0 24px 0;
+    padding: 0 24px;
+  }
+
+  .offer__row {
+    margin: 0 -24px;
+  }
+
+  .offer__img {
+    height: 180px;
+  }
 }
