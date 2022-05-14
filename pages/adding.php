@@ -14,9 +14,9 @@
         <header class="header">
             <div class="header__container container">
                 <div class="header__content">
-                    <a href="../index.html" class="header__logo">High Tower</a>
+                    <a href="../index.php" class="header__logo">High Tower</a>
                     <nav class="header__nav">
-                        <a href="ads.html" class="nav-btn">Аренда</a>
+                        <a href="ads.php" class="nav-btn">Аренда</a>
                         <a href="#" class="nav-btn">Продажа</a>
                         <a href="#" class="nav-btn">Новостройки</a>
                         <a href="#" class="nav-btn">Дома и участки</a>

@@ -1,3 +1,7 @@
+<?php
+ob_start();
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="ru">
 
@@ -5,8 +9,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/advertisements.css">
     <title>Аренда</title>
-    <link rel="stylesheet" href="../css/ads.css" />
 </head>
 
 <body>
@@ -14,23 +18,53 @@
         <header class="header">
             <div class="header__container container">
                 <div class="header__content">
-                    <a href="../index.html" class="header__logo">High Tower</a>
+                    <a href="../index.php" class="header__logo">High Tower</a>
                     <nav class="header__nav">
-                        <a href="pages/ads.html" class="nav-btn">Аренда</a>
+                        <a href="ads.php" class="nav-btn">Аренда</a>
                         <a href="#" class="nav-btn">Продажа</a>
                         <a href="#" class="nav-btn">Новостройки</a>
                         <a href="#" class="nav-btn">Дома и участки</a>
                     </nav>
+                    <?php
+                    if (!isset($_SESSION['Name'])) { ?>
                     <button class="header__btn">Войти</button>
+                    <?php
+                } else{
+                    ?>
+                    <div class="header__hi">
+                        <div class="menu">
+                            <button class="menu__button" type="button">
+                                <span>Привет, <?php echo $_SESSION['Name'];?></span>
+                            </button>
+                            <ul hidden class="menu__list">
+                                <li><a href="adding.php" class="menu__link">Разместить объявление</a></li>
+                                <li>
+                                    <form method="post" class="exit-form">
+                                        <button class="menu__link" name="exit">Выйти</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <?php
+                            if(isset($_POST['exit'])){
+                                $_SESSION = [];
+                                header('Location: ads.php');
+                            }
+                        ?>
+                    </div>
+                <?php
+                }
+                ?>
                 </div>
             </div>
         </header>
         <main class="main">
             <div class="main__container container">
                 <div class="main__navigation">
-                    <a href="#" class="navigation__link">Главная</a>
+                    <a href="../index.php" class="navigation__link">Главная</a>
                     <span class="navigation__arrow">></span>
-                    <a href="#" class="navigation__link">Аренда</a>
+                    <a href="ads.php" class="navigation__link">Аренда</a>
                 </div>
                 <div class="main__row">
                     <div class="main__title">Аренда квартиры</div>
@@ -123,7 +157,7 @@
                                             дисторшн. Громкостнoй прогрессийный период монотонно трансформирует сонорный
                                             райдер. Арпеджио, как бы это ни казалось парадоксальным, диссонирует сет.
                                         </div>
-                                        <div class="card-info__btn"><a href="ad.html" class="btn__buy">Контакты</a>
+                                        <div class="card-info__btn"><a href="ad.php" class="btn__buy">Контакты</a>
                                         </div>
                                     </div>
                                 </div>
@@ -328,7 +362,7 @@
         </footer>
     </div>
     <div id="entryForm" class="modal">
-        <form class="modal-content animate" action="">
+        <form class="modal-content animate" method="post">
             <div class="imgcontainer">
                 <span class="close" title="Close Modal">×</span>
             </div>
@@ -343,12 +377,12 @@
 
                 <input type="password" placeholder="Пароль" name="psw" required>
 
-                <button type="submit" class="btn__submit">Вход</button>
+                <button type="submit" class="btn__submit" name="entry">Вход</button>
             </div>
         </form>
     </div>
     <div id="regForm" class="modal">
-        <form class="modal-content animate" action="">
+        <form class="modal-content animate" method="post">
             <div class="imgcontainer">
                 <span class="close" title="Close Modal">×</span>
             </div>
@@ -366,11 +400,100 @@
                 <input type="password" placeholder="Пароль" name="psw" required>
                 <input type="password" placeholder="Повторите пароль" name="psw2" required>
 
-                <button type="submit" class="btn__submit">Регистрация</button>
+                <button type="submit" class="btn__submit" name="regist">Регистрация</button>
             </div>
         </form>
     </div>
+    <?php
+    session_start();
+    if (isset($_POST['entry'])) {
+        $mail = $_POST['Email'];
+        $pass = $_POST['psw'];
+        $key = "GDSHG4385743HGSDHdkfgjdfk4653475JSGHDJSDSKJDF476354";
+
+        header('Content-Type: text/html; charset=utf-8');
+        $link = mysqli_connect('127.0.0.1', 'root', '', 'dbhightower');
+
+
+        if (!$link) die("Error");
+        if (!mysqli_set_charset($link, "utf8")) {
+            printf("Error loading character set utf8: %s\n", mysqli_error($link));
+            exit;
+        }
+
+
+
+        if (empty($_POST['Email']) || empty($_POST['psw'])) {
+            echo "<script>alert('Заполните все поля')</script>";
+            echo "<meta http-equiv='refresh' content='0; url=http://high-tower/pages/ads.php'>";
+        } else {
+            $queryHash = "SELECT * FROM `users` WHERE `Mail` = '$mail'";
+            $temp1 = mysqli_query($link, $queryHash);
+            $row = mysqli_fetch_array($temp1);
+
+            if (password_verify($pass, $row['Pass'])) {
+                $nameTable = "SELECT Name FROM `users` WHERE `Mail` = '$mail'";
+                $text = mysqli_fetch_array(mysqli_query($link, $nameTable));
+
+                $_SESSION['Name'] = $text[0];
+                header('Location: ads.php');
+            } else {
+                echo "<script>alert('Неверный логин и/или пароль')</script>";
+                echo "<meta http-equiv='refresh' content='0; url=http://high-tower/pages/ads.php'>";
+            }
+        }
+    
+}
+
+if (isset($_POST['regist'])) {
+    $name = $_POST['Name'];
+    $mail = $_POST['Email'];
+    $phone = $_POST['Number'];
+    $pass = $_POST['psw'];
+    $repPass = $_POST['psw2'];
+    $hash = password_hash($_POST['psw'], PASSWORD_BCRYPT);
+    $key = "GDSHG4385743HGSDHdkfgjdfk4653475JSGHDJSDSKJDF476354";
+
+    // error_reporting(0);
+    header('Content-Type: text/html; charset=utf-8');
+    $link = mysqli_connect('127.0.0.1', 'root', '', 'dbhightower');
+    if (strpos($mail, "@") !== false) {
+
+        if (strlen($pass) > 4) {
+
+            if ($pass == $repPass){
+                if (empty($_POST['Name']) || empty($_POST['Email']) || empty($_POST['psw']) || empty($_POST['psw2']) || empty($_POST['Number'])) {
+                    echo "<script>alert('Заполните все поля!')</script>";
+                    echo "<meta http-equiv='refresh' content='0; url=http://high-tower/pages/ads.php'>";
+                } else {
+                    $queryMail = "SELECT * FROM `users` WHERE `Mail` = '$mail'";
+                    $tempMail = mysqli_query($link, $queryMail);
+                    if (mysqli_num_rows($tempMail) > 0) {
+                        echo "<script>alert('Данная почта привязана к другому аккаунту!')</script>";
+                        echo "<meta http-equiv='refresh' content='0; url=http://high-tower/pages/ads.php'>";
+                    } else {
+                        $query = "INSERT INTO `users` (Name, Mail, Pass, NumberPhone) VALUE ('$name', '$mail', '$hash', '$phone')";
+                        if (mysqli_query($link, $query)) {
+                            echo "<script>alert('Пользователь успешно добавлен')</script>";
+                            echo "<meta http-equiv='refresh' content='0; url=http://high-tower/pages/ads.php'>";
+                        } else {
+                            echo "Пользователь не добавлен и за ошибки: " . mysqli_error($link);
+                        }
+                    }
+                }
+            }else{
+                    echo "<script>alert('Пароли не совпадают')</script>";
+                }
+        }else{
+            echo "<script>alert('Пароли меньше 4')</script>";
+        }
+    }else{
+        echo "<script>alert('Почта введена неправильно')</script>";
+    }         
+}
+?>
     <script src="../js/entry.js"></script>
+    <script src="../js/hList.js"></script>
 </body>
 
 </html>

@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
 * {
   padding: 0;
   margin: 0;
@@ -124,11 +125,11 @@ h1 {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
 }
 
 .header__logo {
@@ -162,6 +163,64 @@ h1 {
   padding: 8px 50px;
   border-radius: 10px;
   color: white;
+}
+
+.exit-form {
+  display: inline;
+}
+
+.exit-btn {
+  font-size: 16px;
+  font-family: "Roboto";
+  font-weight: 400;
+  background-color: white;
+  padding: 4px 20px;
+  border-radius: 10px;
+  color: #000;
+  border: 2px solid #ff4d4d;
+}
+
+.menu {
+  display: inline-block;
+}
+
+.menu.active .menu__list {
+  display: block;
+  position: absolute;
+  z-index: 100;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.menu__button {
+  background-color: white;
+  font-size: 20px;
+  font-family: "Roboto";
+  font-weight: 300;
+  color: black;
+}
+
+.menu__list {
+  padding: 15px;
+}
+
+.menu__list li:not(:last-child) {
+  margin: 0 0 15px 0;
+}
+
+.menu__link {
+  font-size: 20px;
+  font-family: "Roboto";
+  font-weight: 300;
+  color: black;
+  background-color: white;
+}
+
+.header__hi {
+  font-size: 20px;
+  font-family: "Roboto";
+  font-weight: 300;
 }
 
 .search {
@@ -198,7 +257,7 @@ h1 {
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 
 .search__btn {
@@ -235,13 +294,14 @@ h1 {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   font-family: "Roboto";
   font-style: normal;
   font-weight: 100;
   font-size: 20px;
 }
+
 .search__row a[href="pages/ads.html"] {
   color: white;
 }
@@ -252,7 +312,7 @@ h1 {
 
 .row__apart {
   -ms-flex-preferred-size: 20%;
-      flex-basis: 20%;
+  flex-basis: 20%;
   padding: 12px 10px;
   font-family: "Roboto";
   font-style: normal;
@@ -264,7 +324,7 @@ h1 {
 
 .row__room {
   -ms-flex-preferred-size: 20%;
-      flex-basis: 20%;
+  flex-basis: 20%;
   padding: 12px 10px;
   font-family: "Roboto";
   font-style: normal;
@@ -275,7 +335,7 @@ h1 {
 
 .row__dist {
   -ms-flex-preferred-size: 20%;
-      flex-basis: 20%;
+  flex-basis: 20%;
   padding: 12px 10px;
   font-family: "Roboto";
   font-style: normal;
@@ -293,7 +353,7 @@ h1 {
   font-weight: 300;
   font-size: 20px;
   -ms-flex-preferred-size: 20%;
-      flex-basis: 20%;
+  flex-basis: 20%;
   text-align: center;
   display: block;
   border-radius: 0 5px 5px 0;
@@ -337,14 +397,14 @@ h1 {
   display: flex;
   margin: 0 -8px 50px;
   -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  flex-wrap: wrap;
 }
 
 .offer__column {
   padding: 0 8px;
   -webkit-box-flex: 0;
-      -ms-flex: 0 1 25%;
-          flex: 0 1 25%;
+  -ms-flex: 0 1 25%;
+  flex: 0 1 25%;
 }
 
 .offer__item {
@@ -355,11 +415,12 @@ h1 {
   height: 152px;
   width: 100%;
 }
+
 .offer__img img {
   height: 100%;
   width: 100%;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 
 .title {
@@ -387,8 +448,8 @@ h1 {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
 }
 
 .metro {
@@ -436,14 +497,14 @@ h1 {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: end;
+  -ms-flex-pack: end;
+  justify-content: end;
 }
 
 .hypothec__title {
   -webkit-box-flex: 0;
-      -ms-flex: 0 1 40%;
-          flex: 0 1 40%;
+  -ms-flex: 0 1 40%;
+  flex: 0 1 40%;
   font-size: 20px;
   font-family: "Roboto";
   color: #323232;
@@ -457,18 +518,18 @@ h1 {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  flex-wrap: wrap;
   margin: 0 -15px;
   -webkit-box-align: stretch;
-      -ms-flex-align: stretch;
-          align-items: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
 }
 
 .hypothec__column {
   padding: 0 15px;
   -webkit-box-flex: 0;
-      -ms-flex: 0 1 25%;
-          flex: 0 1 25%;
+  -ms-flex: 0 1 25%;
+  flex: 0 1 25%;
 }
 
 .hypothec__item {
@@ -543,10 +604,10 @@ h1 {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  flex-wrap: wrap;
   -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
   margin-bottom: 35px;
 }
 
@@ -578,11 +639,11 @@ h1 {
   display: flex;
   margin: 0 -20px;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   margin-top: 45px;
 }
 
@@ -599,14 +660,14 @@ h1 {
 
   .header__nav {
     -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
   }
 
   .offer__column {
     -webkit-box-flex: 0;
-        -ms-flex: 0 1 50%;
-            flex: 0 1 50%;
+    -ms-flex: 0 1 50%;
+    flex: 0 1 50%;
     margin: 0 0 24px 0;
     padding: 0 24px;
   }
@@ -617,5 +678,155 @@ h1 {
 
   .offer__img {
     height: 180px;
+  }
+}
+
+input {
+  margin-bottom: 16px;
+}
+
+/* Full-width input fields */
+input[type=text],
+input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  border-radius: 5px;
+  font-size: 22px;
+  font-family: "Roboto";
+  font-weight: 300;
+}
+
+/* Set a style for all buttons */
+.btn__submit {
+  background-image: linear-gradient(45deg, #FF4D62, #E96200);
+  border-radius: 10px;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  width: 100%;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 23px;
+  cursor: pointer;
+  margin-top: 40px;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+/* Center the image and position the close button */
+.imgcontainer {
+  position: relative;
+}
+
+.container1 {
+  padding: 32px 70px 50px;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: black;
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */
+  padding-top: 60px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto 15% auto;
+  /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+  width: 493px;
+  /* Could be more or less, depending on screen size */
+  border-radius: 5px;
+}
+
+.h2__enter {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 42px;
+  margin-bottom: 56px;
+  color: #000000;
+}
+
+.entr {
+  cursor: pointer;
+}
+
+.reg {
+  cursor: pointer;
+}
+
+.notActive {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+/* The Close Button (x) */
+.close {
+  position: absolute;
+  right: 25px;
+  top: 0;
+  color: #000;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: red;
+  cursor: pointer;
+}
+
+/* Add Zoom Animation */
+.animate {
+  -webkit-animation: animatezoom 0.6s;
+  animation: animatezoom 0.6s;
+}
+
+@-webkit-keyframes animatezoom {
+  from {
+    -webkit-transform: scale(0);
+  }
+
+  to {
+    -webkit-transform: scale(1);
+  }
+}
+
+@keyframes animatezoom {
+  from {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  }
+
+  to {
+    -webkit-transform: scale(1);
+    transform: scale(1);
   }
 }
