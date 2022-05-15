@@ -177,6 +177,10 @@ session_start();
                                         <span>аренда</span>
                                     </li>
                                     <li class="characteristic-li">
+                                        <span>Недвижимость</span>
+                                        <span>квартира</span>
+                                    </li>
+                                    <li class="characteristic-li">
                                         <span>Высота потолков</span>
                                         <span>3 м</span>
                                     </li>

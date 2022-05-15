@@ -35,17 +35,17 @@
                 <div class="main__row">
                     <div class="left-block">
                         <div class="left-block__title">Новое объявление</div>
-                        <form action="" method="post" class="left-block__form">
+                        <form method="post" class="left-block__form">
                             <div class="left-block__first">
                                 <div class="left-block__subtitle subtitle">Название объявления</div>
-                                <input type="text" class="input__name">
+                                <input type="text" class="input__name" name="input__name">
                                 <div class="left-block__subtitle subtitle">Описание объявления</div>
-                                <textarea type="text" class="input__description"
+                                <textarea type="text" class="input__description" name="input__description"
                                     placeholder="Расскажите в каком состоянии квартира, была ли перепланировка, сколько было хозяев, какие соседи и т.д."></textarea>
                                 <div class="left-block__subtitle subtitle">Цена</div>
                                 <div class="left-block__cost-row">
                                     <label for="cost" class="row__cost">Цена</label>
-                                    <input type="text" name="cost" class="input__cost">
+                                    <input type="text" name="input__cost" class="input__cost">
                                     <label for="cost" class="row__cost">руб.</label>
                                 </div>
                             </div>
@@ -56,22 +56,22 @@
                                         <li class="characteristic-li">
                                             <span>Тип сделки</span>
                                             <div class="li__radio">
-                                                <input id="radio-1" type="radio" name="radio" value="1" checked>
+                                                <input id="radio-1" type="radio" name="radio" value="Аренда" checked>
                                                 <label for="radio-1">Аренда</label>
                                             </div>
                                             <div class="li__radio">
-                                                <input id="radio-2" type="radio" name="radio" value="1">
+                                                <input id="radio-2" type="radio" name="radio" value="Продажа">
                                                 <label for="radio-2">Продажа</label>
                                             </div>
                                         </li>
                                         <li class="characteristic-li">
                                             <span>Тип недвижимости</span>
                                             <div class="li__radio">
-                                                <input id="radio-3" type="radio" name="radio1" value="1" checked>
+                                                <input id="radio-3" type="radio" name="radio1" value="Жилая" checked>
                                                 <label for="radio-3">Жилая</label>
                                             </div>
                                             <div class="li__radio">
-                                                <input id="radio-4" type="radio" name="radio1" value="2">
+                                                <input id="radio-4" type="radio" name="radio1" value="Новостройка">
                                                 <label for="radio-4">Новостройка</label>
                                             </div>
                                         </li>
@@ -82,29 +82,29 @@
                                             <div class="li__items li__items2">
                                                 <div class="item__row">
                                                     <div class="li__radio"><input id="radio-5" type="radio"
-                                                            name="radio3" value="3" checked>
+                                                            name="radio3" value="Квартира" checked>
                                                         <label for="radio-5">Квартира</label>
                                                     </div>
                                                     <div class="li__radio"><input id="radio-6" type="radio"
-                                                            name="radio3" value="4">
+                                                            name="radio3" value="Новостройка">
                                                         <label for="radio-6">Новостройка</label>
                                                     </div>
                                                 </div>
                                                 <div class="break"></div>
                                                 <div class="item__row">
                                                     <div class="li__radio"><input id="radio-7" type="radio"
-                                                            name="radio3" value="5">
+                                                            name="radio3" value="Комната">
                                                         <label for="radio-7">Комната</label>
                                                     </div>
                                                     <div class="li__radio"><input id="radio-8" type="radio"
-                                                            name="radio3" value="6  ">
+                                                            name="radio3" value="Дом">
                                                         <label for="radio-8">Дом</label>
                                                     </div>
                                                 </div>
                                                 <div class="break"></div>
                                                 <div>
                                                     <div class="li__radio"><input id="radio-9" type="radio"
-                                                            name="radio3" value="1">
+                                                            name="radio3" value="Участок">
                                                         <label for="radio-9">Участок</label>
                                                     </div>
                                                 </div>
@@ -116,7 +116,7 @@
                             </div>
                             <div class="left-block__third">
                                 <div class="left-block__subtitle subtitle">Адрес</div>
-                                <input type="text" name="address" class="input__address">
+                                <input type="text" name="input__address" class="input__address">
                                 <div class="left-block__map">
 
                                 </div>
@@ -125,13 +125,13 @@
                                         <div class="metro__station">
                                             <div class="station__metro">Станция метро</div>
                                             <div>
-                                                <input type="text" class="metro__input" name="station">
+                                                <input type="text" class="metro__input" name="metro__input">
                                             </div>
                                         </div>
                                         <div class="metro__foot">
                                             <div class="foot__metro">Минут до метро(пешком)</div>
                                             <div>
-                                                <input type="text" class="foot__input" name="foot">
+                                                <input type="text" class="foot__input" name="foot__input">
                                             </div>
                                         </div>
                                     </div>
@@ -142,36 +142,36 @@
                                 <div class="params__container">
                                     <div class="params__row">
                                         <label for="quantity">Количество комнат</label>
-                                        <input type="text" name="quantity" id="">
+                                        <input type="text" name="params__quantity" id="">
                                     </div>
                                     <div class="params__row">
                                         <label for="square">Площадь</label>
-                                        <input type="text" name="square" id="">
+                                        <input type="text" name="params__square" id="">
                                     </div>
                                     <div class="params__row">
                                         <label for="floor">Этаж</label>
-                                        <input type="text" name="floor" id="">
+                                        <input type="text" name="params__floor" id="">
                                     </div>
                                     <div class="params__row">
                                         <label for="totalFloor">Этажей в доме</label>
-                                        <input type="text" name="totalFloor" id="">
+                                        <input type="text" name="params__totalFloor" id="">
                                     </div>
                                     <div class="params__row">
                                         <label for="ceilHeight">Высота потолков</label>
-                                        <input type="text" name="ceilHeight" id="">
+                                        <input type="text" name="params__ceilHeight" id="">
                                     </div>
                                     <div class="params__row">
                                         <div class="params__renovation">Ремонт</div>
                                         <div class="li__radio">
-                                            <input id="radio-10" type="radio" name="radio10" value="2" checked>
+                                            <input id="radio-10" type="radio" name="radio10" value="Требуется" checked>
                                             <label for="radio-10">Требуется</label>
                                         </div>
                                         <div class="li__radio">
-                                            <input id="radio-11" type="radio" name="radio10" value="2">
+                                            <input id="radio-11" type="radio" name="radio10" value="Евро">
                                             <label for="radio-11">Евро</label>
                                         </div>
                                         <div class="li__radio">
-                                            <input id="radio-12" type="radio" name="radio10" value="2">
+                                            <input id="radio-12" type="radio" name="radio10" value="Косметический">
                                             <label for="radio-12">Косметический</label>
                                         </div>
                                     </div>
@@ -182,13 +182,17 @@
                                 <div class="photo__description">Не допускаются к размещению фотографии с водяными
                                     знаками, чужих объектов и рекламные баннеры.
                                     JPG, PNG или GIF. Максимальный размер файла 10 мб</div>
-                                <div class="photo__content">
-                                    <div class="photo__img"><img src="../img/icons/photo.svg" alt=""></div>
-                                    <div class="photo__btn">
-
-                                        <button>Добавить фотографии</button>
+                                    <div class="photo__content">
+                                        <form method="post">
+                                        <div class="photo__img"><img src="../img/icons/photo.svg" alt=""></div>
+                                        <input type="file" id="fileElem" multiple accept="image/*" onchange="handleFiles(this.files)">
+                                        <div class="photo__btn">
+                                            <button>Добавить фотографии</button>
+                                        </div>
+                                    </form>
                                     </div>
-                                </div>
+                                    <div id="gallery"></div>
+                                <progress id="progress-bar" max=100 value=0></progress>
                             </div>
                             <button class="submit" type="submit">Опубликовать</button>
                         </form>
