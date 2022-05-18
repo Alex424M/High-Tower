@@ -321,21 +321,6 @@ h6 {
   display: flex;
 }
 
-.cost-item {
-  margin-right: 8px;
-}
-.cost-item input {
-  max-width: 106px;
-  font-family: "Roboto";
-  border: 1px solid rgba(0, 0, 0, 0.25);
-  border-radius: 5px;
-  font-weight: 300;
-  font-size: 20px;
-}
-.cost-item :last-child {
-  margin-right: 0px;
-}
-
 .right-block__sort {
   padding: 11px 32px;
   margin: 0 0 0 32px;
@@ -560,6 +545,22 @@ input[type=password] {
   font-size: 22px;
   font-family: "Roboto";
   font-weight: 300;
+}
+
+.cost-item {
+  margin-right: 8px;
+}
+.cost-item input {
+  max-width: 106px;
+  font-family: "Roboto";
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  font-weight: 300;
+  font-size: 20px;
+  padding: 0px 0px;
+}
+.cost-item :last-child {
+  margin-right: 0px;
 }
 
 /* Set a style for all buttons */

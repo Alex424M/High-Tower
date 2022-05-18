@@ -1,3 +1,7 @@
+<?php
+ob_start();
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="ru">
 
@@ -17,11 +21,41 @@
                     <a href="../index.php" class="header__logo">High Tower</a>
                     <nav class="header__nav">
                         <a href="ads.php" class="nav-btn">Аренда</a>
-                        <a href="#" class="nav-btn">Продажа</a>
-                        <a href="#" class="nav-btn">Новостройки</a>
-                        <a href="#" class="nav-btn">Дома и участки</a>
+                        <a href="ads.php" class="nav-btn">Продажа</a>
+                        <a href="ads.php" class="nav-btn">Новостройки</a>
+                        <a href="ads.php" class="nav-btn">Дома и участки</a>
                     </nav>
-                    <a href="adding.html" class="header__btn">Разместить объявление</a>
+                    <?php
+                    if (!isset($_SESSION['Name'])) { ?>
+                    <button class="header__btn">Войти</button>
+                    <?php
+                } else{
+                    ?>
+                    <div class="header__hi">
+                        <div class="menu">
+                            <button class="menu__button" type="button">
+                                <span>Привет, <?php echo $_SESSION['Name'];?></span>
+                            </button>
+                            <ul hidden class="menu__list">
+                                <li><a href="adding.php" class="menu__link">Разместить объявление</a></li>
+                                <li>
+                                    <form method="post" class="exit-form">
+                                        <button class="menu__link" name="exit">Выйти</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <?php
+                            if(isset($_POST['exit'])){
+                                $_SESSION = [];
+                                header('Location: index.php');
+                            }
+                        ?>
+                    </div>
+                <?php
+                }
+                ?>
                 </div>
             </div>
         </header>
@@ -33,9 +67,9 @@
                     <a href="#" class="navigation__link">Разместить объявление</a>
                 </div>
                 <div class="main__row">
-                    <div class="left-block">
+                <div class="left-block">
                         <div class="left-block__title">Новое объявление</div>
-                        <form method="post" class="left-block__form">
+                        <form method="post" class="left-block__form" enctype="multipart/form-data">
                             <div class="left-block__first">
                                 <div class="left-block__subtitle subtitle">Название объявления</div>
                                 <input type="text" class="input__name" name="input__name">
@@ -183,20 +217,51 @@
                                     знаками, чужих объектов и рекламные баннеры.
                                     JPG, PNG или GIF. Максимальный размер файла 10 мб</div>
                                     <div class="photo__content">
-                                        <form method="post">
-                                        <div class="photo__img"><img src="../img/icons/photo.svg" alt=""></div>
-                                        <input type="file" id="fileElem" multiple accept="image/*" onchange="handleFiles(this.files)">
-                                        <div class="photo__btn">
-                                            <button>Добавить фотографии</button>
-                                        </div>
-                                    </form>
+                                            <div class="photo__img"><img src="../img/icons/photo.svg" alt=""></div>
+                                            <div class="photo__btn">
+                                                <input type="file" name="img_upload" multiple accept="image/*">
+                                            </div>
                                     </div>
-                                    <div id="gallery"></div>
-                                <progress id="progress-bar" max=100 value=0></progress>
                             </div>
-                            <button class="submit" type="submit">Опубликовать</button>
+                            <input type="submit" name="upload" class="submit" value="Опубликовать">
                         </form>
                     </div>
+                    <?php
+                     $server= $_SERVER['SERVER_ADDR'];
+                     $username='root';
+                     $password='';
+                     $db='dbhightower';
+                     $charset='utf8';
+
+                     $conection=new mysqli($server, $username, $password, $db);
+                     if(!$conection->set_charset($charset)){
+                         echo "charset err";
+                     }
+                        if(isset($_POST["upload"])){
+                           
+                            $name=$_POST['input__name'];
+                            $description=$_POST['input__description'];
+                            $cost=$_POST['input__cost'];
+                            $metro=$_POST['metro__input'];
+                            $transaction=$_POST['radio'];
+                            $typeRealty=$_POST['radio1'];
+                            $realty=$_POST['radio3'];
+                            $address=$_POST['input__address'];
+                            $foot=$_POST['foot__input'];
+
+                            $quantity=$_POST['params__quantity'];
+                            $floor=$_POST['params__floor'];
+                            $square=$_POST['params__square'];
+                            $totalFloor=$_POST['params__totalFloor'];
+                            $ceilHeight=$_POST['params__ceilHeight'];
+                            $repair=$_POST['radio10'];
+                            $user=$_SESSION['Name'];
+                            $img=addslashes(file_get_contents($_FILES['img_upload']['tmp_name']));
+                            $conection->query("INSERT INTO announcement (Title, Description, Photo, Cost, Metro, transaction, typeRealty, realty, address, foot, QuantityRoom, Floor, square, totalFloor, ceilHeight, repair)
+                             VALUE ('$name', '$description', '$img', '$cost', '$metro', ' $transaction', '$typeRealty', '$realty', '$address', '$foot', '$quantity', '$floor', '$square', '$totalFloor', '$ceilHeight', '$repair')");
+                            echo "<meta http-equiv='refresh' content='0; url=http://high-tower/pages/ads.php'>";
+                        }
+                    ?>
                     <div class="right-block">
                         <div class="right-block__container">
                             <ul>
@@ -251,6 +316,7 @@
         </footer>
     </div>
     <script src="../js/adding.js"></script>
+    <script src="../js/hList.js"></script>
 </body>
 
 </html>

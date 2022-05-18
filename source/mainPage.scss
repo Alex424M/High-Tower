@@ -93,7 +93,48 @@ h1 {
     font-family: "Roboto";
     font-weight: 300;
 }
-
+.menu {
+    display: inline-block;
+  }
+  
+  .menu.active .menu__list {
+    display: block;
+    position: absolute;
+    z-index: 100;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+  }
+  
+  .menu__button {
+    background-color: white;
+    font-size: 20px;
+    font-family: "Roboto";
+    font-weight: 300;
+    color: black;
+  }
+  
+  .menu__list {
+    padding: 15px;
+  }
+  
+  .menu__list li:not(:last-child) {
+    margin: 0 0 15px 0;
+  }
+  
+  .menu__link {
+    font-size: 20px;
+    font-family: "Roboto";
+    font-weight: 300;
+    color: black;
+    background-color: white;
+  }
+  
+  .header__hi {
+    font-size: 20px;
+    font-family: "Roboto";
+    font-weight: 300;
+  }
 .search {
     position: relative;
     height: 576px;

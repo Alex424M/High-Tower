@@ -125,6 +125,7 @@ session_start();
                         </div>
                     </aside>
                     <div class="right-block">
+                        <form method="post">
                         <div class="right-block__sort sort">
                             <div class="sort__title">Сортировка:</div>
                             <div class="sort__select">
@@ -136,6 +137,14 @@ session_start();
                                 </select>
                             </div>
                         </div>
+                        <?php
+                        $query = "SELECT * FROM announcement WHERE ID>0 ORDER BY ID DESC LIMIT 10";
+                        $result = mysqli_query($link, $query) or die(mysqli_errno($link));
+                        if (mysqli_num_rows(mysqli_query($link, $query)) > 0) {
+                            $states = mysqli_query($link, $query);
+                            while ($states1 = mysqli_fetch_array($states)) {
+                        ?>
+                        ?>
                         <div class="right-block__offers offers">
                             <div class="offers__card card">
                                 <div class="card__row">
@@ -163,162 +172,7 @@ session_start();
                                 </div>
                             </div>
                         </div>
-                        <div class="right-block__offers offers">
-                            <div class="offers__card card">
-                                <div class="card__row">
-                                    <div class="card__img"><img src="../img/rent/1.png" alt=""></div>
-                                    <div class="card-info">
-                                        <div class="card-info__row">
-                                            <div class="card-info__item item__title">Квартира на Войковской</div>
-                                            <div class="card-info__item item__price">19 834 384руб.</div>
-                                        </div>
-                                        <div class="card-info__room">2-комнт. 80м 9/50 эт.</div>
-                                        <div class="card-info__line">
-                                            <div class="card-info__column item__metro">Войковская</div>
-                                            <div class="card-info__column item__foot">15 минут пешком</div>
-                                        </div>
-                                        <div class="card-info__description">Как мы уже знаем, кластерное вибрато
-                                            многопланово варьирует дорийский мнимотакт. Аллегро, на первый взгляд,
-                                            имитирует микрохроматический интервал. Показательный пример – райдер
-                                            традиционен. Цикл, как бы это ни казалось парадоксальным, дает определенный
-                                            дисторшн. Громкостнoй прогрессийный период монотонно трансформирует сонорный
-                                            райдер. Арпеджио, как бы это ни казалось парадоксальным, диссонирует сет.
-                                        </div>
-                                        <div class="card-info__btn"><a href="#" class="btn__buy">Контакты</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="right-block__offers offers">
-                            <div class="offers__card card">
-                                <div class="card__row">
-                                    <div class="card__img"><img src="../img/rent/1.png" alt=""></div>
-                                    <div class="card-info">
-                                        <div class="card-info__row">
-                                            <div class="card-info__item item__title">Квартира на Войковской</div>
-                                            <div class="card-info__item item__price">19 834 384руб.</div>
-                                        </div>
-                                        <div class="card-info__room">2-комнт. 80м 9/50 эт.</div>
-                                        <div class="card-info__line">
-                                            <div class="card-info__column item__metro">Войковская</div>
-                                            <div class="card-info__column item__foot">15 минут пешком</div>
-                                        </div>
-                                        <div class="card-info__description">Как мы уже знаем, кластерное вибрато
-                                            многопланово варьирует дорийский мнимотакт. Аллегро, на первый взгляд,
-                                            имитирует микрохроматический интервал. Показательный пример – райдер
-                                            традиционен. Цикл, как бы это ни казалось парадоксальным, дает определенный
-                                            дисторшн. Громкостнoй прогрессийный период монотонно трансформирует сонорный
-                                            райдер. Арпеджио, как бы это ни казалось парадоксальным, диссонирует сет.
-                                        </div>
-                                        <div class="card-info__btn"><a href="#" class="btn__buy">Контакты</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="right-block__offers offers">
-                            <div class="offers__card card">
-                                <div class="card__row">
-                                    <div class="card__img"><img src="../img/rent/1.png" alt=""></div>
-                                    <div class="card-info">
-                                        <div class="card-info__row">
-                                            <div class="card-info__item item__title">Квартира на Войковской</div>
-                                            <div class="card-info__item item__price">19 834 384руб.</div>
-                                        </div>
-                                        <div class="card-info__room">2-комнт. 80м 9/50 эт.</div>
-                                        <div class="card-info__line">
-                                            <div class="card-info__column item__metro">Войковская</div>
-                                            <div class="card-info__column item__foot">15 минут пешком</div>
-                                        </div>
-                                        <div class="card-info__description">Как мы уже знаем, кластерное вибрато
-                                            многопланово варьирует дорийский мнимотакт. Аллегро, на первый взгляд,
-                                            имитирует микрохроматический интервал. Показательный пример – райдер
-                                            традиционен. Цикл, как бы это ни казалось парадоксальным, дает определенный
-                                            дисторшн. Громкостнoй прогрессийный период монотонно трансформирует сонорный
-                                            райдер. Арпеджио, как бы это ни казалось парадоксальным, диссонирует сет.
-                                        </div>
-                                        <div class="card-info__btn"><a href="#" class="btn__buy">Контакты</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="right-block__offers offers">
-                            <div class="offers__card card">
-                                <div class="card__row">
-                                    <div class="card__img"><img src="../img/rent/1.png" alt=""></div>
-                                    <div class="card-info">
-                                        <div class="card-info__row">
-                                            <div class="card-info__item item__title">Квартира на Войковской</div>
-                                            <div class="card-info__item item__price">19 834 384руб.</div>
-                                        </div>
-                                        <div class="card-info__room">2-комнт. 80м 9/50 эт.</div>
-                                        <div class="card-info__line">
-                                            <div class="card-info__column item__metro">Войковская</div>
-                                            <div class="card-info__column item__foot">15 минут пешком</div>
-                                        </div>
-                                        <div class="card-info__description">Как мы уже знаем, кластерное вибрато
-                                            многопланово варьирует дорийский мнимотакт. Аллегро, на первый взгляд,
-                                            имитирует микрохроматический интервал. Показательный пример – райдер
-                                            традиционен. Цикл, как бы это ни казалось парадоксальным, дает определенный
-                                            дисторшн. Громкостнoй прогрессийный период монотонно трансформирует сонорный
-                                            райдер. Арпеджио, как бы это ни казалось парадоксальным, диссонирует сет.
-                                        </div>
-                                        <div class="card-info__btn"><a href="#" class="btn__buy">Контакты</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="right-block__offers offers">
-                            <div class="offers__card card">
-                                <div class="card__row">
-                                    <div class="card__img"><img src="../img/rent/1.png" alt=""></div>
-                                    <div class="card-info">
-                                        <div class="card-info__row">
-                                            <div class="card-info__item item__title">Квартира на Войковской</div>
-                                            <div class="card-info__item item__price">19 834 384руб.</div>
-                                        </div>
-                                        <div class="card-info__room">2-комнт. 80м 9/50 эт.</div>
-                                        <div class="card-info__line">
-                                            <div class="card-info__column item__metro">Войковская</div>
-                                            <div class="card-info__column item__foot">15 минут пешком</div>
-                                        </div>
-                                        <div class="card-info__description">Как мы уже знаем, кластерное вибрато
-                                            многопланово варьирует дорийский мнимотакт. Аллегро, на первый взгляд,
-                                            имитирует микрохроматический интервал. Показательный пример – райдер
-                                            традиционен. Цикл, как бы это ни казалось парадоксальным, дает определенный
-                                            дисторшн. Громкостнoй прогрессийный период монотонно трансформирует сонорный
-                                            райдер. Арпеджио, как бы это ни казалось парадоксальным, диссонирует сет.
-                                        </div>
-                                        <div class="card-info__btn"><a href="#" class="btn__buy">Контакты</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="right-block__offers offers">
-                            <div class="offers__card card">
-                                <div class="card__row">
-                                    <div class="card__img"><img src="../img/rent/1.png" alt=""></div>
-                                    <div class="card-info">
-                                        <div class="card-info__row">
-                                            <div class="card-info__item item__title">Квартира на Войковской</div>
-                                            <div class="card-info__item item__price">19 834 384руб.</div>
-                                        </div>
-                                        <div class="card-info__room">2-комнт. 80м 9/50 эт.</div>
-                                        <div class="card-info__line">
-                                            <div class="card-info__column item__metro">Войковская</div>
-                                            <div class="card-info__column item__foot">15 минут пешком</div>
-                                        </div>
-                                        <div class="card-info__description">Как мы уже знаем, кластерное вибрато
-                                            многопланово варьирует дорийский мнимотакт. Аллегро, на первый взгляд,
-                                            имитирует микрохроматический интервал. Показательный пример – райдер
-                                            традиционен. Цикл, как бы это ни казалось парадоксальным, дает определенный
-                                            дисторшн. Громкостнoй прогрессийный период монотонно трансформирует сонорный
-                                            райдер. Арпеджио, как бы это ни казалось парадоксальным, диссонирует сет.
-                                        </div>
-                                        <div class="card-info__btn"><a href="#" class="btn__buy">Контакты</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
