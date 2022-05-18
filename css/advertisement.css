@@ -429,6 +429,10 @@ h6 {
   color: #000000;
 }
 
+.map__container {
+  padding: 14px 8px;
+}
+
 .right-block {
   margin-left: 16px;
   background: #FFFFFF;

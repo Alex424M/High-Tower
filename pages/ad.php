@@ -212,7 +212,9 @@ session_start();
                         <div class="left-block__map map">
                             <div class="map__title title">Адрес</div>
                             <div class="map__addres"></div>
-                            <div class="map__container"></div>
+                            <div class="map__container">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d35821.130483550674!2d37.431765153280594!3d55.8657779793332!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sru!2sru!4v1652900294817!5m2!1sru!2sru" width="100%" height="450" allowfullscreen=""  loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            </div>
                         </div>
                     </main>
                     <aside class="right-block">

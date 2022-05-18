@@ -346,7 +346,9 @@ $opacity: .7;
     color: #000000;
 }
 
-.map__container {}
+.map__container {
+    padding: 14px 8px;
+}
 
 .right-block {
     margin-left: 16px;
@@ -433,7 +435,6 @@ $opacity: .7;
     color: #000000;
 
 }
-
 .right-block__time {
     font-family: 'Roboto';
     font-style: normal;
