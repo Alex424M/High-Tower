@@ -63,22 +63,32 @@ session_start();
 
         <div class="announcement">
             <div class="announcement__container container">
+                 <?php
+                        if ($_SESSION['SelectArticle'] != -1) { 
+                            $articleId=$_SESSION['SelectArticle'];
+                            $mysqli = new mysqli("127.0.0.1", "root", "", "dbhightower");
+                            $query = "SELECT * FROM `announcement` WHERE ID='$articleId'";
+                            if (mysqli_num_rows(mysqli_query($mysqli, $query)) > 0) {
+                                $comment = mysqli_fetch_array(mysqli_query($mysqli, $query));
+                                
+                ?>
                 <div class="announcement__navigation">
-                    <a href="#" class="navigation__link">Главная</a>
+                    <a href="../index.php" class="navigation__link">Главная</a>
                     <span class="navigation__arrow">></span>
-                    <a href="#" class="navigation__link">Аренда</a>
+                    <a href="ads.php" class="navigation__link">Аренда</a>
                     <span class="navigation__arrow">></span>
-                    <a href="#" class="navigation__link">Квартира на Войковской</a>
+                    <a href="ad.php" class="navigation__link"><?php echo $comment['Title'] ?></a>
                 </div>
+               
                 <div class="announcement__row">
                     <main class="left-block">
                         <div class="left-block__row">
                             <div class="left-block__title">
-                                <h1>Квартира рядом с Войковской</h1>
+                                <h1><?php echo $comment['Title'] ?></h1>
                             </div>
                             <div class="left-block__icon"><img src="../img/icons/like-heart.svg" alt=""></div>
                         </div>
-                        <div class="left-block__img"><img src="../img/apartment/4.png" alt=""></div>
+                        <div class="left-block__img"><img src="data:image/jpeg;base64, <?php echo base64_encode($comment['Photo']); ?>" alt=""></div>
                         <div class="left-block__line">
                             <div class="left-block__column">
                                 <div class="left-block__item">
@@ -140,25 +150,25 @@ session_start();
                             <div class="params__row">
                                 <div class="params__column">
                                     <div class="params__item">
-                                        <div class="params__title">80м</div>
+                                        <div class="params__title"><?php echo $comment['square'] ?></div>
                                         <div class="params__subtitle">Площадь</div>
                                     </div>
                                 </div>
                                 <div class="params__column">
                                     <div class="params__item">
-                                        <div class="params__title">7</div>
+                                        <div class="params__title"><?php echo $comment['Floor'] ?></div>
                                         <div class="params__subtitle">Этаж</div>
                                     </div>
                                 </div>
                                 <div class="params__column">
                                     <div class="params__item">
-                                        <div class="params__title">27</div>
+                                        <div class="params__title"><?php echo $comment['totalFloor'] ?></div>
                                         <div class="params__subtitle">Этажей</div>
                                     </div>
                                 </div>
                                 <div class="params__column">
                                     <div class="params__item">
-                                        <div class="params__title">2.5м</div>
+                                        <div class="params__title"><?php echo $comment['ceilHeight'] ?>м</div>
                                         <div class="params__subtitle">Высота потолка</div>
                                     </div>
                                 </div>
@@ -170,65 +180,65 @@ session_start();
                                 <ul class="characteristic-ul">
                                     <li class="characteristic-li">
                                         <span>Тип недвижимости</span>
-                                        <span>жилая</span>
+                                        <span><?php echo $comment['typeRealty'] ?></span>
                                     </li>
                                     <li class="characteristic-li">
                                         <span>Тип сделки</span>
-                                        <span>аренда</span>
+                                        <span><?php echo $comment['transaction'] ?></span>
                                     </li>
                                     <li class="characteristic-li">
                                         <span>Недвижимость</span>
-                                        <span>квартира</span>
+                                        <span><?php echo $comment['realty'] ?></span>
                                     </li>
                                     <li class="characteristic-li">
                                         <span>Высота потолков</span>
-                                        <span>3 м</span>
+                                        <span><?php echo $comment['ceilHeight'] ?> м</span>
                                     </li>
                                     <li class="characteristic-li">
                                         <span>Количество комнат</span>
-                                        <span>3</span>
+                                        <span><?php echo $comment['QuantityRoom'] ?></span>
                                     </li>
                                     <li class="characteristic-li">
                                         <span>Площадь</span>
-                                        <span>56м</span>
+                                        <span><?php echo $comment['square'] ?>м</span>
                                     </li>
                                     <li class="characteristic-li">
                                         <span>Ремонт</span>
-                                        <span>Евро</span>
+                                        <span><?php echo $comment['repair'] ?></span>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                         <div class="left-block__description description">
                             <div class="description__title title">Описание</div>
-                            <div class="description__text">Ротор векторного поля непосредственно масштабирует убывающий
-                                неопределенный интеграл. Математическое моделирование однозначно показывает, что тройной
-                                интеграл изменяет критерий интегрируемости, что и требовалось доказать. Интеграл от
-                                функции комплексной переменной, исключая очевидный случай, непосредственно масштабирует
-                                критерий интегрируемости. Окрестность точки, исключая очевидный случай, проецирует
-                                интеграл от функции, обращающейся в бесконечность в изолированной точке, при этом,
-                                вместо 13 можно взять любую другую константу.</div>
+                            <div class="description__text"><?php echo $comment['Description'] ?></div>
                         </div>
                         <div class="left-block__map map">
                             <div class="map__title title">Адрес</div>
-                            <div class="map__addres"></div>
+                            <div class="map__addres"><?php echo $comment['address'] ?></div>
                             <div class="map__container">
                             <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d35821.130483550674!2d37.431765153280594!3d55.8657779793332!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sru!2sru!4v1652900294817!5m2!1sru!2sru" width="100%" height="450" allowfullscreen=""  loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                             </div>
                         </div>
                     </main>
                     <aside class="right-block">
-                        <div class="right-block__price">19 953 826 руб.</div>
-                        <div class="right-block__costMeter">156 434 руб./м</div>
+                        <div class="right-block__price"><?php echo $comment['Cost'] ?> руб.</div>
+                        <div class="right-block__costMeter">
+                            <?php 
+                            $costMetr = $comment['Cost']/$comment['square'];
+                            echo round ($costMetr, 0);;?> руб./м
+                        </div>
                         <a href="#" class="right-block__cotact">Показать контакты</a>
                         <div class="right-block__name">Компания Москва</div>
-                        <div class="right-block__change">Дом 8, сдан в 4 кв. 2013</div>
-                        <div class="right-block__address">Москва, 1-я Радиаторская улица, 7</div>
+                        <div class="right-block__address"><?php echo $comment['address'] ?></div>
                         <div class="right-block__row">
-                            <div class="right-block__metro">м.Войковская</div>
-                            <div class="right-block__time">7 минут пешком</div>
+                            <div class="right-block__metro">м.<?php echo $comment['Metro'] ?></div>
+                            <div class="right-block__time"><?php echo $comment['foot'] ?> минут пешком</div>
                         </div>
                     </aside>
+                    <?php
+                            }}
+                    ?>
                 </div>
             </div>
         </div>

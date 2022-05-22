@@ -20,15 +20,21 @@ session_start();
             <div class="header__container container">
                 <div class="header__content">
                     <a href="./index.php" class="header__logo">High Tower</a>
-                    <nav class="header__nav">
-                        <a href="pages/ads.php" class="nav-btn">Аренда</a>
-                        <a href="#" class="nav-btn">Продажа</a>
-                        <a href="#" class="nav-btn">Новостройки</a>
-                        <a href="#" class="nav-btn">Дома и участки</a>
-                    </nav>
+                    <div class="header__burger">
+                        <span></span>
+                    </div>
+                    <div class="header__menu">
+                        <nav class="header__nav">
+                            <a href="pages/ads.php" class="nav-btn">Аренда</a>
+                            <a href="#" class="nav-btn">Продажа</a>
+                            <a href="#" class="nav-btn">Новостройки</a>
+                            <a href="#" class="nav-btn">Дома и участки</a>
+                        </nav>
                     <?php
                     if (!isset($_SESSION['Name'])) { ?>
-                    <button class="header__btn">Войти</button>
+                        <button class="header__btn">Войти</button>
+                    </div>
+                    
                     <?php
                 } else{
                     ?>
@@ -73,26 +79,36 @@ session_start();
                         <a href="" class="btn__sell btn-search">Продать</a>
                     </div>
                     <div class="search__row">
-                        <select class="row__apart" name="apartment">
-                            <option value="A">Вторичку</option>
-                            <option value="B">Новостройку</option>
-                        </select>
-                        <select class="row__room" name="room">
-                            <option value="A">Студия</option>
-                            <option value="B">1 команат</option>
-                            <option value="C">2 команат</option>
-                            <option value="D">3 команат</option>
-                            <option value="E">4 команат</option>
-                        </select>
-                        <select class="row__dist" name="district">
-                            <option value="A">Алексеевская</option>
-                            <option value="B">Бауманская</option>
-                            <option value="C">Войковская</option>
-                            <option value="D">Коломенская</option>
-                            <option value="E">Лефортово</option>
-                        </select>
-                        <a href="" class="btn-cost">Стоимость</a>
-                        <a href="pages/ads.html" class="btn__search">Найти</a>
+                        <div class="row__column1">
+                            <div class="column1">
+                                <select class="row__apart row-item" name="apartment">
+                                <option value="A">Вторичку</option>
+                                <option value="B">Новостройку</option>
+                            </select>
+                            <select class="row__room row-item" name="room">
+                                <option value="A">Студия</option>
+                                <option value="B">1 команат</option>
+                                <option value="C">2 команат</option>
+                                <option value="D">3 команат</option>
+                                <option value="E">4 команат</option>
+                            </select>
+                            </div>
+                            <div class="column2">
+                                <select class="row__dist row-item" name="district">
+                                <option value="A">Алексеевская</option>
+                                <option value="B">Бауманская</option>
+                                <option value="C">Войковская</option>
+                                <option value="D">Коломенская</option>
+                                <option value="E">Лефортово</option>
+                            </select>
+                            <a href="" class="btn-cost row-item">Стоимость</a>
+                            </div>
+                            
+                        </div>
+                        <div class="row__column2">
+
+                            <a href="pages/ads.html" class="btn__search">Найти</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -108,7 +124,7 @@ session_start();
                                 <div class="offer__item">
                                     <div class="offer__img"><img src="img/apartment/1.jpg" alt=""></div>
                                     <div class="offer__content">
-                                        <div class="offer__title title">ЖК Отрадное</div>
+                                        <div class="offer__title title"><a href="pages/ad.php">ЖК Отрадное</a></div>
                                         <div class="offer__cost cost">от 7,5млн рублей</div>
                                         <div class="location__row">
                                             <div class="location__metro metro">Метро Отрадное</div>
@@ -121,7 +137,7 @@ session_start();
                                 <div class="offer__item">
                                     <div class="offer__img"><img src="img/apartment/2.jpg" alt=""></div>
                                     <div class="offer__content">
-                                        <div class="offer__title title">ЖК Отрадное</div>
+                                        <div class="offer__title title"><a href="pages/ad.php">ЖК Отрадное</a></div>
                                         <div class="offer__cost cost">от 7,5млн рублей</div>
                                         <div class="location__row">
                                             <div class="location__metro metro">Метро Отрадное</div>
@@ -134,7 +150,7 @@ session_start();
                                 <div class="offer__item">
                                     <div class="offer__img"><img src="img/apartment/3.jpg" alt=""></div>
                                     <div class="offer__content">
-                                        <div class="offer__title title">ЖК Отрадное</div>
+                                        <div class="offer__title title"><a href="pages/ad.php">ЖК Отрадное</a></div>
                                         <div class="offer__cost cost">от 7,5млн рублей</div>
                                         <div class="location__row">
                                             <div class="location__metro metro">Метро Отрадное</div>
@@ -147,7 +163,7 @@ session_start();
                                 <div class="offer__item">
                                     <div class="offer__img"><img src="img/apartment/1.jpg" alt=""></div>
                                     <div class="offer__content">
-                                        <div class="offer__title title">ЖК Отрадное</div>
+                                        <div class="offer__title title"><a href="pages/ad.php">ЖК Отрадное</a></div>
                                         <div class="offer__cost cost">от 7,5млн рублей</div>
                                         <div class="location__row">
                                             <div class="location__metro metro">Метро Отрадное</div>
@@ -163,7 +179,7 @@ session_start();
                                 <div class="offer__item">
                                     <div class="offer__img"><img src="img/apartment/3.jpg" alt=""></div>
                                     <div class="offer__content">
-                                        <div class="offer__title title">ЖК Отрадное</div>
+                                        <div class="offer__title title"><a href="pages/ad.php">ЖК Отрадное</a></div>
                                         <div class="offer__cost cost">от 7,5млн рублей</div>
                                         <div class="location__row">
                                             <div class="location__metro metro">Метро Отрадное</div>
@@ -176,7 +192,7 @@ session_start();
                                 <div class="offer__item">
                                     <div class="offer__img"><img src="img/apartment/2.jpg" alt=""></div>
                                     <div class="offer__content">
-                                        <div class="offer__title title">ЖК Отрадное</div>
+                                        <div class="offer__title title"><a href="pages/ad.php">ЖК Отрадное</a></div>
                                         <div class="offer__cost cost">от 7,5млн рублей</div>
                                         <div class="location__row">
                                             <div class="location__metro metro">Метро Отрадное</div>
@@ -189,7 +205,7 @@ session_start();
                                 <div class="offer__item">
                                     <div class="offer__img"><img src="img/apartment/3.jpg" alt=""></div>
                                     <div class="offer__content">
-                                        <div class="offer__title title">ЖК Отрадное</div>
+                                        <div class="offer__title title"><a href="pages/ad.php">ЖК Отрадное</a></div>
                                         <div class="offer__cost cost">от 7,5млн рублей</div>
                                         <div class="location__row">
                                             <div class="location__metro metro">Метро Отрадное</div>
@@ -202,7 +218,7 @@ session_start();
                                 <div class="offer__item">
                                     <div class="offer__img"><img src="img/apartment/1.jpg" alt=""></div>
                                     <div class="offer__content">
-                                        <div class="offer__title title">ЖК Отрадное</div>
+                                        <div class="offer__title title"><a href="pages/ad.php">ЖК Отрадное</a></div>
                                         <div class="offer__cost cost">от 7,5млн рублей</div>
                                         <div class="location__row">
                                             <div class="location__metro metro">Метро Отрадное</div>
@@ -226,7 +242,7 @@ session_start();
                                 <div class="offer__item">
                                     <div class="offer__img"><img src="img/apartment/1.jpg" alt=""></div>
                                     <div class="offer__content">
-                                        <div class="offer__title title">ЖК Отрадное</div>
+                                        <div class="offer__title title"><a href="pages/ad.php">ЖК Отрадное</a></div>
                                         <div class="offer__cost cost">от 7,5млн рублей</div>
                                         <div class="location__row">
                                             <div class="location__metro metro">Метро Отрадное</div>
@@ -239,7 +255,7 @@ session_start();
                                 <div class="offer__item">
                                     <div class="offer__img"><img src="img/apartment/2.jpg" alt=""></div>
                                     <div class="offer__content">
-                                        <div class="offer__title title">ЖК Отрадное</div>
+                                        <div class="offer__title title"><a href="pages/ad.php">ЖК Отрадное</a></div>
                                         <div class="offer__cost cost">от 7,5млн рублей</div>
                                         <div class="location__row">
                                             <div class="location__metro metro">Метро Отрадное</div>
@@ -252,7 +268,7 @@ session_start();
                                 <div class="offer__item">
                                     <div class="offer__img"><img src="img/apartment/3.jpg" alt=""></div>
                                     <div class="offer__content">
-                                        <div class="offer__title title">ЖК Отрадное</div>
+                                        <div class="offer__title title"><a href="pages/ad.php">ЖК Отрадное</a></div>
                                         <div class="offer__cost cost">от 7,5млн рублей</div>
                                         <div class="location__row">
                                             <div class="location__metro metro">Метро Отрадное</div>
@@ -265,7 +281,7 @@ session_start();
                                 <div class="offer__item">
                                     <div class="offer__img"><img src="img/apartment/1.jpg" alt=""></div>
                                     <div class="offer__content">
-                                        <div class="offer__title title">ЖК Отрадное</div>
+                                        <div class="offer__title title"><a href="pages/ad.php">ЖК Отрадное</a></div>
                                         <div class="offer__cost cost">от 7,5млн рублей</div>
                                         <div class="location__row">
                                             <div class="location__metro metro">Метро Отрадное</div>
@@ -275,13 +291,12 @@ session_start();
                                 </div>
                             </div>
                         </div>
-                        <!-- Меню -->
                         <div class="offer__row">
                             <div class="offer__column">
                                 <div class="offer__item">
                                     <div class="offer__img"><img src="img/apartment/3.jpg" alt=""></div>
                                     <div class="offer__content">
-                                        <div class="offer__title title">ЖК Отрадное</div>
+                                        <div class="offer__title title"><a href="pages/ad.php">ЖК Отрадное</a></div>
                                         <div class="offer__cost cost">от 7,5млн рублей</div>
                                         <div class="location__row">
                                             <div class="location__metro metro">Метро Отрадное</div>
@@ -294,7 +309,7 @@ session_start();
                                 <div class="offer__item">
                                     <div class="offer__img"><img src="img/apartment/2.jpg" alt=""></div>
                                     <div class="offer__content">
-                                        <div class="offer__title title">ЖК Отрадное</div>
+                                        <div class="offer__title title"><a href="pages/ad.php">ЖК Отрадное</a></div>
                                         <div class="offer__cost cost">от 7,5млн рублей</div>
                                         <div class="location__row">
                                             <div class="location__metro metro">Метро Отрадное</div>
@@ -307,7 +322,7 @@ session_start();
                                 <div class="offer__item">
                                     <div class="offer__img"><img src="img/apartment/3.jpg" alt=""></div>
                                     <div class="offer__content">
-                                        <div class="offer__title title">ЖК Отрадное</div>
+                                        <div class="offer__title title"><a href="pages/ad.php">ЖК Отрадное</a></div>
                                         <div class="offer__cost cost">от 7,5млн рублей</div>
                                         <div class="location__row">
                                             <div class="location__metro metro">Метро Отрадное</div>
@@ -320,7 +335,7 @@ session_start();
                                 <div class="offer__item">
                                     <div class="offer__img"><img src="img/apartment/1.jpg" alt=""></div>
                                     <div class="offer__content">
-                                        <div class="offer__title title">ЖК Отрадное</div>
+                                        <div class="offer__title title"><a href="pages/ad.php">ЖК Отрадное</a></div>
                                         <div class="offer__cost cost">от 7,5млн рублей</div>
                                         <div class="location__row">
                                             <div class="location__metro metro">Метро Отрадное</div>
@@ -381,23 +396,10 @@ session_start();
                 <div class="about__content">
                     <div class="about__logo logo">Агенство недвижимости High Tower</div>
                     <div class="about__text">
-                        <p> Арифметическая прогрессия, исключая очевидный случай, масштабирует линейно
-                            зависимый интеграл Пуассона, в итоге приходим к логическому противоречию. Полином, не
-                            вдаваясь в
-                            подробности, усиливает степенной ряд. Дело в том, что целое число соответствует график
-                            функции
-                            многих переменных. По сути, аксиома решительно масштабирует экспериментальный разрыв
-                            функции.</p>
+                        <p> Ищете надежные квартиры в Москве? Обратитесь в к нам. Мы предоставляем все 
+                            типы объявлений начиная от продажи заканчивая арендой. Мы оказывает услуги на рынке с 2022 года.</p>
 
-                        <p> Подмножество последовательно трансформирует отрицательный критерий интегрируемости.
-                            Интерполяция
-                            существенно ускоряет тригонометрический график функции. Вектор выведен. Линейное
-                            программирование однородно притягивает график функции многих переменных.</p>
-
-                        <p> Дисперсия по-прежнему востребована. Непрерывная функция, в первом приближении, обуславливает
-                            интеграл от функции, имеющий конечный разрыв. Согласно предыдущему, лемма накладывает
-                            положительный интеграл Пуассона. Дивергенция векторного поля непосредственно нейтрализует
-                            комплексный контрпример. Контрпример нормально распределен.</p>
+                        <p> Наш сайт позволяет удобно выбирать квартиры. С нашей помощью вы можете осуществить поиск и регистрацию недвижимости.</p>
                     </div>
                 </div>
             </div>
@@ -574,6 +576,8 @@ if (isset($_POST['regist'])) {
 ?>
     <script src="js/entry.js"></script>
     <script src="js/hList.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="js/menu.js"></script> 
 </body>
 
 </html>

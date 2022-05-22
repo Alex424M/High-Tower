@@ -157,6 +157,7 @@ if(!$conection->set_charset($charset)){
                             
                         ?>
                         <div class="right-block__offers offers">
+                        <form method="post" class="rightForm">
                             <div class="offers__card card">
                                 <div class="card__row">
                                     <div class="card__img"><img src="data:image/jpeg;base64, <?php echo base64_encode($states1['Photo']); ?>" alt="Изображение"></div>
@@ -174,11 +175,18 @@ if(!$conection->set_charset($charset)){
                                             <?php echo $states1['Description']; ?>
                                         </div>
                                         <div class="card-info__btn">
-                                            <a href="ad.php" class="btn__buy">Контакты</a>
+                                            <?php
+                                                echo "<input type = \"submit\" value = \"Посмотреть\" class=\"btn__buy\" name = \"$states1[ID]\">";
+                                                if (isset($_POST[$states1['ID']])) {
+                                                    $_SESSION['SelectArticle'] = $states1['ID'];
+                                                    header("Location: ad.php");
+                                                }
+                                                ?>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            </form>
                         </div>
                         <?php
                             }

@@ -249,6 +249,9 @@ h6 {
   background: #FFFFFF;
   border-radius: 5px;
   padding: 24px 16px 32px;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 68%;
+          flex: 1 1 68%;
 }
 
 .left-block__row {
@@ -441,6 +444,9 @@ h6 {
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 32%;
+          flex: 0 0 32%;
 }
 
 .right-block__price {
