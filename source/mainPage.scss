@@ -17,11 +17,10 @@ h1 {
     width: 100%;
     overflow: hidden;
 }
-
-
 .header {
     width: 100%;
     padding: 15px 0;
+    box-shadow: 0px -2px 45px rgba(0, 0, 0, 0.25);
     position: fixed;
     top: 0;
     left: 0;
@@ -270,6 +269,7 @@ h1 {
     font-size: 20px;
     max-width: 195px;
     border-radius: 5px 0 0 5px;
+    background-color: #fff;
 }
 
 .row__room {
@@ -280,6 +280,7 @@ h1 {
     font-weight: 300;
     font-size: 20px;
     max-width: 195px;
+    background-color: #fff;
 }
 
 .row__dist {
@@ -290,6 +291,7 @@ h1 {
     font-weight: 300;
     font-size: 20px;
     max-width: 195px;
+    background-color: #fff;
 }
 
 .btn-cost {
@@ -593,31 +595,7 @@ h1 {
 
 .contacts__icon img {}
 
-@media(max-width: 1200px) {
-    .container {
-        max-width: 900px;
-        margin: 0 auto;
-        padding: 0 16px;
-    }
 
-    .header__nav {
-        align-items: center;
-    }
-
-    .offer__column {
-        flex: 0 1 50%;
-        margin: 0 0 24px 0;
-        padding: 0 24px;
-    }
-
-    .offer__row {
-        margin: 0 -24px;
-    }
-
-    .offer__img {
-        height: 180px;
-    }
-}
 
 input {
     margin-bottom: 16px;
@@ -766,7 +744,31 @@ button:hover {
         transform: scale(1)
     }
 }
+@media(max-width: 1200px) {
+    .container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 0 16px;
+    }
 
+    .header__nav {
+        align-items: center;
+    }
+
+    .offer__column {
+        flex: 0 1 50%;
+        margin: 0 0 24px 0;
+        padding: 0 24px;
+    }
+
+    .offer__row {
+        margin: 0 -24px;
+    }
+
+    .offer__img {
+        height: 180px;
+    }
+}
 
 @media(max-width: 780px) {
     .search__row {
@@ -884,6 +886,7 @@ button:hover {
     }
     .row-item{
         flex: 1 1 50%;
+        max-width: 100%;
     }
     .row__room{
         border-radius: 0px 5px 5px 0px;
@@ -908,4 +911,19 @@ button:hover {
     .footer__column{
         margin-bottom: 16px;
     }
+    .modal-content {
+        width: 90%;
+    }
+}
+@media(max-width: 420px) {
+    .h2__enter {
+        margin-bottom: 18px;
+    }
+    .btn__submit {
+        margin-top: 8px;
+    }
+    .container1 {
+        padding: 32px 34px 50px;
+    }
+
 }

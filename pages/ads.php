@@ -25,19 +25,25 @@ if(!$conection->set_charset($charset)){
 
 <body>
     <div class="wrapper">
-        <header class="header">
+    <header class="header">
             <div class="header__container container">
                 <div class="header__content">
                     <a href="../index.php" class="header__logo">High Tower</a>
-                    <nav class="header__nav">
-                        <a href="ads.php" class="nav-btn">Аренда</a>
-                        <a href="#" class="nav-btn">Продажа</a>
-                        <a href="#" class="nav-btn">Новостройки</a>
-                        <a href="#" class="nav-btn">Дома и участки</a>
-                    </nav>
+                    <div class="header__burger">
+                        <span></span>
+                    </div>
+                    <div class="header__menu">
+                        <nav class="header__nav">
+                            <a href="pages/ads.php" class="nav-btn">Аренда</a>
+                            <a href="#" class="nav-btn">Продажа</a>
+                            <a href="#" class="nav-btn">Новостройки</a>
+                            <a href="#" class="nav-btn">Дома и участки</a>
+                        </nav>
                     <?php
                     if (!isset($_SESSION['Name'])) { ?>
-                    <button class="header__btn">Войти</button>
+                        <button class="header__btn">Войти</button>
+                    </div>
+                    
                     <?php
                 } else{
                     ?>
@@ -59,7 +65,7 @@ if(!$conection->set_charset($charset)){
                         <?php
                             if(isset($_POST['exit'])){
                                 $_SESSION = [];
-                                header('Location: ads.php');
+                                header('Location: index.php');
                             }
                         ?>
                     </div>
@@ -368,6 +374,8 @@ if (isset($_POST['regist'])) {
 ?>
     <script src="../js/entry.js"></script>
     <script src="../js/hList.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="../js/menu.js"></script> 
 </body>
 
 </html>

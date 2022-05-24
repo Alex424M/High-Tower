@@ -91,7 +91,9 @@ h6 {
 }
 
 .wrapper {
-  min-height: 100%;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
 }
 
 .header {
@@ -99,8 +101,21 @@ h6 {
   padding: 15px 0;
   -webkit-box-shadow: 0px -2px 45px rgba(0, 0, 0, 0.25);
           box-shadow: 0px -2px 45px rgba(0, 0, 0, 0.25);
-  position: relative;
-  z-index: 2;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 50;
+}
+
+.header::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  z-index: 3;
 }
 
 .container {
@@ -114,6 +129,7 @@ h6 {
 }
 
 .header__content {
+  position: relative;
   max-width: 1140px;
   margin: 0 auto;
   display: -webkit-box;
@@ -131,6 +147,24 @@ h6 {
   font-size: 25px;
   font-family: "Roboto";
   font-weight: 400;
+  position: relative;
+  z-index: 5;
+}
+
+.header__menu {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 1 75%;
+          flex: 0 1 75%;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  z-index: 5;
 }
 
 .header__nav {
@@ -140,13 +174,13 @@ h6 {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  color: black;
+  margin-right: 16px;
 }
 
 .nav-btn {
   margin-right: 40px;
-  color: black;
 }
+
 .nav-btn:last-child {
   margin-right: 0px;
 }
@@ -155,10 +189,11 @@ h6 {
   font-size: 20px;
   font-family: "Roboto";
   font-weight: 400;
-  background: linear-gradient(45deg, #FF4D62, #E96200);
+  background-image: linear-gradient(45deg, #FF4D62, #E96200);
   padding: 8px 50px;
   border-radius: 10px;
   color: white;
+  position: relative;
 }
 
 .exit-form {
@@ -174,6 +209,12 @@ h6 {
   border-radius: 10px;
   color: #000;
   border: 2px solid #ff4d4d;
+}
+
+.header__hi {
+  font-size: 20px;
+  font-family: "Roboto";
+  font-weight: 300;
 }
 
 .menu {
@@ -223,7 +264,7 @@ h6 {
   position: relative;
   z-index: 1;
   height: 100%;
-  padding: 27px 0 64px 0;
+  padding: 78px 0 64px 0;
 }
 
 .announcement__navigation {
@@ -250,8 +291,8 @@ h6 {
   border-radius: 5px;
   padding: 24px 16px 32px;
   -webkit-box-flex: 1;
-      -ms-flex: 1 1 68%;
-          flex: 1 1 68%;
+      -ms-flex: 1 1 67%;
+          flex: 1 1 67%;
 }
 
 .left-block__row {
@@ -279,14 +320,25 @@ h6 {
 }
 
 .left-block__img {
-  border-radius: 5px;
   margin-bottom: 16px;
+  width: 100%;
+  height: 384px;
+}
+.left-block__img img {
+  vertical-align: top;
+  -o-object-fit: cover;
+     object-fit: cover;
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
 }
 
 .left-block__line {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
 
 .left-block__column {
@@ -445,8 +497,8 @@ h6 {
   height: -moz-fit-content;
   height: fit-content;
   -webkit-box-flex: 0;
-      -ms-flex: 0 0 32%;
-          flex: 0 0 32%;
+      -ms-flex: 0 0 34%;
+          flex: 0 0 34%;
 }
 
 .right-block__price {
@@ -654,7 +706,7 @@ button:hover {
   /* Hidden by default */
   position: fixed;
   /* Stay in place */
-  z-index: 1;
+  z-index: 51;
   /* Sit on top */
   left: 0;
   top: 0;
@@ -742,5 +794,169 @@ button:hover {
   to {
     -webkit-transform: scale(1);
             transform: scale(1);
+  }
+}
+@media (max-width: 1200px) {
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+
+  .header__nav {
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+}
+@media (max-width: 767px) {
+  .announcement__row {
+    display: block;
+  }
+
+  .right-block {
+    margin: 16px 0 0;
+  }
+
+  .right-block__cotact {
+    width: 45%;
+  }
+
+  body.lock {
+    overflow: hidden;
+  }
+
+  .header__burger {
+    display: block;
+    position: relative;
+    width: 30px;
+    height: 20px;
+    position: relative;
+    z-index: 6;
+  }
+  .header__burger span {
+    background-color: #000;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    top: 9px;
+    -webkit-transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s;
+  }
+
+  .menu__button {
+    margin-top: 16px;
+    font-weight: 400;
+  }
+
+  .header__burger::before,
+.header__burger::after {
+    content: "";
+    background-color: #000;
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    left: 0;
+    -webkit-transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s;
+  }
+
+  .header__burger::before {
+    top: 0;
+  }
+
+  .header__burger::after {
+    bottom: 0;
+  }
+
+  .header__nav {
+    display: block;
+  }
+  .header__nav a {
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .header__menu {
+    position: fixed;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    display: block;
+    padding: 48px 0 0 16px;
+    -webkit-transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s;
+    overflow: auto;
+  }
+
+  .header__menu.active {
+    top: 0;
+  }
+
+  .header__burger.active span {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  }
+
+  .header__burger.active::before {
+    -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+    top: 9px;
+  }
+
+  .header__burger.active::after {
+    -webkit-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+    bottom: 9px;
+  }
+
+  .announcement__navigation {
+    font-size: 12px;
+    padding: 13px 0 16px 0;
+  }
+
+  .announcement {
+    padding: 56px 0 64px 0;
+  }
+}
+@media (max-width: 576px) {
+  .right-block__cotact {
+    width: 100%;
+  }
+
+  .params__row {
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+
+  .characteristic-li span:first-child {
+    -webkit-box-flex: 1;
+        -ms-flex: 1 1 50%;
+            flex: 1 1 50%;
+    max-width: 121px;
+    margin-right: 16px;
+  }
+
+  .modal-content {
+    width: 90%;
+  }
+}
+@media (max-width: 420px) {
+  .h2__enter {
+    margin-bottom: 18px;
+  }
+
+  .btn__submit {
+    margin-top: 8px;
+  }
+
+  .container1 {
+    padding: 32px 34px 50px;
   }
 }
