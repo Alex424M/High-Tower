@@ -75,7 +75,7 @@ session_start();
                                 $articleId=$_SESSION['SelectArticle'];
                             }
                             $mysqli = new mysqli("127.0.0.1", "root", "", "dbhightower");
-                            $query = "SELECT * FROM `announcement` WHERE ID='$articleId'";
+                            $query = "SELECT *, (SELECT name FROM users WHERE id = IDUser) as 'user', (SELECT NumberPhone FROM users WHERE id = IDUser) as 'phone' FROM announcement WHERE ID='$articleId'";
                             if (mysqli_num_rows(mysqli_query($mysqli, $query)) > 0) {
                                 $comment = mysqli_fetch_array(mysqli_query($mysqli, $query));
                                 
@@ -236,7 +236,7 @@ session_start();
                             echo round ($costMetr, 0);;?> руб./м
                         </div>
                         <a href="#" class="right-block__cotact">Показать контакты</a>
-                        <div class="right-block__name">Компания Москва</div>
+                        <div class="right-block__name"><?php echo $comment['user'] ?></div>
                         <div class="right-block__address"><?php echo $comment['address'] ?></div>
                         <div class="right-block__row">
                             <div class="right-block__metro">м.<?php echo $comment['Metro'] ?></div>
