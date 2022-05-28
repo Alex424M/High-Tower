@@ -428,6 +428,54 @@ h1 {
   background-color: #fff;
 }
 
+.cost__inputs {
+  display: none;
+}
+.cost__inputs.valid {
+  display: block;
+  position: absolute;
+  z-index: 10;
+  margin-top: 8px;
+  -webkit-box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.1);
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  background-color: #fff;
+  padding: 16px;
+  min-width: 150px;
+  max-width: 296px;
+}
+
+.cost__row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  width: 100%;
+}
+
+.cost__item {
+  width: 100%;
+  margin: 0 8px 0 0;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 50%;
+          flex: 1 1 50%;
+}
+.cost__item:last-child {
+  margin: 0;
+}
+
+.input__cost {
+  font-family: "Roboto";
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  font-weight: 300;
+  font-size: 20px;
+  width: 100%;
+}
+
 .btn-cost {
   background-color: #fff;
   padding: 15px 10px;
@@ -441,6 +489,7 @@ h1 {
   text-align: center;
   display: block;
   border-radius: 0 5px 5px 0;
+  width: 100%;
 }
 
 .btn__search {
@@ -450,7 +499,7 @@ h1 {
   background-image: linear-gradient(45deg, #FF4D62, #E96200);
   padding: 10px 50px;
   border-radius: 10px;
-  margin-left: 30px;
+  color: #fff;
 }
 
 .row-item {
@@ -488,6 +537,9 @@ h1 {
   margin: 0 -8px 50px;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
 }
 
 .offer__column {
@@ -499,6 +551,7 @@ h1 {
 
 .offer__item {
   background-color: #f2f2f2;
+  height: 100%;
 }
 
 .offer__img {
@@ -740,13 +793,8 @@ h1 {
   padding: 0 20px;
 }
 
-input {
-  margin-bottom: 16px;
-}
-
 /* Full-width input fields */
-input[type=text],
-input[type=password] {
+.input__form {
   width: 100%;
   padding: 12px 20px;
   display: inline-block;

@@ -15,19 +15,25 @@ session_start();
 
 <body>
     <div class="wrapper">
-        <header class="header">
+    <header class="header">
             <div class="header__container container">
                 <div class="header__content">
                     <a href="../index.php" class="header__logo">High Tower</a>
-                    <nav class="header__nav">
-                        <a href="ads.php" class="nav-btn">Аренда</a>
-                        <a href="ads.php" class="nav-btn">Продажа</a>
-                        <a href="ads.php" class="nav-btn">Новостройки</a>
-                        <a href="ads.php" class="nav-btn">Дома и участки</a>
-                    </nav>
+                    <div class="header__burger">
+                        <span></span>
+                    </div>
+                    <div class="header__menu">
+                        <nav class="header__nav">
+                            <a href="ads.php?rent" class="nav-btn">Аренда</a>
+                            <a href="ads.php?sale" class="nav-btn">Продажа</a>
+                            <a href="ads.php?NewBuildings" class="nav-btn">Новостройки</a>
+                            <a href="ads.php?area" class="nav-btn">Дома и участки</a>
+                        </nav>
                     <?php
                     if (!isset($_SESSION['Name'])) { ?>
-                    <button class="header__btn">Войти</button>
+                        <button class="header__btn">Войти</button>
+                    </div>
+                    
                     <?php
                 } else{
                     ?>
@@ -49,7 +55,7 @@ session_start();
                         <?php
                             if(isset($_POST['exit'])){
                                 $_SESSION = [];
-                                header('Location: index.php');
+                                header('Location: ../index.php');
                             }
                         ?>
                     </div>
@@ -150,8 +156,8 @@ session_start();
                             </div>
                             <div class="left-block__third">
                                 <div class="left-block__subtitle subtitle">Адрес</div>
-                                <input type="text" name="input__address" class="input__address">
-                                <div class="left-block__map">
+                                <input type="text" name="input__address" id="suggest1" class="input__address">
+                                <div class="left-block__map" id="map">
 
                                 </div>
                                 <div class="left-block__metro">
@@ -317,6 +323,10 @@ session_start();
     </div>
     <script src="../js/adding.js"></script>
     <script src="../js/hList.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=565f0af0-7c62-45bb-8626-681498eea6ee" type="text/javascript"></script>
+    <script src="../js/suggest.js" type="text/javascript"></script>
+    <script src="../js/menu.js"></script> 
 </body>
 
 </html>

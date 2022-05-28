@@ -1,6 +1,16 @@
 <?php
 ob_start();
 session_start();
+$server= "127.0.0.1";
+$username='root';
+$password='';
+$db='dbhightower';
+$charset='utf8';
+
+$conection=new mysqli($server, $username, $password, $db);
+if(!$conection->set_charset($charset)){
+    echo "charset err";
+}
 ?>
 
 <!DOCTYPE html>
@@ -25,10 +35,10 @@ session_start();
                     </div>
                     <div class="header__menu">
                         <nav class="header__nav">
-                            <a href="pages/ads.php" class="nav-btn">Аренда</a>
-                            <a href="#" class="nav-btn">Продажа</a>
-                            <a href="#" class="nav-btn">Новостройки</a>
-                            <a href="#" class="nav-btn">Дома и участки</a>
+                            <a href="pages/ads.php?type=rent" class="nav-btn">Аренда</a>
+                            <a href="pages/ads.php?type=sale" class="nav-btn">Продажа</a>
+                            <a href="pages/ads.php?type=NewBuildings" class="nav-btn">Новостройки</a>
+                            <a href="pages/ads.php?type=area" class="nav-btn">Дома и участки</a>
                         </nav>
                     <?php
                     if (!isset($_SESSION['Name'])) { ?>
@@ -73,43 +83,56 @@ session_start();
             <div class="search__container container">
                 <div class="search__title">Квартира вашей мечты</div>
                 <div class="search__content">
-                    <div class="search__btn">
-                        <a href="" class="btn__buy btn-search">Купить</a>
-                        <a href="" class="btn__rent btn-search">Снять</a>
-                        <a href="" class="btn__sell btn-search">Продать</a>
-                    </div>
+                    <form method="get" action="pages/ads.php">
                     <div class="search__row">
                         <div class="row__column1">
                             <div class="column1">
-                                <select class="row__apart row-item" name="apartment">
-                                <option value="A">Вторичку</option>
-                                <option value="B">Новостройку</option>
+                                <select class="row__apart row-item" name="type">
+                                <option value="rent">Аренда</option>
+                                <option value="sale">Продажа</option>
+                                <option value="NewBuildings">Новостройку</option>
+                                <option value="area">Дом и участок</option>
                             </select>
                             <select class="row__room row-item" name="room">
-                                <option value="A">Студия</option>
-                                <option value="B">1 команат</option>
-                                <option value="C">2 команат</option>
-                                <option value="D">3 команат</option>
-                                <option value="E">4 команат</option>
+                                <option value="0">Студия</option>
+                                <option value="1">1 команат</option>
+                                <option value="2">2 команат</option>
+                                <option value="3">3 команат</option>
+                                <option value="4">4 команат</option>
                             </select>
                             </div>
                             <div class="column2">
-                                <select class="row__dist row-item" name="district">
-                                <option value="A">Алексеевская</option>
-                                <option value="B">Бауманская</option>
-                                <option value="C">Войковская</option>
-                                <option value="D">Коломенская</option>
-                                <option value="E">Лефортово</option>
+                                <select class="row__dist row-item" name="metro">
+                                <option value="Алексеевская">Алексеевская</option>
+                                <option value="Бауманская">Бауманская</option>
+                                <option value="Войковская">Войковская</option>
+                                <option value="Коломенская">Коломенская</option>
+                                <option value="Лефортово">Лефортово</option>
+                                <option value="Ховрино">Ховрино</option>
+                                <option value="Новокосино">Новокосино</option>
+                                <option value="Щелковская">Щелковская</option>
                             </select>
-                            <a href="" class="btn-cost row-item">Стоимость</a>
+                            <div class="cost-btn  row-item">
+                                <button type="button" class="btn-cost" value="">Стоимость</button>
+                                <div class="cost__inputs">
+                                    <div class="cost__row">
+                                        <div class="cost__item">
+                                            <input type="text" placeholder="От" name="priceStart" value="0" class="cost__from input__cost">
+                                        </div>
+                                        <div class="cost__item">
+                                            <input type="text" placeholder="До" name="priceEnd" value="99999999" class="cost__to input__cost">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             </div>
                             
                         </div>
                         <div class="row__column2">
-
-                            <a href="pages/ads.html" class="btn__search">Найти</a>
+                            <input type="submit" value="Найти" class="btn__search"/>
                         </div>
                     </div>
+                </form>
                 </div>
             </div>
 
@@ -120,114 +143,71 @@ session_start();
                     <a href="pages/ads.html" class="buy__logo logo">Купить квартиру</a>
                     <div class="offers">
                         <div class="offer__row">
+                            <?php
+                                $queryBuy= "SELECT * FROM announcement WHERE transaction=' Продажа' ORDER BY ID DESC LIMIT 8";
+                                mysqli_query($conection, $queryBuy) or die(mysqli_errno($conection));
+                                $mysqli_query=mysqli_query($conection,$queryBuy); 
+                                $i=0;
+                                while($states1=mysqli_fetch_array($mysqli_query)) {  
+                                    
+                                    if($i<2){                
+                             ?>
                             <div class="offer__column">
                                 <div class="offer__item">
-                                    <div class="offer__img"><img src="img/apartment/1.jpg" alt=""></div>
+                                    <div class="offer__img"><img src="data:image/png;base64, <?php echo base64_encode($states1['Photo']); ?>" alt=""></div>
                                     <div class="offer__content">
-                                        <div class="offer__title title"><a href="pages/ad.php">ЖК Отрадное</a></div>
-                                        <div class="offer__cost cost">от 7,5млн рублей</div>
+                                        <div class="offer__title title"><a href="pages/ad.php?selectedArticle=<?php echo $states1['ID']; ?>"><?php echo $states1['Title']; ?></a></div>
+                                        <div class="offer__cost cost"><?php echo $states1['Cost']; ?> рублей</div>
                                         <div class="location__row">
-                                            <div class="location__metro metro">Метро Отрадное</div>
-                                            <div class="location__foot foot">5 минут от метро</div>
+                                            <div class="location__metro metro">Метро <?php echo $states1['Metro']; ?></div>
+                                            <div class="location__foot foot"><?php echo $states1['foot']; ?> минут от метро</div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="offer__column">
+                        <?php
+                                    }elseif($i==3){
+                                    ?>
+                                    
+                                    <div class="offer__column">
                                 <div class="offer__item">
-                                    <div class="offer__img"><img src="img/apartment/2.jpg" alt=""></div>
+                                    <div class="offer__img"><img src="data:image/png;base64, <?php echo base64_encode($states1['Photo']); ?>" alt=""></div>
                                     <div class="offer__content">
-                                        <div class="offer__title title"><a href="pages/ad.php">ЖК Отрадное</a></div>
-                                        <div class="offer__cost cost">от 7,5млн рублей</div>
+                                        <div class="offer__title title"><a href="pages/ad.php?selectedArticle=<?php echo $states1['ID']; ?>"><?php echo $states1['Title']; ?></a></div>
+                                        <div class="offer__cost cost"><?php echo $states1['Cost']; ?> рублей</div>
                                         <div class="location__row">
-                                            <div class="location__metro metro">Метро Отрадное</div>
-                                            <div class="location__foot foot">5 минут от метро</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="offer__column">
-                                <div class="offer__item">
-                                    <div class="offer__img"><img src="img/apartment/3.jpg" alt=""></div>
-                                    <div class="offer__content">
-                                        <div class="offer__title title"><a href="pages/ad.php">ЖК Отрадное</a></div>
-                                        <div class="offer__cost cost">от 7,5млн рублей</div>
-                                        <div class="location__row">
-                                            <div class="location__metro metro">Метро Отрадное</div>
-                                            <div class="location__foot foot">5 минут от метро</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="offer__column">
-                                <div class="offer__item">
-                                    <div class="offer__img"><img src="img/apartment/1.jpg" alt=""></div>
-                                    <div class="offer__content">
-                                        <div class="offer__title title"><a href="pages/ad.php">ЖК Отрадное</a></div>
-                                        <div class="offer__cost cost">от 7,5млн рублей</div>
-                                        <div class="location__row">
-                                            <div class="location__metro metro">Метро Отрадное</div>
-                                            <div class="location__foot foot">5 минут от метро</div>
+                                            <div class="location__metro metro">Метро <?php echo $states1['Metro']; ?></div>
+                                            <div class="location__foot foot"><?php echo $states1['foot']; ?> минут от метро</div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- Меню -->
-                        <div class="offer__row">
+                            <div class="offer__row">
+                                <?php
+                                    } else{
+                        ?>
                             <div class="offer__column">
                                 <div class="offer__item">
-                                    <div class="offer__img"><img src="img/apartment/3.jpg" alt=""></div>
+                                    <div class="offer__img"><img src="data:image/png;base64, <?php echo base64_encode($states1['Photo']); ?>" alt=""></div>
                                     <div class="offer__content">
-                                        <div class="offer__title title"><a href="pages/ad.php">ЖК Отрадное</a></div>
-                                        <div class="offer__cost cost">от 7,5млн рублей</div>
+                                        <div class="offer__title title"><a href="pages/ad.php?selectedArticle=<?php echo $states1['ID']; ?>"><?php echo $states1['Title']; ?></a></div>
+                                        <div class="offer__cost cost"><?php echo $states1['Cost']; ?> рублей</div>
                                         <div class="location__row">
-                                            <div class="location__metro metro">Метро Отрадное</div>
-                                            <div class="location__foot foot">5 минут от метро</div>
+                                            <div class="location__metro metro">Метро <?php echo $states1['Metro']; ?></div>
+                                            <div class="location__foot foot"><?php echo $states1['foot']; ?> минут от метро</div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="offer__column">
-                                <div class="offer__item">
-                                    <div class="offer__img"><img src="img/apartment/2.jpg" alt=""></div>
-                                    <div class="offer__content">
-                                        <div class="offer__title title"><a href="pages/ad.php">ЖК Отрадное</a></div>
-                                        <div class="offer__cost cost">от 7,5млн рублей</div>
-                                        <div class="location__row">
-                                            <div class="location__metro metro">Метро Отрадное</div>
-                                            <div class="location__foot foot">5 минут от метро</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="offer__column">
-                                <div class="offer__item">
-                                    <div class="offer__img"><img src="img/apartment/3.jpg" alt=""></div>
-                                    <div class="offer__content">
-                                        <div class="offer__title title"><a href="pages/ad.php">ЖК Отрадное</a></div>
-                                        <div class="offer__cost cost">от 7,5млн рублей</div>
-                                        <div class="location__row">
-                                            <div class="location__metro metro">Метро Отрадное</div>
-                                            <div class="location__foot foot">5 минут от метро</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="offer__column">
-                                <div class="offer__item">
-                                    <div class="offer__img"><img src="img/apartment/1.jpg" alt=""></div>
-                                    <div class="offer__content">
-                                        <div class="offer__title title"><a href="pages/ad.php">ЖК Отрадное</a></div>
-                                        <div class="offer__cost cost">от 7,5млн рублей</div>
-                                        <div class="location__row">
-                                            <div class="location__metro metro">Метро Отрадное</div>
-                                            <div class="location__foot foot">5 минут от метро</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                            
+                        
+                        <?php
+                                    }
+                        $i++;
+                                }
+                        ?>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -238,112 +218,70 @@ session_start();
                     <div class="rent__logo logo">Арендовать квартиру</div>
                     <div class="offers">
                         <div class="offer__row">
+                        <?php
+                                $queryBuy= "SELECT * FROM announcement WHERE transaction=' Аренда' ORDER BY ID DESC LIMIT 8";
+                                mysqli_query($conection, $queryBuy) or die(mysqli_errno($conection));
+                                $mysqli_query=mysqli_query($conection,$queryBuy); 
+                                $i=0;
+                                while($states1=mysqli_fetch_array($mysqli_query)) {  
+                                    
+                                    if($i<2){                
+                             ?>
                             <div class="offer__column">
                                 <div class="offer__item">
-                                    <div class="offer__img"><img src="img/apartment/1.jpg" alt=""></div>
+                                    <div class="offer__img"><img src="data:image/png;base64, <?php echo base64_encode($states1['Photo']); ?>" alt=""></div>
                                     <div class="offer__content">
-                                        <div class="offer__title title"><a href="pages/ad.php">ЖК Отрадное</a></div>
-                                        <div class="offer__cost cost">от 7,5млн рублей</div>
+                                        <div class="offer__title title"><a href="pages/ad.php?selectedArticle=<?php echo $states1['ID']; ?>"><?php echo $states1['Title']; ?></a></div>
+                                        <div class="offer__cost cost"><?php echo $states1['Cost']; ?> рублей</div>
                                         <div class="location__row">
-                                            <div class="location__metro metro">Метро Отрадное</div>
-                                            <div class="location__foot foot">5 минут от метро</div>
+                                            <div class="location__metro metro">Метро <?php echo $states1['Metro']; ?></div>
+                                            <div class="location__foot foot"><?php echo $states1['foot']; ?> минут от метро</div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="offer__column">
+                        <?php
+                                    }elseif($i==3){
+                                    ?>
+                                    
+                                    <div class="offer__column">
                                 <div class="offer__item">
-                                    <div class="offer__img"><img src="img/apartment/2.jpg" alt=""></div>
+                                    <div class="offer__img"><img src="data:image/png;base64, <?php echo base64_encode($states1['Photo']); ?>" alt=""></div>
                                     <div class="offer__content">
-                                        <div class="offer__title title"><a href="pages/ad.php">ЖК Отрадное</a></div>
-                                        <div class="offer__cost cost">от 7,5млн рублей</div>
+                                        <div class="offer__title title"><a href="pages/ad.php?selectedArticle=<?php echo $states1['ID']; ?>"><?php echo $states1['Title']; ?></a></div>
+                                        <div class="offer__cost cost"><?php echo $states1['Cost']; ?> рублей</div>
                                         <div class="location__row">
-                                            <div class="location__metro metro">Метро Отрадное</div>
-                                            <div class="location__foot foot">5 минут от метро</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="offer__column">
-                                <div class="offer__item">
-                                    <div class="offer__img"><img src="img/apartment/3.jpg" alt=""></div>
-                                    <div class="offer__content">
-                                        <div class="offer__title title"><a href="pages/ad.php">ЖК Отрадное</a></div>
-                                        <div class="offer__cost cost">от 7,5млн рублей</div>
-                                        <div class="location__row">
-                                            <div class="location__metro metro">Метро Отрадное</div>
-                                            <div class="location__foot foot">5 минут от метро</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="offer__column">
-                                <div class="offer__item">
-                                    <div class="offer__img"><img src="img/apartment/1.jpg" alt=""></div>
-                                    <div class="offer__content">
-                                        <div class="offer__title title"><a href="pages/ad.php">ЖК Отрадное</a></div>
-                                        <div class="offer__cost cost">от 7,5млн рублей</div>
-                                        <div class="location__row">
-                                            <div class="location__metro metro">Метро Отрадное</div>
-                                            <div class="location__foot foot">5 минут от метро</div>
+                                            <div class="location__metro metro">Метро <?php echo $states1['Metro']; ?></div>
+                                            <div class="location__foot foot"><?php echo $states1['foot']; ?> минут от метро</div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="offer__row">
+                            <div class="offer__row">
+                                <?php
+                                    } else{
+                        ?>
                             <div class="offer__column">
                                 <div class="offer__item">
-                                    <div class="offer__img"><img src="img/apartment/3.jpg" alt=""></div>
+                                    <div class="offer__img"><img src="data:image/png;base64, <?php echo base64_encode($states1['Photo']); ?>" alt=""></div>
                                     <div class="offer__content">
-                                        <div class="offer__title title"><a href="pages/ad.php">ЖК Отрадное</a></div>
-                                        <div class="offer__cost cost">от 7,5млн рублей</div>
+                                        <div class="offer__title title"><a href="pages/ad.php?selectedArticle=<?php echo $states1['ID']; ?>"><?php echo $states1['Title']; ?></a></div>
+                                        <div class="offer__cost cost"><?php echo $states1['Cost']; ?> рублей</div>
                                         <div class="location__row">
-                                            <div class="location__metro metro">Метро Отрадное</div>
-                                            <div class="location__foot foot">5 минут от метро</div>
+                                            <div class="location__metro metro">Метро <?php echo $states1['Metro']; ?></div>
+                                            <div class="location__foot foot"><?php echo $states1['foot']; ?> минут от метро</div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="offer__column">
-                                <div class="offer__item">
-                                    <div class="offer__img"><img src="img/apartment/2.jpg" alt=""></div>
-                                    <div class="offer__content">
-                                        <div class="offer__title title"><a href="pages/ad.php">ЖК Отрадное</a></div>
-                                        <div class="offer__cost cost">от 7,5млн рублей</div>
-                                        <div class="location__row">
-                                            <div class="location__metro metro">Метро Отрадное</div>
-                                            <div class="location__foot foot">5 минут от метро</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="offer__column">
-                                <div class="offer__item">
-                                    <div class="offer__img"><img src="img/apartment/3.jpg" alt=""></div>
-                                    <div class="offer__content">
-                                        <div class="offer__title title"><a href="pages/ad.php">ЖК Отрадное</a></div>
-                                        <div class="offer__cost cost">от 7,5млн рублей</div>
-                                        <div class="location__row">
-                                            <div class="location__metro metro">Метро Отрадное</div>
-                                            <div class="location__foot foot">5 минут от метро</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="offer__column">
-                                <div class="offer__item">
-                                    <div class="offer__img"><img src="img/apartment/1.jpg" alt=""></div>
-                                    <div class="offer__content">
-                                        <div class="offer__title title"><a href="pages/ad.php">ЖК Отрадное</a></div>
-                                        <div class="offer__cost cost">от 7,5млн рублей</div>
-                                        <div class="location__row">
-                                            <div class="location__metro metro">Метро Отрадное</div>
-                                            <div class="location__foot foot">5 минут от метро</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            
+                        
+                        <?php
+                                    }
+                        $i++;
+                                }
+                        ?>
                         </div>
                     </div>
                 </div>
@@ -454,9 +392,9 @@ session_start();
                     /
                     <span class="reg  notActive">Регистрация</span>
                 </div>
-                <input type="text" placeholder="Email" name="Email" required>
+                <input type="text" placeholder="Email" name="Email" class="input__form" required>
 
-                <input type="password" placeholder="Пароль" name="psw" required>
+                <input type="password" placeholder="Пароль" name="psw" class="input__form" required>
 
                 <button type="submit" class="btn__submit" name="entry">Вход</button>
             </div>
@@ -474,12 +412,12 @@ session_start();
                     /
                     <span class="reg">Регистрация</span>
                 </div>
-                <input type="text" placeholder="Имя" name="Name" required>
-                <input type="text" placeholder="Email" name="Email" required>
-                <input type="text" placeholder="Номер телефона" name="Number" required>
+                <input type="text" placeholder="Имя" name="Name" class="input__form" required>
+                <input type="text" placeholder="Email" name="Email" class="input__form" required>
+                <input type="text" placeholder="Номер телефона" name="Number" class="input__form" required>
 
-                <input type="password" placeholder="Пароль" name="psw" required>
-                <input type="password" placeholder="Повторите пароль" name="psw2" required>
+                <input type="password" placeholder="Пароль" name="psw" class="input__form" required>
+                <input type="password" placeholder="Повторите пароль" name="psw2" class="input__form" required>
 
                 <button type="submit" class="btn__submit" name="regist">Регистрация</button>
             </div>
@@ -577,7 +515,8 @@ if (isset($_POST['regist'])) {
     <script src="js/entry.js"></script>
     <script src="js/hList.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="js/menu.js"></script> 
+    <script src="js/menu.js"></script>
+    <script src="js/priceList.js"></script> 
 </body>
 
 </html>

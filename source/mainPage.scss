@@ -294,6 +294,55 @@ h1 {
     background-color: #fff;
 }
 
+.cost-btn {
+}
+.cost__inputs {
+    display: none;
+    &.valid{
+        display: block;
+        position: absolute;
+        z-index: 10; 
+        margin-top: 8px;
+        -webkit-box-shadow: 0 10px 20px 0 rgb(0 0 0 / 10%); 
+        -moz-box-shadow: 0 10px 20px 0 rgba(0,0,0,.1);
+        box-shadow: 0 10px 20px 0 rgb(0 0 0 / 10%);
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        background-color: #fff;
+        padding: 16px;
+        min-width: 150px;
+        max-width: 296px;
+    }
+}
+.cost__row {
+    display: flex;
+    position: relative;
+    -webkit-flex-wrap: nowrap;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    width: 100%;
+}
+.cost__item {
+    width: 100%;
+    margin: 0 8px 0 0;
+    flex: 1 1 50%;
+    &:last-child{
+        margin: 0;
+    }
+}
+.cost__from {
+}
+.input__cost {
+    font-family: "Roboto";
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+    font-weight: 300;
+    font-size: 20px;
+    width: 100%;
+}
+.cost__to {
+    
+}
 .btn-cost {
     background-color: #fff;
     padding: 15px 10px;
@@ -306,6 +355,7 @@ h1 {
     text-align: center;
     display: block;
     border-radius: 0 5px 5px 0;
+    width: 100%;
 }
 
 .btn__search {
@@ -315,8 +365,8 @@ h1 {
     background-image: $gradient;
     padding: 10px 50px;
     border-radius: 10px;
-    margin-left: 30px;
-
+    //margin-left: 30px;
+    color: #fff;
 }
 .row-item{
     flex: 1 1 25%;
@@ -351,6 +401,7 @@ h1 {
     display: flex;
     margin: 0 -8px 50px;
     flex-wrap: wrap;
+    align-items: stretch;
 }
 
 .offer__column {
@@ -360,6 +411,7 @@ h1 {
 
 .offer__item {
     background-color: #f2f2f2;
+    height: 100%;
 }
 
 .offer__img {
@@ -598,12 +650,11 @@ h1 {
 
 
 input {
-    margin-bottom: 16px;
+    //margin-bottom: 16px;
 }
 
 /* Full-width input fields */
-input[type=text],
-input[type=password] {
+.input__form {
     width: 100%;
     padding: 12px 20px;
     display: inline-block;

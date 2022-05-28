@@ -382,7 +382,10 @@ $opacity: .7;
 .map__container {
     padding: 14px 8px;
 }
-
+#map{
+    width: 100%;
+    height: 350px;
+}
 .right-block {
     margin-left: 16px;
     background: #FFFFFF;

@@ -24,10 +24,10 @@ session_start();
                     </div>
                     <div class="header__menu">
                         <nav class="header__nav">
-                            <a href="pages/ads.php" class="nav-btn">Аренда</a>
-                            <a href="#" class="nav-btn">Продажа</a>
-                            <a href="#" class="nav-btn">Новостройки</a>
-                            <a href="#" class="nav-btn">Дома и участки</a>
+                            <a href="ads.php?rent" class="nav-btn">Аренда</a>
+                            <a href="ads.php?sale" class="nav-btn">Продажа</a>
+                            <a href="ads.php?NewBuildings" class="nav-btn">Новостройки</a>
+                            <a href="ads.php?area" class="nav-btn">Дома и участки</a>
                         </nav>
                     <?php
                     if (!isset($_SESSION['Name'])) { ?>
@@ -68,8 +68,12 @@ session_start();
         <div class="announcement">
             <div class="announcement__container container">
                  <?php
-                        if ($_SESSION['SelectArticle'] != -1) { 
-                            $articleId=$_SESSION['SelectArticle'];
+                        if ($_SESSION['SelectArticle'] != -1 or isset($_GET['selectedArticle'])) { 
+                            if(isset($_GET['selectedArticle'])){
+                                $articleId=$_GET['selectedArticle'];
+                            }elseif($_SESSION['SelectArticle']!=-1){
+                                $articleId=$_SESSION['SelectArticle'];
+                            }
                             $mysqli = new mysqli("127.0.0.1", "root", "", "dbhightower");
                             $query = "SELECT * FROM `announcement` WHERE ID='$articleId'";
                             if (mysqli_num_rows(mysqli_query($mysqli, $query)) > 0) {
@@ -220,8 +224,7 @@ session_start();
                         <div class="left-block__map map">
                             <div class="map__title title">Адрес</div>
                             <div class="map__addres"><?php echo $comment['address'] ?></div>
-                            <div class="map__container">
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d35821.130483550674!2d37.431765153280594!3d55.8657779793332!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sru!2sru!4v1652900294817!5m2!1sru!2sru" width="100%" height="450" allowfullscreen=""  loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            <div class="map__container" id="map">
                             </div>
                         </div>
                     </main>
@@ -418,7 +421,9 @@ if (isset($_POST['regist'])) {
     <script src="../js/entry.js"></script>
     <script src="../js/hList.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="../js/menu.js"></script> 
+    <script src="../js/menu.js"></script>
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=565f0af0-7c62-45bb-8626-681498eea6ee" type="text/javascript"></script>
+    <script src="../js/search_control_ppo.js" type="text/javascript"></script>
 </body>
 
 </html>
