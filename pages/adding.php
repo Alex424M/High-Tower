@@ -225,7 +225,7 @@ session_start();
                                     <div class="photo__content">
                                             <div class="photo__img"><img src="../img/icons/photo.svg" alt=""></div>
                                             <div class="photo__btn">
-                                                <input type="file" name="img_upload" multiple accept="image/*">
+                                                <input type="file" name="file[]" multiple accept="image/*">
                                             </div>
                                     </div>
                             </div>
@@ -261,11 +261,27 @@ session_start();
                             $totalFloor=$_POST['params__totalFloor'];
                             $ceilHeight=$_POST['params__ceilHeight'];
                             $repair=$_POST['radio10'];
-                            $user=$_SESSION['Name'];
-                            $img=addslashes(file_get_contents($_FILES['img_upload']['tmp_name']));
-                            $conection->query("INSERT INTO announcement (Title, Description, Photo, Cost, Metro, transaction, typeRealty, realty, address, foot, QuantityRoom, Floor, square, totalFloor, ceilHeight, repair)
-                             VALUE ('$name', '$description', '$img', '$cost', '$metro', ' $transaction', '$typeRealty', '$realty', '$address', '$foot', '$quantity', '$floor', '$square', '$totalFloor', '$ceilHeight', '$repair')");
-                            echo "<meta http-equiv='refresh' content='0; url=http://high-tower/pages/ads.php'>";
+                            $user=$_SESSION['Id'];
+                            $conection->query("INSERT INTO announcement (Title, Description, Cost, Metro, transaction, typeRealty, realty, address, foot, QuantityRoom, Floor, square, totalFloor, ceilHeight, repair, IDUser)
+                            VALUE ('$name', '$description', '$cost', '$metro', ' $transaction', '$typeRealty', '$realty', '$address', '$foot', '$quantity', '$floor', '$square', '$totalFloor', '$ceilHeight', '$repair', '$user')");
+                           
+                            $iii=$conection->query("SELECT MAX(id) as 'id' FROM announcement");
+                            $row = mysqli_fetch_array($iii);
+                            $conection->close();
+                            $db=new PDO("mysql:host=127.0.0.1;dbname=dbhightower", "root", "");
+
+                            foreach($_FILES['file']['name'] as $k=>$f) {
+                                $file=$_FILES['file'];
+                                $name=$file['name'][$k];
+                                $pathFile= __DIR__ .'/../imgAppartments/'.$name;
+                                if(!move_uploaded_file($file['tmp_name'][$k], $pathFile)){
+                                    echo 'Файл не смог загрузится';
+                                }
+                                $data=$db->prepare("INSERT INTO `photos` (announcementID, Photo) VALUE (?,'$name')");
+                                $data->execute([(int)$row['id']]);
+                            }
+                            
+                            //echo "<meta http-equiv='refresh' content='0; url=http://high-tower/pages/ads.php'>";
                         }
                     ?>
                     <div class="right-block">

@@ -456,6 +456,7 @@ if(!$conection->set_charset($charset)){
                 $text = mysqli_fetch_array(mysqli_query($link, $nameTable));
 
                 $_SESSION['Name'] = $text[0];
+                $_SESSION['Id']=$row['ID'];
                 header('Location: index.php');
             } else {
                 echo "<script>alert('Неверный логин и/или пароль')</script>";

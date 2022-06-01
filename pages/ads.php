@@ -925,7 +925,7 @@ if(!$conection->set_charset($charset)){
             if (password_verify($pass, $row['Pass'])) {
                 $nameTable = "SELECT Name FROM `users` WHERE `Mail` = '$mail'";
                 $text = mysqli_fetch_array(mysqli_query($link, $nameTable));
-
+                $_SESSION['Id']=$row['ID'];
                 $_SESSION['Name'] = $text[0];
                 header('Location: ads.php');
             } else {
