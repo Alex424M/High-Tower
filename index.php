@@ -21,6 +21,7 @@ if(!$conection->set_charset($charset)){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/mainPage.css">
+    <link rel="icon" href="/img/icons/Union.png" type="image/x-icon">
     <title>HighTower - сайт недвижимости</title>
 </head>
 
@@ -113,7 +114,7 @@ if(!$conection->set_charset($charset)){
                                 <option value="Щелковская">Щелковская</option>
                             </select>
                             <div class="cost-btn  row-item">
-                                <button type="button" class="btn-cost" value="">Стоимость</button>
+                                <button type="button" class="btn-cost noHover" value="">Стоимость</button>
                                 <div class="cost__inputs">
                                     <div class="cost__row">
                                         <div class="cost__item">
@@ -140,11 +141,12 @@ if(!$conection->set_charset($charset)){
         <section class="buy">
             <div class="buy__container container">
                 <div class="buy__content">
-                    <a href="pages/ads.html" class="buy__logo logo">Купить квартиру</a>
+                    <a href="pages/ads.php?type=sale" class="buy__logo logo">Купить квартиру</a>
                     <div class="offers">
                         <div class="offer__row">
                             <?php
-                                $queryBuy= "SELECT * FROM announcement WHERE transaction=' Продажа' ORDER BY ID DESC LIMIT 8";
+                                $queryBuy= "SELECT *, (SELECT photo1 FROM photos WHERE announcementID=a.ID) as 'photo1'
+                                FROM announcement a WHERE transaction=' Продажа' ORDER BY ID DESC LIMIT 8";
                                 mysqli_query($conection, $queryBuy) or die(mysqli_errno($conection));
                                 $mysqli_query=mysqli_query($conection,$queryBuy); 
                                 $i=0;
@@ -154,7 +156,7 @@ if(!$conection->set_charset($charset)){
                              ?>
                             <div class="offer__column">
                                 <div class="offer__item">
-                                    <div class="offer__img"><img src="data:image/png;base64, <?php echo base64_encode($states1['Photo']); ?>" alt=""></div>
+                                    <div class="offer__img"><img src="/imgAppartments/announcement<?php echo $states1['ID']."/"; echo $states1['photo1']; ?>" alt=""></div>
                                     <div class="offer__content">
                                         <div class="offer__title title"><a href="pages/ad.php?selectedArticle=<?php echo $states1['ID']; ?>"><?php echo $states1['Title']; ?></a></div>
                                         <div class="offer__cost cost"><?php echo $states1['Cost']; ?> рублей</div>
@@ -171,7 +173,7 @@ if(!$conection->set_charset($charset)){
                                     
                                     <div class="offer__column">
                                 <div class="offer__item">
-                                    <div class="offer__img"><img src="data:image/png;base64, <?php echo base64_encode($states1['Photo']); ?>" alt=""></div>
+                                    <div class="offer__img"><img src="/imgAppartments/announcement<?php echo $states1['ID']."/"; echo $states1['photo1']; ?>" alt=""></div>
                                     <div class="offer__content">
                                         <div class="offer__title title"><a href="pages/ad.php?selectedArticle=<?php echo $states1['ID']; ?>"><?php echo $states1['Title']; ?></a></div>
                                         <div class="offer__cost cost"><?php echo $states1['Cost']; ?> рублей</div>
@@ -189,7 +191,7 @@ if(!$conection->set_charset($charset)){
                         ?>
                             <div class="offer__column">
                                 <div class="offer__item">
-                                    <div class="offer__img"><img src="data:image/png;base64, <?php echo base64_encode($states1['Photo']); ?>" alt=""></div>
+                                    <div class="offer__img"><img src="/imgAppartments/announcement<?php echo $states1['ID']."/"; echo $states1['photo1']; ?>" alt=""></div>
                                     <div class="offer__content">
                                         <div class="offer__title title"><a href="pages/ad.php?selectedArticle=<?php echo $states1['ID']; ?>"><?php echo $states1['Title']; ?></a></div>
                                         <div class="offer__cost cost"><?php echo $states1['Cost']; ?> рублей</div>
@@ -215,11 +217,11 @@ if(!$conection->set_charset($charset)){
         <section class="rent">
             <div class="rent__container container">
                 <div class="rent__content">
-                    <div class="rent__logo logo">Арендовать квартиру</div>
+                    <a href="/pages/ads.php?type=rent" class="rent__logo logo">Арендовать квартиру</a>
                     <div class="offers">
                         <div class="offer__row">
                         <?php
-                                $queryBuy= "SELECT * FROM announcement WHERE transaction=' Аренда' ORDER BY ID DESC LIMIT 8";
+                                $queryBuy= "SELECT *, (SELECT photo1 FROM photos WHERE announcementID=a.ID) as 'photo1' FROM announcement a WHERE transaction=' Аренда' ORDER BY ID DESC LIMIT 8";
                                 mysqli_query($conection, $queryBuy) or die(mysqli_errno($conection));
                                 $mysqli_query=mysqli_query($conection,$queryBuy); 
                                 $i=0;
@@ -229,7 +231,7 @@ if(!$conection->set_charset($charset)){
                              ?>
                             <div class="offer__column">
                                 <div class="offer__item">
-                                    <div class="offer__img"><img src="data:image/png;base64, <?php echo base64_encode($states1['Photo']); ?>" alt=""></div>
+                                    <div class="offer__img"><img src="/imgAppartments/announcement<?php echo $states1['ID']."/"; echo $states1['photo1']; ?>" alt=""></div>
                                     <div class="offer__content">
                                         <div class="offer__title title"><a href="pages/ad.php?selectedArticle=<?php echo $states1['ID']; ?>"><?php echo $states1['Title']; ?></a></div>
                                         <div class="offer__cost cost"><?php echo $states1['Cost']; ?> рублей</div>
@@ -246,7 +248,7 @@ if(!$conection->set_charset($charset)){
                                     
                                     <div class="offer__column">
                                 <div class="offer__item">
-                                    <div class="offer__img"><img src="data:image/png;base64, <?php echo base64_encode($states1['Photo']); ?>" alt=""></div>
+                                    <div class="offer__img"><img src="/imgAppartments/announcement<?php echo $states1['ID']."/"; echo $states1['photo1']; ?>" alt=""></div>
                                     <div class="offer__content">
                                         <div class="offer__title title"><a href="pages/ad.php?selectedArticle=<?php echo $states1['ID']; ?>"><?php echo $states1['Title']; ?></a></div>
                                         <div class="offer__cost cost"><?php echo $states1['Cost']; ?> рублей</div>
@@ -264,7 +266,7 @@ if(!$conection->set_charset($charset)){
                         ?>
                             <div class="offer__column">
                                 <div class="offer__item">
-                                    <div class="offer__img"><img src="data:image/png;base64, <?php echo base64_encode($states1['Photo']); ?>" alt=""></div>
+                                    <div class="offer__img"><img src="/imgAppartments/announcement<?php echo $states1['ID']."/"; echo $states1['photo1']; ?>" alt=""></div>
                                     <div class="offer__content">
                                         <div class="offer__title title"><a href="pages/ad.php?selectedArticle=<?php echo $states1['ID']; ?>"><?php echo $states1['Title']; ?></a></div>
                                         <div class="offer__cost cost"><?php echo $states1['Cost']; ?> рублей</div>
@@ -350,9 +352,9 @@ if(!$conection->set_charset($charset)){
                             <div class="footer__item">
                                 <div class="column__title">Недвижимость</div>
                                 <ul>
-                                    <li><a class="item__subtitle">Аренда</a></li>
-                                    <li><a class="item__subtitle">Купить</a></li>
-                                    <li><a class="item__subtitle">Продать</a></li>
+                                    <li><a href="pages/ads.php?type=rent" class="item__subtitle">Аренда</a></li>
+                                    <li><a href="pages/ads.php?type=sale" class="item__subtitle">Купить</a></li>
+                                    <li><a href="pages/ads.php?type=NewBuildings" class="item__subtitle">Новостройки</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -360,8 +362,8 @@ if(!$conection->set_charset($charset)){
                             <div class="footer__item">
                                 <div class="column__title">О компании</div>
                                 <ul>
-                                    <li><a class="item__subtitle">Email: hightower@ht.com</a></li>
-                                    <li><a class="item__subtitle">Тел. +7 495 138 98 78</a></li>
+                                    <li><a href="mailto:hightower@ht.com" class="item__subtitle">Email: hightower@ht.com</a></li>
+                                    <li><a href="tel:+74951389878" class="item__subtitle">Тел. +7 495 138 98 78</a></li>
                                     <li><a class="item__subtitle">Адрес г.Москва, ул Пушкина, д. 38</a></li>
                                 </ul>
                             </div>

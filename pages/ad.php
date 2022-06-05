@@ -9,7 +9,7 @@ session_start();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Квартира на Войковской</title>
+    <title>Просмотр объявления</title>
     <link rel="stylesheet" href="../css/advertisement.css">
 </head>
 
@@ -24,10 +24,10 @@ session_start();
                     </div>
                     <div class="header__menu">
                         <nav class="header__nav">
-                            <a href="ads.php?rent" class="nav-btn">Аренда</a>
-                            <a href="ads.php?sale" class="nav-btn">Продажа</a>
-                            <a href="ads.php?NewBuildings" class="nav-btn">Новостройки</a>
-                            <a href="ads.php?area" class="nav-btn">Дома и участки</a>
+                            <a href="ads.php?type=rent" class="nav-btn">Аренда</a>
+                            <a href="ads.php?type=sale" class="nav-btn">Продажа</a>
+                            <a href="ads.php?type=NewBuildings" class="nav-btn">Новостройки</a>
+                            <a href="ads.php?type=area" class="nav-btn">Дома и участки</a>
                         </nav>
                     <?php
                     if (!isset($_SESSION['Name'])) { ?>
@@ -55,7 +55,7 @@ session_start();
                         <?php
                             if(isset($_POST['exit'])){
                                 $_SESSION = [];
-                                header('Location: index.php');
+                                header('Location: ../index.php');
                             }
                         ?>
                     </div>
@@ -75,7 +75,21 @@ session_start();
                                 $articleId=$_SESSION['SelectArticle'];
                             }
                             $mysqli = new mysqli("127.0.0.1", "root", "", "dbhightower");
-                            $query = "SELECT *, (SELECT name FROM users WHERE id = IDUser) as 'user', (SELECT NumberPhone FROM users WHERE id = IDUser) as 'phone' FROM announcement WHERE ID='$articleId'";
+                            $query = "SELECT *, 
+                            (SELECT photo1 FROM photos WHERE announcementID='$articleId') as 'photo1', 
+                            (SELECT photo2 FROM photos WHERE announcementID='$articleId') as 'photo2', 
+                            (SELECT photo3 FROM photos WHERE announcementID='$articleId') as 'photo3', 
+                            (SELECT photo4 FROM photos WHERE announcementID='$articleId') as 'photo4', 
+                            (SELECT photo5 FROM photos WHERE announcementID='$articleId') as 'photo5', 
+                            (SELECT photo6 FROM photos WHERE announcementID='$articleId') as 'photo6', 
+                            (SELECT photo7 FROM photos WHERE announcementID='$articleId') as 'photo7', 
+                            (SELECT photo8 FROM photos WHERE announcementID='$articleId') as 'photo8', 
+                            (SELECT photo9 FROM photos WHERE announcementID='$articleId') as 'photo9', 
+                            (SELECT photo10 FROM photos WHERE announcementID='$articleId') as 'photo10', 
+                            (SELECT photo11 FROM photos WHERE announcementID='$articleId') as 'photo11',
+                            (SELECT NumberPhone FROM users WHERE ID=a.IDUser) as 'numberPhone',
+                            (SELECT Name FROM users WHERE ID=a.IDUser) as 'user'
+                            FROM announcement a WHERE ID='$articleId'";
                             if (mysqli_num_rows(mysqli_query($mysqli, $query)) > 0) {
                                 $comment = mysqli_fetch_array(mysqli_query($mysqli, $query));
                                 
@@ -83,7 +97,11 @@ session_start();
                 <div class="announcement__navigation">
                     <a href="../index.php" class="navigation__link">Главная</a>
                     <span class="navigation__arrow">></span>
-                    <a href="ads.php" class="navigation__link">Аренда</a>
+                    <a <?php if($comment['transaction']==" Продажа"){?>
+                    href="ads.php?type=sale" <?php }
+                    elseif($comment['transaction']==" Аренда"){?>
+                    href="ads.php?type=rent" <?php }?>
+                    class="navigation__link"><?php echo $comment['transaction'] ?></a>
                     <span class="navigation__arrow">></span>
                     <a href="ad.php" class="navigation__link"><?php echo $comment['Title'] ?></a>
                 </div>
@@ -94,65 +112,134 @@ session_start();
                             <div class="left-block__title">
                                 <h1><?php echo $comment['Title'] ?></h1>
                             </div>
-                            <div class="left-block__icon"><img src="../img/icons/like-heart.svg" alt=""></div>
                         </div>
-                        <div class="left-block__img"><img src="data:image/jpeg;base64, <?php echo base64_encode($comment['Photo']); ?>" alt=""></div>
-                        <div class="left-block__line">
+                        <div class="slider">
+                        <?php
+                        $count=0;
+                            if(!is_null($comment['photo1']))
+                                {
+                                    $count++;
+                        ?>
                             <div class="left-block__column">
-                                <div class="left-block__item">
-                                    <img src="../img/apartment/5.png" alt="">
+                                <div class="left-block__img">
+                                    <img src="../imgAppartments/announcement<?php echo $comment['ID']."/"; echo $comment['photo1']; ?>" >
                                 </div>
                             </div>
+
+                            <?php
+                                }
+                                if(!is_null($comment['photo2'])){
+                                    $count++;
+                                    ?>
                             <div class="left-block__column">
-                                <div class="left-block__item">
-                                    <img src="../img/apartment/6.png" alt="">
+                                <div class="left-block__img">
+                                    <img src="../imgAppartments/announcement<?php echo $comment['ID']."/"; echo $comment['photo2']; ?>" onerror="this.style.visibility = 'hidden'">
                                 </div>
                             </div>
+                            <?php
+                                }
+                                if(!is_null($comment['photo3'])){
+                                    $count++;
+                                    ?>
                             <div class="left-block__column">
-                                <div class="left-block__item">
-                                    <img src="../img/apartment/7.png" alt="">
+                                <div class="left-block__img">
+                                    <img src="../imgAppartments/announcement<?php echo $comment['ID']."/"; echo $comment['photo3']; ?>" onerror="this.style.visibility = 'hidden'">
                                 </div>
                             </div>
+                            <?php
+                                }
+                                if(!is_null($comment['photo4'])){
+                                    $count++;
+                                    ?>
                             <div class="left-block__column">
-                                <div class="left-block__item">
-                                    <img src="../img/apartment/8.png" alt="">
+                                <div class="left-block__img">
+                                    <img src="../imgAppartments/announcement<?php echo $comment['ID']."/"; echo $comment['photo4']; ?>" onerror="this.style.visibility = 'hidden'">
                                 </div>
                             </div>
+                            <?php
+                                }
+                                if(!is_null($comment['photo5'])){
+                                    $count++;
+                                    ?>
                             <div class="left-block__column">
-                                <div class="left-block__item">
-                                    <img src="../img/apartment/5.png" alt="">
+                                <div class="left-block__img">
+                                    <img src="../imgAppartments/announcement<?php echo $comment['ID']."/"; echo $comment['photo5']; ?>" onerror="this.style.visibility = 'hidden'">
                                 </div>
                             </div>
+                            <?php
+                                }
+                                if(!is_null($comment['photo6'])){
+                                    $count++;
+                                    ?>
                             <div class="left-block__column">
-                                <div class="left-block__item">
-                                    <img src="../img/apartment/7.png" alt="">
+                                <div class="left-block__img">
+                                    <img src="../imgAppartments/announcement<?php echo $comment['ID']."/"; echo $comment['photo6']; ?>" onerror="this.style.visibility = 'hidden'">
                                 </div>
                             </div>
+                            <?php
+                                }
+                                if(!is_null($comment['photo7'])){
+                                    $count++;
+                                    ?>
                             <div class="left-block__column">
-                                <div class="left-block__item">
-                                    <img src="../img/apartment/6.png" alt="">
+                                <div class="left-block__img">
+                                    <img src="../imgAppartments/announcement<?php echo $comment['ID']."/"; echo $comment['photo7']; ?>" onerror="this.style.visibility = 'hidden'">
                                 </div>
                             </div>
+                            <?php
+                                }
+                                if(!is_null($comment['photo8'])){
+                                    $count++;
+                                    ?>
                             <div class="left-block__column">
-                                <div class="left-block__item">
-                                    <img src="../img/apartment/8.png" alt="">
+                                <div class="left-block__img">
+                                    <img src="../imgAppartments/announcement<?php echo $comment['ID']."/"; echo $comment['photo8']; ?>" onerror="this.style.visibility = 'hidden'">
                                 </div>
                             </div>
+                            <?php
+                                }
+                                if(!is_null($comment['photo9'])){
+                                    $count++;
+                                    ?>
                             <div class="left-block__column">
-                                <div class="left-block__item">
-                                    <img src="../img/apartment/5.png" alt="">
+                                <div class="left-block__img">
+                                    <img src="../imgAppartments/announcement<?php echo $comment['ID']."/"; echo $comment['photo9']; ?>" onerror="this.style.visibility = 'hidden'">
                                 </div>
                             </div>
+                            <?php
+                                }
+                                if(!is_null($comment['photo10'])){
+                                    $count++;
+                                    ?>
                             <div class="left-block__column">
-                                <div class="left-block__item">
-                                    <img src="../img/apartment/8.png" alt="">
+                                <div class="left-block__img">
+                                    <img src="../imgAppartments/announcement<?php echo $comment['ID']."/"; echo $comment['photo10']; ?>" onerror="this.style.visibility = 'hidden'">
                                 </div>
                             </div>
+                            <?php
+                                }
+                                if(!is_null($comment['photo11'])){
+                                    $count++;
+                                    ?>
                             <div class="left-block__column">
-                                <div class="left-block__item">
-                                    <img src="../img/apartment/6.png" alt="">
+                                <div class="left-block__img">
+                                    <img src="../imgAppartments/announcement<?php echo $comment['ID']."/"; echo $comment['photo11']; ?>" onerror="this.style.visibility = 'hidden'">
                                 </div>
                             </div>
+                            <?php
+                                }
+                                ?>
+                            <a class="prev" onclick="minusSlide()">&#10094;</a>
+                            <a class="next" onclick="plusSlide()">&#10095;</a>
+                        </div>
+                        <div class="slider-dots">
+                            <?php
+                                for ($i = 1; $i <= $count; $i++) {?>
+                                    <span class="slider-dots_item" onclick="currentSlide(<?= $count?>)"></span> 
+                                    <?php
+                                }
+                            ?>
+                            
                         </div>
                         <div class="left-block__params params">
                             <div class="params__row">
@@ -235,7 +322,8 @@ session_start();
                             $costMetr = $comment['Cost']/$comment['square'];
                             echo round ($costMetr, 0);;?> руб./м
                         </div>
-                        <a href="#" class="right-block__cotact">Показать контакты</a>
+                        <button class="right-block__cotact">Показать контакты</button>
+                        <div class="right-block__numberPhone"><?php echo $comment['numberPhone'] ?></div>
                         <div class="right-block__name"><?php echo $comment['user'] ?></div>
                         <div class="right-block__address"><?php echo $comment['address'] ?></div>
                         <div class="right-block__row">
@@ -257,9 +345,9 @@ session_start();
                             <div class="footer__item">
                                 <div class="column__title">Недвижимость</div>
                                 <ul>
-                                    <li><a class="item__subtitle">Аренда</a></li>
-                                    <li><a class="item__subtitle">Купить</a></li>
-                                    <li><a class="item__subtitle">Продать</a></li>
+                                    <li><a href="../pages/ads.php?type=rent" class="item__subtitle">Аренда</a></li>
+                                    <li><a href="../pages/ads.php?type=sale" class="item__subtitle">Купить</a></li>
+                                    <li><a href="../pages/ads.php?type=NewBuildings" class="item__subtitle">Новостройки</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -267,8 +355,8 @@ session_start();
                             <div class="footer__item">
                                 <div class="column__title">О компании</div>
                                 <ul>
-                                    <li><a class="item__subtitle">Email: hightower@ht.com</a></li>
-                                    <li><a class="item__subtitle">Тел. +7 495 138 98 78</a></li>
+                                    <li><a href="mailto:hightower@ht.com" class="item__subtitle">Email: hightower@ht.com</a></li>
+                                    <li><a href="tel:+74951389878" class="item__subtitle">Тел. +7 495 138 98 78</a></li>
                                     <li><a class="item__subtitle">Адрес г.Москва, ул Пушкина, д. 38</a></li>
                                 </ul>
                             </div>
@@ -424,6 +512,8 @@ if (isset($_POST['regist'])) {
     <script src="../js/menu.js"></script>
     <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=565f0af0-7c62-45bb-8626-681498eea6ee" type="text/javascript"></script>
     <script src="../js/search_control_ppo.js" type="text/javascript"></script>
+    <script src="../js/slider.js"></script>
+    <script src="../js/contacts.js"></script>
 </body>
 
 </html>

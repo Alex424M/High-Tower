@@ -20,7 +20,22 @@ if(!$conection->set_charset($charset)){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/advertisements.css">
+    <link rel="icon" href="../img/icons/Union.png" type="image/x-icon">
+    <?php
+    if($_GET['type']=="rent")  
+        {?>
     <title>Аренда</title>
+    <?php
+        }elseif($_GET['type']=="sale"){?>
+    <title>Продажа</title>
+    <?php
+        }elseif($_GET['type']=="NewBuildings"){?>
+            <title>Новостройки</title>
+    <?php
+        }elseif($_GET['type']=="area"){?>
+            <title>Участки</title>
+    <?php
+        }?>
 </head>
 
 <body>
@@ -65,7 +80,7 @@ if(!$conection->set_charset($charset)){
                         <?php
                             if(isset($_POST['exit'])){
                                 $_SESSION = [];
-                                header('Location: index.php');
+                                header('Location: ads.php?type='.$_GET['type'].'&room='.$_GET['room'].'&metro='.$_GET['metro'].'&priceStart='.$_GET['priceStart'].'&priceEnd='.$_GET['priceEnd']);
                             }
                         ?>
                     </div>
@@ -84,10 +99,10 @@ if(!$conection->set_charset($charset)){
                 <div class="main__navigation">
                     <a href="../index.php" class="navigation__link">Главная</a>
                     <span class="navigation__arrow">></span>
-                    <a href="ads.php" class="navigation__link">Аренда</a>
+                    <a href="ads.php?type=rent" class="navigation__link">Аренда</a>
                 </div>
                 <?php
-                $sql = "SELECT * FROM announcement WHERE transaction=' Аренда'";
+                $sql = "SELECT *, (SELECT photo1 FROM photos WHERE announcementID=a.ID) as 'photo1' FROM announcement a WHERE transaction=' Аренда'";
                 $queryCount= "SELECT COUNT(*) FROM announcement WHERE transaction=' Аренда'";
                 if(!empty($_GET['room'])){
                     $rooms=$_GET['room'];
@@ -222,7 +237,7 @@ if(!$conection->set_charset($charset)){
                         <form method="post" class="rightForm">
                             <div class="offers__card card">
                                 <div class="card__row">
-                                    <div class="card__img"><img src="data:image/jpeg;base64, <?php echo base64_encode($states1['Photo']); ?>" alt="Изображение"></div>
+                                    <div class="card__img"><img src="../imgAppartments/announcement<?php echo $states1['ID']."/"; echo $states1['photo1']; ?>" alt="Изображение"></div>
                                     <div class="card-info">
                                         <div class="card-info__row">
                                             <div class="card-info__item item__title"><?php echo $states1['Title']; ?></div>
@@ -268,10 +283,10 @@ if(!$conection->set_charset($charset)){
                 <div class="main__navigation">
                     <a href="../index.php" class="navigation__link">Главная</a>
                     <span class="navigation__arrow">></span>
-                    <a href="ads.php?sale" class="navigation__link">Продажа</a>
+                    <a href="ads.php?type=sale" class="navigation__link">Продажа</a>
                 </div>
                 <?php
-                $sql = "SELECT * FROM announcement WHERE transaction=' Продажа'";
+                $sql = "SELECT *, (SELECT photo1 FROM photos WHERE announcementID=a.ID) as 'photo1' FROM announcement a WHERE transaction=' Продажа'";
                 $queryCount= "SELECT COUNT(*) FROM announcement WHERE transaction=' Продажа'";
                 if(!empty($_GET['room'])){
                     $rooms=$_GET['room'];
@@ -405,7 +420,7 @@ if(!$conection->set_charset($charset)){
                         <form method="post" class="rightForm">
                             <div class="offers__card card">
                                 <div class="card__row">
-                                    <div class="card__img"><img src="data:image/jpeg;base64, <?php echo base64_encode($states1['Photo']); ?>" alt="Изображение"></div>
+                                    <div class="card__img"><img src="../imgAppartments/announcement<?php echo $states1['ID']."/";echo $states1['photo1']; ?>" alt="Изображение"></div>
                                     <div class="card-info">
                                         <div class="card-info__row">
                                             <div class="card-info__item item__title"><?php echo $states1['Title']; ?></div>
@@ -451,10 +466,10 @@ if(!$conection->set_charset($charset)){
                 <div class="main__navigation">
                     <a href="../index.php" class="navigation__link">Главная</a>
                     <span class="navigation__arrow">></span>
-                    <a href="ads.php?NewBuildings" class="navigation__link">Новостройки</a>
+                    <a href="ads.php?type=NewBuildings" class="navigation__link">Новостройки</a>
                 </div>
                 <?php
-                $sql = "SELECT * FROM announcement WHERE transaction='Новостройка'";
+                $sql = "SELECT *, (SELECT photo1 FROM photos WHERE announcementID=a.ID) as 'photo1' FROM announcement a WHERE transaction='Новостройка'";
                 $queryCount= "SELECT COUNT(*) FROM announcement WHERE transaction='Новостройка'";
                 if(!empty($_GET['room'])){
                     $rooms=$_GET['room'];
@@ -590,7 +605,7 @@ if(!$conection->set_charset($charset)){
                         <form method="post" class="rightForm">
                             <div class="offers__card card">
                                 <div class="card__row">
-                                    <div class="card__img"><img src="data:image/jpeg;base64, <?php echo base64_encode($states1['Photo']); ?>" alt="Изображение"></div>
+                                    <div class="card__img"><img src="../imgAppartments/announcement<?php echo $states1['ID']."/"; echo $states1['photo1']; ?>" alt="Изображение"></div>
                                     <div class="card-info">
                                         <div class="card-info__row">
                                             <div class="card-info__item item__title"><?php echo $states1['Title']; ?></div>
@@ -636,10 +651,10 @@ if(!$conection->set_charset($charset)){
                 <div class="main__navigation">
                     <a href="../index.php" class="navigation__link">Главная</a>
                     <span class="navigation__arrow">></span>
-                    <a href="ads.php" class="navigation__link">Дома и участки</a>
+                    <a href="ads.php?type=area" class="navigation__link">Дома и участки</a>
                 </div>
                 <?php
-                $sql = "SELECT * FROM announcement WHERE transaction='Участок'";
+                $sql = "SELECT *, (SELECT photo1 FROM photos WHERE announcementID=a.ID) as 'photo1' FROM announcement a WHERE transaction='Участок'";
                 $queryCount= "SELECT COUNT(*) FROM announcement WHERE transaction='Участок'";
                 if(!empty($_GET['room'])){
                     $rooms=$_GET['room'];
@@ -774,7 +789,7 @@ if(!$conection->set_charset($charset)){
                         <form method="post" class="rightForm">
                             <div class="offers__card card">
                                 <div class="card__row">
-                                    <div class="card__img"><img src="data:image/jpeg;base64, <?php echo base64_encode($states1['Photo']); ?>" alt="Изображение"></div>
+                                    <div class="card__img"><img src="../imgAppartments/announcement<?php echo $states1['ID']."/"; echo $states1['photo1']; ?>" alt="Изображение"></div>
                                     <div class="card-info">
                                         <div class="card-info__row">
                                             <div class="card-info__item item__title"><?php echo $states1['Title']; ?></div>
@@ -822,9 +837,9 @@ if(!$conection->set_charset($charset)){
                             <div class="footer__item">
                                 <div class="column__title">Недвижимость</div>
                                 <ul>
-                                    <li><a class="item__subtitle">Аренда</a></li>
-                                    <li><a class="item__subtitle">Контакты</a></li>
-                                    <li><a class="item__subtitle">Продать</a></li>
+                                    <li><a href="../pages/ads.php?type=rent" class="item__subtitle">Аренда</a></li>
+                                    <li><a href="../pages/ads.php?type=sale" class="item__subtitle">Купить</a></li>
+                                    <li><a href="../pages/ads.php?type=NewBuildings" class="item__subtitle">Новостройки</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -832,8 +847,8 @@ if(!$conection->set_charset($charset)){
                             <div class="footer__item">
                                 <div class="column__title">О компании</div>
                                 <ul>
-                                    <li><a class="item__subtitle">Email: hightower@ht.com</a></li>
-                                    <li><a class="item__subtitle">Тел. +7 495 138 98 78</a></li>
+                                    <li><a href="mailto:hightower@ht.com" class="item__subtitle">Email: hightower@ht.com</a></li>
+                                    <li><a href="tel:+74951389878" class="item__subtitle">Тел. +7 495 138 98 78</a></li>
                                     <li><a class="item__subtitle">Адрес г.Москва, ул Пушкина, д. 38</a></li>
                                 </ul>
                             </div>
@@ -864,9 +879,9 @@ if(!$conection->set_charset($charset)){
                     /
                     <span class="reg  notActive">Регистрация</span>
                 </div>
-                <input type="text" placeholder="Email" name="Email" required>
+                <input type="text" placeholder="Email" name="Email" class="input__form" required>
 
-                <input type="password" placeholder="Пароль" name="psw" required>
+                <input type="password" placeholder="Пароль" name="psw" class="input__form" required>
 
                 <button type="submit" class="btn__submit" name="entry">Вход</button>
             </div>
@@ -884,12 +899,12 @@ if(!$conection->set_charset($charset)){
                     /
                     <span class="reg">Регистрация</span>
                 </div>
-                <input type="text" placeholder="Имя" name="Name" required>
-                <input type="text" placeholder="Email" name="Email" required>
-                <input type="text" placeholder="Номер телефона" name="Number" required>
+                <input type="text" placeholder="Имя" name="Name" class="input__form" required>
+                <input type="text" placeholder="Email" name="Email" class="input__form" required>
+                <input type="text" placeholder="Номер телефона" name="Number" class="input__form" required>
 
-                <input type="password" placeholder="Пароль" name="psw" required>
-                <input type="password" placeholder="Повторите пароль" name="psw2" required>
+                <input type="password" placeholder="Пароль" name="psw" class="input__form" required>
+                <input type="password" placeholder="Повторите пароль" name="psw2" class="input__form" required>
 
                 <button type="submit" class="btn__submit" name="regist">Регистрация</button>
             </div>
@@ -927,7 +942,7 @@ if(!$conection->set_charset($charset)){
                 $text = mysqli_fetch_array(mysqli_query($link, $nameTable));
                 $_SESSION['Id']=$row['ID'];
                 $_SESSION['Name'] = $text[0];
-                header('Location: ads.php');
+                header('Location: ads.php?type='.$_GET['type'].'&room='.$_GET['room'].'&metro='.$_GET['metro'].'&priceStart='.$_GET['priceStart'].'&priceEnd='.$_GET['priceEnd']);
             } else {
                 echo "<script>alert('Неверный логин и/или пароль')</script>";
                 echo "<meta http-equiv='refresh' content='0; url=http://high-tower/pages/ads.php'>";

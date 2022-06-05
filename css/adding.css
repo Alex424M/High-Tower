@@ -92,7 +92,6 @@ h6 {
 
 .wrapper {
   width: 100%;
-  overflow: hidden;
 }
 
 .header {
@@ -134,6 +133,11 @@ h6 {
   font-size: 25px;
   font-family: "Roboto";
   font-weight: 400;
+  -webkit-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+}
+.header__logo:hover {
+  color: #303030;
 }
 
 .header__menu {
@@ -163,6 +167,13 @@ h6 {
       -ms-flex-align: center;
           align-items: center;
 }
+.header__nav a {
+  -webkit-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+}
+.header__nav a:hover {
+  color: #303030;
+}
 
 .nav-btn {
   margin-right: 40px;
@@ -180,6 +191,12 @@ h6 {
   padding: 8px 20px;
   border-radius: 10px;
   color: white;
+  -webkit-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+}
+.header__btn:hover {
+  color: #303030;
+  opacity: 1;
 }
 
 .exit-form {
@@ -201,6 +218,11 @@ h6 {
   font-size: 20px;
   font-family: "Roboto";
   font-weight: 300;
+  -webkit-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+}
+.header__hi:hover {
+  color: #303030;
 }
 
 .menu {
@@ -238,12 +260,6 @@ h6 {
   font-weight: 300;
   color: black;
   background-color: white;
-}
-
-.header__hi {
-  font-size: 20px;
-  font-family: "Roboto";
-  font-weight: 300;
 }
 
 .main {
@@ -636,6 +652,8 @@ h6 {
 }
 
 .right-block {
+  position: sticky;
+  top: 8px;
   background-color: white;
   border-radius: 5px;
   padding: 24px 0 24px 20px;
@@ -644,8 +662,6 @@ h6 {
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
-  position: sticky;
-  top: 8px;
 }
 
 .list__link {
@@ -721,6 +737,14 @@ h6 {
   margin-bottom: 35px;
 }
 
+.footer__item a {
+  color: #fff;
+}
+
+.footer__item li {
+  padding: 0 0 8px 0;
+}
+
 .column__title {
   font-size: 29px;
   font-family: "Roboto";
@@ -761,22 +785,30 @@ h6 {
   padding: 0 20px;
 }
 
+.contacts__icon {
+  cursor: pointer;
+}
+
 @media (max-width: 1200px) {
   .container {
     max-width: 900px;
     margin: 0 auto;
     padding: 0 16px;
   }
-}
-@media (max-width: 767px) {
+
   .main__row {
     display: block;
+  }
+
+  .wrapper {
+    overflow: hidden;
   }
 
   .right-block {
     display: none;
   }
-
+}
+@media (max-width: 767px) {
   body.lock {
     overflow: hidden;
   }

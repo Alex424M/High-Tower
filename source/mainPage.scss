@@ -60,6 +60,10 @@ h1 {
     font-weight: 400;
     position: relative;
     z-index: 5;
+    transition: all .3s ease 0s;
+    &:hover{
+        color: #303030;
+    }
 }
 .header__menu{
     flex: 0 1 75%;
@@ -67,6 +71,7 @@ h1 {
     display: flex;
     align-items: center;
     z-index: 5;
+    
 }
 .header__nav {
     font-size: 20px;
@@ -74,6 +79,11 @@ h1 {
     font-weight: 300;
     display: flex;
     margin-right: 16px;
+    & a{
+    transition: all .3s ease 0s;
+    &:hover{
+        color: #303030;
+    }}
 }
 .nav-btn {
     margin-right: 40px;
@@ -92,6 +102,11 @@ h1 {
     border-radius: 10px;
     color: white;
     position: relative;
+    transition: all .3s ease 0s;
+    &:hover{
+        color: #303030;
+        opacity: 1;
+    }
 }
 
 .exit-form {
@@ -113,6 +128,10 @@ h1 {
     font-size: 20px;
     font-family: "Roboto";
     font-weight: 300;
+    transition: all .3s ease 0s;
+    &:hover{
+        color: #303030;
+    }
 }
 .menu {
     display: inline-block;
@@ -149,13 +168,13 @@ h1 {
     font-weight: 300;
     color: black;
     background-color: white;
+    transition: all .3s ease 0s;
+    &:hover{
+        color: #303030;
+    }
   }
   
-  .header__hi {
-    font-size: 20px;
-    font-family: "Roboto";
-    font-weight: 300;
-  }
+
 .search {
     position: relative;
     height: 576px;
@@ -270,6 +289,7 @@ h1 {
     max-width: 195px;
     border-radius: 5px 0 0 5px;
     background-color: #fff;
+    
 }
 
 .row__room {
@@ -359,6 +379,7 @@ h1 {
 }
 
 .btn__search {
+    cursor: pointer;
     font-size: 20px;
     font-family: "Roboto";
     font-weight: 400;
@@ -367,10 +388,22 @@ h1 {
     border-radius: 10px;
     //margin-left: 30px;
     color: #fff;
+    transition: all .3s ease 0s;
+    &:hover{
+        color: #303030;
+    }
 }
 .row-item{
     flex: 1 1 25%;
+    transition: all .3s ease 0s;
+    &:hover{
+        background-color: rgb(211, 211, 211);
+    }
+    &button:hover{
+        background-color: rgb(0, 0, 0);
+    }
 }
+
 /*--------------------*/
 .buy {
     position: relative;
@@ -384,13 +417,19 @@ h1 {
     margin: 0 auto;
 }
 
-.buy__logo {}
+.buy__logo {
+    
+}
 
 .logo {
     font-size: 41.667px;
     font-family: "Roboto";
     color: #000;
     font-weight: 500;
+    transition: all .3s ease 0s;
+    &:hover{
+        color: #912a2a;
+    }
 }
 
 .offers {
@@ -426,7 +465,12 @@ h1 {
 }
 
 
-.offer__title {}
+.offer__title a{
+    transition: all .3s ease 0s;
+    &:hover{
+        color: #d83b3b;
+    }
+}
 
 .title {
     font-size: 24px;
@@ -607,9 +651,15 @@ h1 {
     margin-bottom: 35px;
 }
 
-.footer__column {}
 
-.footer__item {}
+.footer__item{
+   & a{ 
+       color: #fff;
+   }
+   & li{
+    padding: 0 0 8px 0;
+   }
+}
 
 .column__title {
     font-size: 29px;
@@ -619,7 +669,7 @@ h1 {
     margin-bottom: 30px;
 }
 
-.item__subtitle {
+.item__subtitle{
     font-size: 21px;
     font-family: "Roboto";
     color: #fff;
@@ -645,7 +695,9 @@ h1 {
     padding: 0 20px;
 }
 
-.contacts__icon img {}
+.contacts__icon img {
+    cursor: pointer;
+}
 
 
 
@@ -664,6 +716,8 @@ input {
     font-size: 22px;
     font-family: "Roboto";
     font-weight: 300;
+    margin-bottom: 16px;
+    
 }
 
 /* Set a style for all buttons */
@@ -681,7 +735,7 @@ input {
     font-size: 20px;
     line-height: 23px;
     cursor: pointer;
-    margin-top: 40px;
+    margin-top: 16px;
 }
 
 button:hover {
@@ -745,7 +799,9 @@ button:hover {
 .entr {
     cursor: pointer;
 }
-
+.passReg{
+    margin-bottom: 24px;
+}
 .reg {
     cursor: pointer;
 }

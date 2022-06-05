@@ -52,6 +52,10 @@ $opacity: .7;
     font-weight: 400;
     position: relative;
     z-index: 5;
+    transition: all .3s ease 0s;
+    &:hover{
+        color: #303030;
+    }
 }
 .header__menu{
     flex: 0 1 75%;
@@ -66,6 +70,11 @@ $opacity: .7;
     font-weight: 300;
     display: flex;
     margin-right: 16px;
+    & a{
+        transition: all .3s ease 0s;
+        &:hover{
+            color: #303030;
+        }}
 }
 .nav-btn {
     margin-right: 40px;
@@ -84,6 +93,11 @@ $opacity: .7;
     border-radius: 10px;
     color: white;
     position: relative;
+    transition: all .3s ease 0s;
+    &:hover{
+        color: #303030;
+        opacity: 1;
+    }
 }
 
 .exit-form {
@@ -101,11 +115,6 @@ $opacity: .7;
     border: 2px solid #ff4d4d;
 }
 
-.header__hi {
-    font-size: 20px;
-    font-family: "Roboto";
-    font-weight: 300;
-}
 
 .menu {
     display: inline-block;
@@ -147,6 +156,10 @@ $opacity: .7;
     font-size: 20px;
     font-family: "Roboto";
     font-weight: 300;
+    transition: all .3s ease 0s;
+    &:hover{
+        color: #303030;
+    }
 }
 
 //--------------------------------
@@ -166,8 +179,12 @@ $opacity: .7;
     line-height: 18px;
     padding: 16px 0 24px 0;
 }
--blo
-.navigation__link {}
+.navigation__link {
+    transition: all .3s ease 0s;
+    &:hover{
+        color: #303030;
+    }
+}
 
 .navigation__arrow {
     opacity: $opacity;
@@ -203,7 +220,65 @@ $opacity: .7;
     width: 28px;
     height: 23px;
 }
-
+.slider{
+    position: relative;
+    margin: auto;
+    margin-bottom: 15px;
+}
+.slider .left-block__img img {
+    object-fit: cover;
+    width: 100%;
+    border: none !important;
+    box-shadow: none !important;
+}
+.slider .prev, .slider .next {
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    top: 50%;
+    width: auto;
+    margin-top: -22px;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+}
+.slider .next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+/* При наведении на кнопки добавляем фон кнопок */
+.slider .prev:hover,
+.slider .next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+/* Кружочки */
+.slider-dots {
+    text-align: center;
+}
+.slider-dots_item{
+    cursor: pointer;
+    height: 12px;
+    width: 12px;
+    margin: 0 2px;
+    background-color: #ddd;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+.active,
+.slider-dots_item:hover {
+    background-color: #aaa;
+}
+/* Анимация слайдов */
+.slider .item {
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 1.5s;
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
 .left-block__img {
     margin-bottom: 16px;
     width: 100%;
@@ -415,6 +490,7 @@ $opacity: .7;
 
 .right-block__cotact {
     font-family: 'Roboto';
+    background-color: #fff;
     font-style: normal;
     font-weight: 500;
     font-size: 20px;
@@ -426,8 +502,21 @@ $opacity: .7;
     border-radius: 10px;
     margin: 24px 0;
     text-align: center;
+    transition: all .3s ease 0s;
+    &:hover{
+        color: #303030;
+    }
 }
-
+.right-block__numberPhone{
+    display: none;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 18px;
+    color: #000000;
+    padding-bottom: 16px;
+}
 .right-block__name {
     font-family: 'Roboto';
     font-style: normal;
@@ -504,7 +593,12 @@ $opacity: .7;
 .footer__column {}
 
 .footer__item {}
-
+.footer__item a {
+    color: #fff;
+}
+.footer__item li {
+    padding: 0 0 8px 0;
+}
 .column__title {
     font-size: 29px;
     font-family: "Roboto";
@@ -539,7 +633,9 @@ $opacity: .7;
     padding: 0 20px;
 }
 
-.contacts__icon img {}
+.contacts__icon img {
+    cursor: pointer;
+}
 
 input {
     margin-bottom: 16px;
@@ -574,7 +670,7 @@ input[type=password] {
     font-size: 20px;
     line-height: 23px;
     cursor: pointer;
-    margin-top: 40px;
+    margin-top: 16px;
 }
 
 button:hover {

@@ -24,10 +24,10 @@ session_start();
                     </div>
                     <div class="header__menu">
                         <nav class="header__nav">
-                            <a href="ads.php?rent" class="nav-btn">Аренда</a>
-                            <a href="ads.php?sale" class="nav-btn">Продажа</a>
-                            <a href="ads.php?NewBuildings" class="nav-btn">Новостройки</a>
-                            <a href="ads.php?area" class="nav-btn">Дома и участки</a>
+                            <a href="ads.php?type=rent" class="nav-btn">Аренда</a>
+                            <a href="ads.php?type=sale" class="nav-btn">Продажа</a>
+                            <a href="ads.php?type=NewBuildings" class="nav-btn">Новостройки</a>
+                            <a href="ads.php?type=area" class="nav-btn">Дома и участки</a>
                         </nav>
                     <?php
                     if (!isset($_SESSION['Name'])) { ?>
@@ -68,9 +68,9 @@ session_start();
         <div class="main">
             <div class="main__container container">
                 <div class="main__navigation">
-                    <a href="#" class="navigation__link">Главная</a>
+                    <a href="../index.php" class="navigation__link">Главная</a>
                     <span class="navigation__arrow">></span>
-                    <a href="#" class="navigation__link">Разместить объявление</a>
+                    <a href="./adding.php" class="navigation__link">Разместить объявление</a>
                 </div>
                 <div class="main__row">
                 <div class="left-block">
@@ -269,16 +269,22 @@ session_start();
                             $row = mysqli_fetch_array($iii);
                             $conection->close();
                             $db=new PDO("mysql:host=127.0.0.1;dbname=dbhightower", "root", "");
-
+                            $increment = 0;
                             foreach($_FILES['file']['name'] as $k=>$f) {
+                                $increment++;
                                 $file=$_FILES['file'];
                                 $name=$file['name'][$k];
-                                $pathFile= __DIR__ .'/../imgAppartments/'.$name;
+                                $pathFile= __DIR__ .'/../imgAppartments/'.mkdir("announcement".(int)$row['id']).$name;
                                 if(!move_uploaded_file($file['tmp_name'][$k], $pathFile)){
                                     echo 'Файл не смог загрузится';
                                 }
-                                $data=$db->prepare("INSERT INTO `photos` (announcementID, Photo) VALUE (?,'$name')");
-                                $data->execute([(int)$row['id']]);
+                                if($increment==1){
+                                    $data=$db->prepare("INSERT INTO `photos` (announcementID, photo1) VALUE (?,'$name')");
+                                    $data->execute([(int)$row['id']]);
+                                }else{
+                                    $data=$db->prepare("UPDATE `photos` SET `photo$increment`='$name' WHERE announcementID=?");
+                                    $data->execute([(int)$row['id']]);
+                                }
                             }
                             
                             //echo "<meta http-equiv='refresh' content='0; url=http://high-tower/pages/ads.php'>";
@@ -307,9 +313,9 @@ session_start();
                             <div class="footer__item">
                                 <div class="column__title">Недвижимость</div>
                                 <ul>
-                                    <li><a class="item__subtitle">Аренда</a></li>
-                                    <li><a class="item__subtitle">Купить</a></li>
-                                    <li><a class="item__subtitle">Продать</a></li>
+                                    <li><a href="../pages/ads.php?type=rent" class="item__subtitle">Аренда</a></li>
+                                    <li><a href="../pages/ads.php?type=sale" class="item__subtitle">Купить</a></li>
+                                    <li><a href="../pages/ads.php?type=NewBuildings" class="item__subtitle">Новостройки</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -317,8 +323,8 @@ session_start();
                             <div class="footer__item">
                                 <div class="column__title">О компании</div>
                                 <ul>
-                                    <li><a class="item__subtitle">Email: hightower@ht.com</a></li>
-                                    <li><a class="item__subtitle">Тел. +7 495 138 98 78</a></li>
+                                    <li><a href="mailto:hightower@ht.com" class="item__subtitle">Email: hightower@ht.com</a></li>
+                                    <li><a href="tel:+74951389878" class="item__subtitle">Тел. +7 495 138 98 78</a></li>
                                     <li><a class="item__subtitle">Адрес г.Москва, ул Пушкина, д. 38</a></li>
                                 </ul>
                             </div>
