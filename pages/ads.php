@@ -1,14 +1,14 @@
 <?php
 ob_start();
 session_start();
-$server= $_SERVER['SERVER_ADDR'];
-$username='root';
-$password='';
-$db='dbhightower';
-$charset='utf8';
+$server = $_SERVER['SERVER_ADDR'];
+$username = 'root';
+$password = '';
+$db = 'dbhightower';
+$charset = 'utf8';
 
-$conection=new mysqli($server, $username, $password, $db);
-if(!$conection->set_charset($charset)){
+$conection = new mysqli($server, $username, $password, $db);
+if (!$conection->set_charset($charset)) {
     echo "charset err";
 }
 ?>
@@ -22,25 +22,24 @@ if(!$conection->set_charset($charset)){
     <link rel="stylesheet" href="../css/advertisements.css">
     <link rel="icon" href="../img/icons/Union.png" type="image/x-icon">
     <?php
-    if($_GET['type']=="rent")  
-        {?>
-    <title>Аренда</title>
+    if ($_GET['type'] == "rent") { ?>
+        <title>Аренда</title>
     <?php
-        }elseif($_GET['type']=="sale"){?>
-    <title>Продажа</title>
+    } elseif ($_GET['type'] == "sale") { ?>
+        <title>Продажа</title>
     <?php
-        }elseif($_GET['type']=="NewBuildings"){?>
-            <title>Новостройки</title>
+    } elseif ($_GET['type'] == "NewBuildings") { ?>
+        <title>Новостройки</title>
     <?php
-        }elseif($_GET['type']=="area"){?>
-            <title>Участки</title>
+    } elseif ($_GET['type'] == "area") { ?>
+        <title>Участки</title>
     <?php
-        }?>
+    } ?>
 </head>
 
 <body>
     <div class="wrapper">
-    <header class="header">
+        <header class="header">
             <div class="header__container container">
                 <div class="header__content">
                     <a href="../index.php" class="header__logo">High Tower</a>
@@ -54,18 +53,18 @@ if(!$conection->set_charset($charset)){
                             <a href="ads.php?type=NewBuildings" class="nav-btn">Новостройки</a>
                             <a href="ads.php?type=area" class="nav-btn">Дома и участки</a>
                         </nav>
-                    <?php
-                    if (!isset($_SESSION['Name'])) { ?>
-                        <button class="header__btn">Войти</button>
+                        <?php
+                        if (!isset($_SESSION['Name'])) { ?>
+                            <button class="header__btn">Войти</button>
                     </div>
-                    
-                    <?php
-                } else{
-                    ?>
+
+                <?php
+                        } else {
+                ?>
                     <div class="header__hi">
                         <div class="menu">
                             <button class="menu__button" type="button">
-                                <span>Привет, <?php echo $_SESSION['Name'];?></span>
+                                <span>Привет, <?php echo $_SESSION['Name']; ?></span>
                             </button>
                             <ul hidden class="menu__list">
                                 <li><a href="adding.php" class="menu__link">Разместить объявление</a></li>
@@ -76,757 +75,727 @@ if(!$conection->set_charset($charset)){
                                 </li>
                             </ul>
                         </div>
-                        
+
                         <?php
-                            if(isset($_POST['exit'])){
+                            if (isset($_POST['exit'])) {
                                 $_SESSION = [];
-                                header('Location: ads.php?type='.$_GET['type'].'&room='.$_GET['room'].'&metro='.$_GET['metro'].'&priceStart='.$_GET['priceStart'].'&priceEnd='.$_GET['priceEnd']);
+                                header('Location: ads.php?type=' . $_GET['type'] . '&room=' . $_GET['room'] . '&metro=' . $_GET['metro'] . '&priceStart=' . $_GET['priceStart'] . '&priceEnd=' . $_GET['priceEnd']);
                             }
                         ?>
                     </div>
                 <?php
-                }
+                        }
                 ?>
                 </div>
             </div>
         </header>
         <?php
-        if($_GET['type']=="rent")  
-        {
+        if ($_GET['type'] == "rent") {
         ?>
-        <main class="main">
-            <div class="main__container container">
-                <div class="main__navigation">
-                    <a href="../index.php" class="navigation__link">Главная</a>
-                    <span class="navigation__arrow">></span>
-                    <a href="ads.php?type=rent" class="navigation__link">Аренда</a>
-                </div>
-                <?php
-                $sql = "SELECT *, (SELECT photo1 FROM photos WHERE announcementID=a.ID) as 'photo1' FROM announcement a WHERE transaction=' Аренда'";
-                $queryCount= "SELECT COUNT(*) FROM announcement WHERE transaction=' Аренда'";
-                if(!empty($_GET['room'])){
-                    $rooms=$_GET['room'];
-                    if(is_array($rooms)){ //проверка на массив
-                    $sql .= " and(";
-                    $queryCount.= " and(";
-                    $i=0;
-                    foreach($rooms as $room){ //перебор массива комнат
-                        if($i==0){
-                            $sql .= " QuantityRoom=".$room;
-                            $queryCount.= " QuantityRoom=".$room;
-                        }else{
-                        $sql .= " OR QuantityRoom=".$room;
-                        $queryCount.= " OR QuantityRoom=".$room;
+            <main class="main">
+                <div class="main__container container">
+                    <div class="main__navigation">
+                        <a href="../index.php" class="navigation__link">Главная</a>
+                        <span class="navigation__arrow">></span>
+                        <a href="ads.php?type=rent" class="navigation__link">Аренда</a>
+                    </div>
+                    <?php
+                    $sql = "SELECT *, (SELECT photo1 FROM photos WHERE announcementID=a.ID) as 'photo1' 
+                    FROM announcement a WHERE transaction=' Аренда' AND typeRealty!='Участок'";
+                    $queryCount = "SELECT COUNT(*) FROM announcement WHERE transaction=' Аренда' AND typeRealty!='Участок'";
+                    if (!empty($_GET['room'])) {
+                        $rooms = $_GET['room'];
+                        if (is_array($rooms)) { //проверка на массив
+                            $sql .= " and(";
+                            $queryCount .= " and(";
+                            $i = 0;
+                            foreach ($rooms as $room) { //перебор массива комнат
+                                if ($i == 0) {
+                                    $sql .= " QuantityRoom=" . $room;
+                                    $queryCount .= " QuantityRoom=" . $room;
+                                } else {
+                                    $sql .= " OR QuantityRoom=" . $room;
+                                    $queryCount .= " OR QuantityRoom=" . $room;
+                                }
+                                $i++;
+                            }
+                            $sql .= ")";
+                            $queryCount .= ")";
+                        } else {
+                            $sql .= ' and QuantityRoom=' . $rooms;
+                            $queryCount .= ' and QuantityRoom=' . $rooms;
                         }
-                        $i++;
                     }
-                    $sql .= ")";
-                    $queryCount .= ")";
-                }else{
-                    $sql .= ' and QuantityRoom='.$rooms;
-                    $queryCount.= ' and QuantityRoom='.$rooms;
-                }
-                }
-                if(!empty($_GET['metro'])){
-                    $sql .=" and Metro='".$_GET['metro']."'";
-                    $queryCount.=" and Metro='".$_GET['metro']."'";
-                }
-                if(!empty($_GET['priceStart'])){
-                    $sql .=" and Cost>=".$_GET['priceStart'];
-                    $queryCount.=" and Cost>=".$_GET['priceStart'];
-                }
-                if(!empty($_GET['priceEnd'])){
-                    $sql .=" and Cost<=".$_GET['priceEnd'];
-                    $queryCount.=" and Cost<=".$_GET['priceEnd'];
-                }
-                if(!empty($_GET['costd'])){
-                    $sql .= " ORDER BY Cost " .$_GET['costd']. " LIMIT 10";
-                    $queryCount.= " ORDER BY Cost " .$_GET['costd']. " LIMIT 10";
-                }
-                else{
-                    $sql.= " ORDER BY Cost ASC LIMIT 10";
-                    $queryCount.= " ORDER BY Cost ASC LIMIT 10";
-                }
+                    if (!empty($_GET['metro'])) {
+                        $sql .= " and Metro='" . $_GET['metro'] . "'";
+                        $queryCount .= " and Metro='" . $_GET['metro'] . "'";
+                    }
+                    if (!empty($_GET['priceStart'])) {
+                        $sql .= " and Cost>=" . $_GET['priceStart'];
+                        $queryCount .= " and Cost>=" . $_GET['priceStart'];
+                    }
+                    if (!empty($_GET['priceEnd'])) {
+                        $sql .= " and Cost<=" . $_GET['priceEnd'];
+                        $queryCount .= " and Cost<=" . $_GET['priceEnd'];
+                    }
+                    if (!empty($_GET['costd'])) {
+                        $sql .= " ORDER BY Cost " . $_GET['costd'] . " LIMIT 0, 10";
+                        $queryCount .= " ORDER BY Cost " . $_GET['costd'] . " LIMIT 0, 10";
+                    } else {
+                        $sql .= " ORDER BY Cost ASC LIMIT 0, 10";
+                        $queryCount .= " ORDER BY Cost ASC LIMIT 0, 10";
+                    }
                     $quantity = mysqli_query($conection, $queryCount);
                     $row = $quantity->fetch_row();
-                    $count = $row[0];   
-                ?>
-                <div class="main__row">
-                    <div class="main__title">Аренда квартиры</div>
-                    <div class="main__quantity"><?php if($count%10==1){
-                        echo $count . " объявление";
-                    }elseif($count%10>1 and $count%10<5){
-                        echo $count . " объявления";
-                    }elseif($count%10>4){
-                        echo $count . " объявлений";
-                    }elseif($count==0){
-                        echo $count ." объявлений";
-                    }  ?></div>
-                </div>
-                <div class="main__ads ads">
-                    <aside class="left-blok">
-                        <form method="get">
-                        <div class="left-block__item">
-                            <div class="left-block__title">Количество комнат</div>
-                            <div class="left-block__inputs">
-                                <div class="">
-                                    <label class="left-block__input">
-                                        <input type="checkbox" name="room[]" value="0">Студия
-                                    </label>
-                                </div>
-                                <div class="">
-                                    <label class="left-block__input">
-                                        <input type="checkbox" name="room[]" value="1">1 комната
-                                    </label>
-                                </div>
-                                <div class="">
-                                    <label class="left-block__input">
-                                        <input type="checkbox" name="room[]" value="2">2 комнаты
-                                    </label>
-                                </div>
-                                <div class="">
-                                    <label class="left-block__input">
-                                        <input type="checkbox" name="room[]" value="3">3 комнаты
-                                    </label>
-                                </div>
-                                <div class="">
-                                    <label class="left-block__input">
-                                        <input type="checkbox" name="room[]" value="4">4 комнаты
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="left-block__item">
-                            <div class="left-block__title">Метро</div>
-                            <div class="left-block__metro">
-                                <select name="metro">
-                                    <option></option>
-                                    <option>Войковская</option>
-                                    <option>Ховрино</option>
-                                    <option>Новокосино</option>
-                                    <option>Щелковская</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="left-block__item">
-                            <div class="left-block__title">Стоимость</div>
-                            <div class="left-block__cost">
-                                <div class="cost-item">
-                                    <input type="text" placeholder="от 3млн." name="priceStart" id="">
-                                </div>
-                                <div class="cost-item">
-                                    <input type="text" placeholder="до 20млн." name="priceEnd" id="">
-                                </div>
-                            </div>
-                        </div>
-                        <button type='submit' name="type" value="rent" class="left-block__applybtn">Сохранить</button>
-                    </form>
-                    
-                    </aside>
-                    <div class="right-block">
-                        <form method="post">
-                        
-                        <?php
-                        $result = mysqli_query($conection, $sql) or die(mysqli_errno($conection));
-                        if (mysqli_num_rows(mysqli_query($conection, $sql)) > 0) {
-                            $states = mysqli_query($conection, $sql);
-                            while ($states1 = mysqli_fetch_array($states)) {
-                            
-                        ?>
-                        <div class="right-block__offers offers">
-                        <form method="post" class="rightForm">
-                            <div class="offers__card card">
-                                <div class="card__row">
-                                    <div class="card__img"><img src="../imgAppartments/announcement<?php echo $states1['ID']."/"; echo $states1['photo1']; ?>" alt="Изображение"></div>
-                                    <div class="card-info">
-                                        <div class="card-info__row">
-                                            <div class="card-info__item item__title"><?php echo $states1['Title']; ?></div>
-                                            <div class="card-info__item item__price"><?php echo $states1['Cost']; ?> руб.</div>
+                    $count = $row[0];
+                    ?>
+                    <div class="main__row">
+                        <div class="main__title">Аренда квартиры</div>
+                        <div class="main__quantity"><?php if ($count % 10 == 1) {
+                                                        echo $count . " объявление";
+                                                    } elseif ($count % 10 > 1 and $count % 10 < 5) {
+                                                        echo $count . " объявления";
+                                                    } elseif ($count % 10 > 4) {
+                                                        echo $count . " объявлений";
+                                                    } elseif ($count == 0) {
+                                                        echo $count . " объявлений";
+                                                    }  ?></div>
+                    </div>
+                    <div class="main__ads ads">
+                        <aside class="left-blok">
+                            <form method="get">
+                                <div class="left-block__item">
+                                    <div class="left-block__title">Количество комнат</div>
+                                    <div class="left-block__inputs">
+                                        <div class="">
+                                            <label class="left-block__input">
+                                                <input type="checkbox" name="room[]" value="0">Студия
+                                            </label>
                                         </div>
-                                        <div class="card-info__room"><?php echo $states1['QuantityRoom']; ?>-комнт. <?php echo $states1['square']; ?>м <?php echo $states1['Floor']; ?>/<?php echo $states1['totalFloor']; ?> эт.</div>
-                                        <div class="card-info__line">
-                                            <div class="card-info__column item__metro"><?php echo $states1['Metro']; ?></div>
-                                            <div class="card-info__column item__foot"><?php echo $states1['foot']; ?> минут пешком</div>
+                                        <div class="">
+                                            <label class="left-block__input">
+                                                <input type="checkbox" name="room[]" value="1">1 комната
+                                            </label>
                                         </div>
-                                        <div class="card-info__description">
-                                            <?php echo $states1['Description']; ?>
+                                        <div class="">
+                                            <label class="left-block__input">
+                                                <input type="checkbox" name="room[]" value="2">2 комнаты
+                                            </label>
                                         </div>
-                                        <div class="card-info__btn">
-                                            <?php
-                                                echo "<input type = \"submit\" value = \"Посмотреть\" class=\"btn__buy\" name = \"$states1[ID]\">";
-                                                if (isset($_POST[$states1['ID']])) {
-                                                    $_SESSION['SelectArticle'] = $states1['ID'];
-                                                    header("Location: ad.php");
-                                                }
-                                                ?>
+                                        <div class="">
+                                            <label class="left-block__input">
+                                                <input type="checkbox" name="room[]" value="3">3 комнаты
+                                            </label>
+                                        </div>
+                                        <div class="">
+                                            <label class="left-block__input">
+                                                <input type="checkbox" name="room[]" value="4">4 комнаты
+                                            </label>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                                <div class="left-block__item">
+                                    <div class="left-block__title">Метро</div>
+                                    <div class="left-block__metro">
+                                        <select name="metro">
+                                            <option></option><?php
+                                                                $queryBuy = "SELECT name FROM metroList";
+                                                                $mysqli_query = mysqli_query($conection, $queryBuy);
+                                                                while ($states1 = mysqli_fetch_array($mysqli_query)) { ?>
+                                                <option value="<?= $states1['name']; ?>"><?= $states1['name']; ?></option>
+                                            <?php
+                                                                }
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="left-block__item">
+                                    <div class="left-block__title">Стоимость</div>
+                                    <div class="left-block__cost">
+                                        <div class="cost-item">
+                                            <input type="text" placeholder="от 3млн." name="priceStart" id="">
+                                        </div>
+                                        <div class="cost-item">
+                                            <input type="text" placeholder="до 20млн." name="priceEnd" id="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type='submit' name="type" value="rent" class="left-block__applybtn">Сохранить</button>
                             </form>
+
+                        </aside>
+                        <div class="right-block">
+                            <form method="post">
+
+                                <?php
+                                $result = mysqli_query($conection, $sql) or die(mysqli_errno($conection));
+                                if (mysqli_num_rows(mysqli_query($conection, $sql)) > 0) {
+                                    $states = mysqli_query($conection, $sql);
+                                    while ($states1 = mysqli_fetch_array($states)) {
+
+                                ?>
+                                        <div class="right-block__offers offers">
+                                            <form method="post" class="rightForm">
+                                                <div class="offers__card card">
+                                                    <div class="card__row">
+                                                        <div class="card__img"><img src="../imgAppartments/announcement<?php echo $states1['ID'] . "/";
+                                                                                                                        echo $states1['photo1']; ?>" alt="Изображение"></div>
+                                                        <div class="card-info">
+                                                            <div class="card-info__row">
+                                                                <div class="card-info__item item__title"><?php echo $states1['Title']; ?></div>
+                                                                <div class="card-info__item item__price"><?php echo $states1['Cost']; ?> руб.</div>
+                                                            </div>
+                                                            <div class="card-info__room">
+                                                                <?php if ($states1['QuantityRoom'] == 0) {
+                                                                    echo "Студия";
+                                                                } else {
+                                                                    echo $states1['QuantityRoom'] . " комнт. ";
+                                                                } ?> <?php echo $states1['square']; ?>м²
+                                                                <?php echo $states1['Floor']; ?>/ <?php echo $states1['totalFloor']; ?> эт.
+                                                            </div>
+                                                            <div class="card-info__line">
+                                                                <div class="card-info__column item__metro"><?php echo $states1['Metro']; ?></div>
+                                                                <div class="card-info__column item__foot"><?php echo $states1['foot']; ?> минут пешком</div>
+                                                            </div>
+                                                            <div class="card-info__description">
+                                                                <?php echo $states1['Description']; ?>
+                                                            </div>
+                                                            <div class="card-info__btn">
+                                                                <?php
+                                                                echo "<input type = \"submit\" value = \"Посмотреть\" class=\"btn__buy\" name = \"$states1[ID]\">";
+                                                                if (isset($_POST[$states1['ID']])) {
+                                                                    $_SESSION['SelectArticle'] = $states1['ID'];
+                                                                    header("Location: ad.php");
+                                                                }
+                                                                ?>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                <?php
+                                    }
+                                }
+                                ?>
+                            </form>
+                            <?php
+                            pagination(page(" Аренда", "Жилая"), ' Аренда');
+
+                            ?>
                         </div>
-                        <?php
-                            }
-                        }
-                        ?>
-                        </form>
+
                     </div>
                 </div>
-            </div>
-        </main>
+            </main>
         <?php
-        }
-        elseif($_GET['type']=="sale"){
-            ?>  
+        } elseif ($_GET['type'] == "sale") {
+        ?>
             <main class="main">
-            <div class="main__container container">
-                <div class="main__navigation">
-                    <a href="../index.php" class="navigation__link">Главная</a>
-                    <span class="navigation__arrow">></span>
-                    <a href="ads.php?type=sale" class="navigation__link">Продажа</a>
-                </div>
-                <?php
-                $sql = "SELECT *, (SELECT photo1 FROM photos WHERE announcementID=a.ID) as 'photo1' FROM announcement a WHERE transaction=' Продажа'";
-                $queryCount= "SELECT COUNT(*) FROM announcement WHERE transaction=' Продажа'";
-                if(!empty($_GET['room'])){
-                    $rooms=$_GET['room'];
-                    if(is_array($rooms)){ //проверка на массив
-                    $sql .= " and(";
-                    $queryCount.= " and(";
-                    $i=0;
-                    foreach($rooms as $room){ //перебор массива комнат
-                        if($i==0){
-                            $sql .= " QuantityRoom=".$room;
-                            $queryCount.= " QuantityRoom=".$room;
-                        }else{
-                        $sql .= " OR QuantityRoom=".$room;
-                        $queryCount.= " OR QuantityRoom=".$room;
+                <div class="main__container container">
+                    <div class="main__navigation">
+                        <a href="../index.php" class="navigation__link">Главная</a>
+                        <span class="navigation__arrow">></span>
+                        <a href="ads.php?type=sale" class="navigation__link">Продажа</a>
+                    </div>
+                    <?php
+                    $sql = "SELECT *, (SELECT photo1 FROM photos WHERE announcementID=a.ID) as 'photo1' 
+                    FROM announcement a WHERE transaction=' Продажа' AND typeRealty!='Участок'";
+                    $queryCount = "SELECT COUNT(*) FROM announcement WHERE transaction=' Продажа' AND typeRealty!='Участок'";
+                    if (!empty($_GET['room'])) {
+                        $rooms = $_GET['room'];
+                        if (is_array($rooms)) { //проверка на массив
+                            $sql .= " and(";
+                            $queryCount .= " and(";
+                            $i = 0;
+                            foreach ($rooms as $room) { //перебор массива комнат
+                                if ($i == 0) {
+                                    $sql .= " QuantityRoom=" . $room;
+                                    $queryCount .= " QuantityRoom=" . $room;
+                                } else {
+                                    $sql .= " OR QuantityRoom=" . $room;
+                                    $queryCount .= " OR QuantityRoom=" . $room;
+                                }
+                                $i++;
+                            }
+                            $sql .= ")";
+                            $queryCount .= ")";
+                        } else {
+                            $sql .= ' and QuantityRoom=' . $rooms;
+                            $queryCount .= ' and QuantityRoom=' . $rooms;
                         }
-                        $i++;
                     }
-                    $sql .= ")";
-                    $queryCount .= ")";
-                }else{
-                    $sql .= ' and QuantityRoom='.$rooms;
-                    $queryCount.= ' and QuantityRoom='.$rooms;
-                }
-                }
-                if(!empty($_GET['metro'])){
-                    $sql .=" and Metro='".$_GET['metro']."'";
-                    $queryCount.=" and Metro='".$_GET['metro']."'";
-                }
-                if(!empty($_GET['priceStart'])){
-                    $sql .=" and Cost>=".$_GET['priceStart'];
-                    $queryCount.=" and Cost>=".$_GET['priceStart'];
-                }
-                if(!empty($_GET['priceEnd'])){
-                    $sql .=" and Cost<=".$_GET['priceEnd'];
-                    $queryCount.=" and Cost<=".$_GET['priceEnd'];
-                }
-                if(!empty($_GET['costd'])){
-                    $sql .= " ORDER BY Cost " .$_GET['costd']. " LIMIT 10";
-                    $queryCount.= " ORDER BY Cost " .$_GET['costd']. " LIMIT 10";
-                }
-                else{
-                    $sql.= " ORDER BY Cost ASC LIMIT 10";
-                    $queryCount.= " ORDER BY Cost ASC LIMIT 10";
-                }
+                    if (!empty($_GET['metro'])) {
+                        $sql .= " and Metro='" . $_GET['metro'] . "'";
+                        $queryCount .= " and Metro='" . $_GET['metro'] . "'";
+                    }
+                    if (!empty($_GET['priceStart'])) {
+                        $sql .= " and Cost>=" . $_GET['priceStart'];
+                        $queryCount .= " and Cost>=" . $_GET['priceStart'];
+                    }
+                    if (!empty($_GET['priceEnd'])) {
+                        $sql .= " and Cost<=" . $_GET['priceEnd'];
+                        $queryCount .= " and Cost<=" . $_GET['priceEnd'];
+                    }
+                    $p = (!isset($_GET['p'])) ? $p = 0 : $p = $_GET['p'];
+                    $sql .= " ORDER BY Cost ASC LIMIT " . $_GET['p'] * 10 . ", 10";
+                    $queryCount .= " ORDER BY Cost ASC LIMIT " . $_GET['p'] * 10  . ", 10";
                     $quantity = mysqli_query($conection, $queryCount);
                     $row = $quantity->fetch_row();
-                    $count = $row[0];   
-                ?>
-                <div class="main__row">
-                    <div class="main__title">Продажа квартиры</div>
-                    <div class="main__quantity"><?php if($count%10==1){
-                        echo $count . " объявление";
-                    }elseif($count%10>1 and $count%10<5){
-                        echo $count . " объявления";
-                    }elseif($count%10>4){
-                        echo $count . " объявлений";
-                    }  ?></div>
-                </div>
-                <div class="main__ads ads">
-                    <aside class="left-blok">
-                        <form method="get" method="ads.php">
-                        <div class="left-block__item">
+                    $count = $row[0];
+                    ?>
+                    <div class="main__row">
+                        <div class="main__title">Продажа квартиры</div>
+                        <div class="main__quantity"><?php if ($count % 10 == 1) {
+                                                        echo $count . " объявление";
+                                                    } elseif ($count % 10 > 1 and $count % 10 < 5) {
+                                                        echo $count . " объявления";
+                                                    } elseif ($count % 10 > 4) {
+                                                        echo $count . " объявлений";
+                                                    }  ?></div>
+                    </div>
+                    <div class="main__ads ads">
+                        <aside class="left-blok">
+                            <form method="get" method="ads.php">
+                                <div class="left-block__item">
 
-                            <div class="left-block__title">Количество комнат</div>
-                            <div class="left-block__inputs">
-                                <div class="">
-                                    <label class="left-block__input">
-                                        <input type="checkbox" name="room[]" value="0">Студия
-                                    </label>
-                                </div>
-                                <div class="">
-                                    <label class="left-block__input">
-                                        <input type="checkbox" name="room[]" value="1">1 комната
-                                    </label>
-                                </div>
-                                <div class="">
-                                    <label class="left-block__input">
-                                        <input type="checkbox" name="room[]" value="2">2 комнаты
-                                    </label>
-                                </div>
-                                <div class="">
-                                    <label class="left-block__input">
-                                        <input type="checkbox" name="room[]" value="3">3 комнаты
-                                    </label>
-                                </div>
-                                <div class="">
-                                    <label class="left-block__input">
-                                        <input type="checkbox" name="room[]" value="4">3 комнаты
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="left-block__item">
-                            <div class="left-block__title">Метро</div>
-                            <div class="left-block__metro">
-                            <select name="metro">
-                                    <option></option>
-                                    <option>Войковская</option>
-                                    <option>Ховрино</option>
-                                    <option>Новокосино</option>
-                                    <option>Щелковская</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="left-block__item">
-                            <div class="left-block__title">Стоимость</div>
-                            <div class="left-block__cost">
-                                <div class="cost-item">
-                                    <input type="text" placeholder="от 3млн." name="priceStart" id="">
-                                </div>
-                                <div class="cost-item">
-                                    <input type="text" placeholder="до 20млн." name="priceEnd" id="">
-                                </div>
-                            </div>
-                        </div>
-                        <button type='submit' name="type" value="sale" class="left-block__applybtn">Сохранить</button>
-                        </form>
-                        
-                    </aside>
-                    <div class="right-block">
-                        <form method="post">
-                        <?php
-                        $result = mysqli_query($conection, $sql) or die(mysqli_errno($conection));
-                        if (mysqli_num_rows(mysqli_query($conection, $sql)) > 0) {
-                            $states = mysqli_query($conection, $sql);
-                            while ($states1 = mysqli_fetch_array($states)) {
-
-                            
-                        ?>
-                        <div class="right-block__offers offers">
-                        <form method="post" class="rightForm">
-                            <div class="offers__card card">
-                                <div class="card__row">
-                                    <div class="card__img"><img src="../imgAppartments/announcement<?php echo $states1['ID']."/";echo $states1['photo1']; ?>" alt="Изображение"></div>
-                                    <div class="card-info">
-                                        <div class="card-info__row">
-                                            <div class="card-info__item item__title"><?php echo $states1['Title']; ?></div>
-                                            <div class="card-info__item item__price"><?php echo $states1['Cost']; ?> руб.</div>
+                                    <div class="left-block__title">Количество комнат</div>
+                                    <div class="left-block__inputs">
+                                        <div class="">
+                                            <label class="left-block__input">
+                                                <input type="checkbox" name="room[]" value="0">Студия
+                                            </label>
                                         </div>
-                                        <div class="card-info__room"><?php echo $states1['QuantityRoom']; ?>-комнт. <?php echo $states1['square']; ?>м <?php echo $states1['Floor']; ?>/<?php echo $states1['totalFloor']; ?> эт.</div>
-                                        <div class="card-info__line">
-                                            <div class="card-info__column item__metro"><?php echo $states1['Metro']; ?></div>
-                                            <div class="card-info__column item__foot"><?php echo $states1['foot']; ?> минут пешком</div>
+                                        <div class="">
+                                            <label class="left-block__input">
+                                                <input type="checkbox" name="room[]" value="1">1 комната
+                                            </label>
                                         </div>
-                                        <div class="card-info__description">
-                                            <?php echo $states1['Description']; ?>
+                                        <div class="">
+                                            <label class="left-block__input">
+                                                <input type="checkbox" name="room[]" value="2">2 комнаты
+                                            </label>
                                         </div>
-                                        <div class="card-info__btn">
-                                            <?php
-                                                echo "<input type = \"submit\" value = \"Посмотреть\" class=\"btn__buy\" name = \"$states1[ID]\">";
-                                                if (isset($_POST[$states1['ID']])) {
-                                                    $_SESSION['SelectArticle'] = $states1['ID'];
-                                                    header("Location: ad.php");
-                                                }
-                                                ?>
+                                        <div class="">
+                                            <label class="left-block__input">
+                                                <input type="checkbox" name="room[]" value="3">3 комнаты
+                                            </label>
+                                        </div>
+                                        <div class="">
+                                            <label class="left-block__input">
+                                                <input type="checkbox" name="room[]" value="4">4 комнаты
+                                            </label>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            </form>
-                        </div>
-                        <?php
-                            }
-                        }
-                        ?>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </main>
-            <?php
-        }
-        elseif($_GET['type']=="NewBuildings"){
-            ?>
-            <main class="main">
-            <div class="main__container container">
-                <div class="main__navigation">
-                    <a href="../index.php" class="navigation__link">Главная</a>
-                    <span class="navigation__arrow">></span>
-                    <a href="ads.php?type=NewBuildings" class="navigation__link">Новостройки</a>
-                </div>
-                <?php
-                $sql = "SELECT *, (SELECT photo1 FROM photos WHERE announcementID=a.ID) as 'photo1' FROM announcement a WHERE transaction='Новостройка'";
-                $queryCount= "SELECT COUNT(*) FROM announcement WHERE transaction='Новостройка'";
-                if(!empty($_GET['room'])){
-                    $rooms=$_GET['room'];
-                    if(is_array($rooms)){ //проверка на массив
-                    $sql .= " and(";
-                    $queryCount.= " and(";
-                    $i=0;
-                    foreach($rooms as $room){ //перебор массива комнат
-                        if($i==0){
-                            $sql .= " QuantityRoom=".$room;
-                            $queryCount.= " QuantityRoom=".$room;
-                        }else{
-                        $sql .= " OR QuantityRoom=".$room;
-                        $queryCount.= " OR QuantityRoom=".$room;
-                        }
-                        $i++;
-                    }
-                    $sql .= ")";
-                    $queryCount .= ")";
-                }else{
-                    $sql .= ' and QuantityRoom='.$rooms;
-                    $queryCount.= ' and QuantityRoom='.$rooms;
-                }
-                }
-                if(!empty($_GET['metro'])){
-                    $sql .=" and Metro='".$_GET['metro']."'";
-                    $queryCount.=" and Metro='".$_GET['metro']."'";
-                }
-                if(!empty($_GET['priceStart'])){
-                    $sql .=" and Cost>=".$_GET['priceStart'];
-                    $queryCount.=" and Cost>=".$_GET['priceStart'];
-                }
-                if(!empty($_GET['priceEnd'])){
-                    $sql .=" and Cost<=".$_GET['priceEnd'];
-                    $queryCount.=" and Cost<=".$_GET['priceEnd'];
-                }
-                if(!empty($_GET['costd'])){
-                    $sql .= " ORDER BY Cost " .$_GET['costd']. " LIMIT 10";
-                    $queryCount.= " ORDER BY Cost " .$_GET['costd']. " LIMIT 10";
-                }
-                else{
-                    $sql.= " ORDER BY Cost ASC LIMIT 10";
-                    $queryCount.= " ORDER BY Cost ASC LIMIT 10";
-                }
-                    $quantity = mysqli_query($conection, $queryCount);
-                    $row = $quantity->fetch_row();
-                    $count = $row[0];   
-                ?>
-                <div class="main__row">
-                    <div class="main__title">Новостройки</div>
-                    <div class="main__quantity"><?php if($count%10==1){
-                        echo $count . " объявление";
-                    }elseif($count%10>1 and $count%10<5){
-                        echo $count . " объявления";
-                    }elseif($count%10>4){
-                        echo $count . " объявлений";
-                    }  ?></div>
-                </div>
-                <div class="main__ads ads">
-                    <aside class="left-blok">
-                        <form method="post">
-                        <div class="left-block__item">
-
-                            <div class="left-block__title">Количество комнат</div>
-                            <div class="left-block__inputs">
-                                <div class="">
-                                    <label class="left-block__input">
-                                        <input type="checkbox" name="room[]" value="0">Студия
-                                    </label>
-                                </div>
-                                <div class="">
-                                    <label class="left-block__input">
-                                        <input type="checkbox" name="room[]" value="1">1 комната
-                                    </label>
-                                </div>
-                                <div class="">
-                                    <label class="left-block__input">
-                                        <input type="checkbox" name="room[]" value="2">2 комнаты
-                                    </label>
-                                </div>
-                                <div class="">
-                                    <label class="left-block__input">
-                                        <input type="checkbox" name="room[]" value="3">3 комнаты
-                                    </label>
-                                </div>
-                                <div class="">
-                                    <label class="left-block__input">
-                                        <input type="checkbox" name="room[]" value="4">4 комнаты
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="left-block__item">
-                            <div class="left-block__title">Метро</div>
-                            <div class="left-block__metro">
-                            <select name="metro">
-                                    <option></option>
-                                    <option>Войковская</option>
-                                    <option>Ховрино</option>
-                                    <option>Новокосино</option>
-                                    <option>Щелковская</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="left-block__item">
-                            <div class="left-block__title">Стоимость</div>
-                            <div class="left-block__cost">
-                                <div class="cost-item">
-                                    <input type="text" placeholder="от 3млн." name="priceStart" id="">
-                                </div>
-                                <div class="cost-item">
-                                    <input type="text" placeholder="до 20млн." name="priceEnd" id="">
-                                </div>
-                            </div>
-                        </div>
-                        <button type='submit' name="type" value="sale" class="left-block__applybtn">Сохранить</button>
-                        </form>
-                        
-                    </aside>
-                    <div class="right-block">
-                        <form method="post">
-                        
-                        <?php
-                        
-                        $result = mysqli_query($conection, $sql) or die(mysqli_errno($conection));
-                        if (mysqli_num_rows(mysqli_query($conection, $sql)) > 0) {
-                            $states = mysqli_query($conection, $sql);
-                            while ($states1 = mysqli_fetch_array($states)) {
-
-                            
-                        ?>
-                        <div class="right-block__offers offers">
-                        <form method="post" class="rightForm">
-                            <div class="offers__card card">
-                                <div class="card__row">
-                                    <div class="card__img"><img src="../imgAppartments/announcement<?php echo $states1['ID']."/"; echo $states1['photo1']; ?>" alt="Изображение"></div>
-                                    <div class="card-info">
-                                        <div class="card-info__row">
-                                            <div class="card-info__item item__title"><?php echo $states1['Title']; ?></div>
-                                            <div class="card-info__item item__price"><?php echo $states1['Cost']; ?> руб.</div>
-                                        </div>
-                                        <div class="card-info__room"><?php echo $states1['QuantityRoom']; ?>-комнт. <?php echo $states1['square']; ?>м <?php echo $states1['Floor']; ?>/<?php echo $states1['totalFloor']; ?> эт.</div>
-                                        <div class="card-info__line">
-                                            <div class="card-info__column item__metro"><?php echo $states1['Metro']; ?></div>
-                                            <div class="card-info__column item__foot"><?php echo $states1['foot']; ?> минут пешком</div>
-                                        </div>
-                                        <div class="card-info__description">
-                                            <?php echo $states1['Description']; ?>
-                                        </div>
-                                        <div class="card-info__btn">
+                                <div class="left-block__item">
+                                    <div class="left-block__title">Метро</div>
+                                    <div class="left-block__metro">
+                                        <select name="metro">
+                                            <option></option><?php
+                                                                $queryBuy = "SELECT name FROM metroList";
+                                                                $mysqli_query = mysqli_query($conection, $queryBuy);
+                                                                while ($states1 = mysqli_fetch_array($mysqli_query)) { ?>
+                                                <option value="<?= $states1['name']; ?>"><?= $states1['name']; ?></option>
                                             <?php
-                                                echo "<input type = \"submit\" value = \"Посмотреть\" class=\"btn__buy\" name = \"$states1[ID]\">";
-                                                if (isset($_POST[$states1['ID']])) {
-                                                    $_SESSION['SelectArticle'] = $states1['ID'];
-                                                    header("Location: ad.php");
-                                                }
-                                                ?>
+                                                                }
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="left-block__item">
+                                    <div class="left-block__title">Стоимость</div>
+                                    <div class="left-block__cost">
+                                        <div class="cost-item">
+                                            <input type="text" placeholder="от 3млн." name="priceStart" id="">
+                                        </div>
+                                        <div class="cost-item">
+                                            <input type="text" placeholder="до 20млн." name="priceEnd" id="">
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                                <button type='submit' name="type" value="sale" class="left-block__applybtn">Сохранить</button>
                             </form>
+
+                        </aside>
+                        <div class="right-block">
+                            <form method="post">
+                                <?php
+                                $result = mysqli_query($conection, $sql) or die(mysqli_errno($conection));
+                                if (mysqli_num_rows(mysqli_query($conection, $sql)) > 0) {
+                                    $states = mysqli_query($conection, $sql);
+                                    while ($states1 = mysqli_fetch_array($states)) {
+
+
+                                ?>
+                                        <div class="right-block__offers offers">
+                                            <form method="post" class="rightForm">
+                                                <div class="offers__card card">
+                                                    <div class="card__row">
+                                                        <div class="card__img"><img src="../imgAppartments/announcement<?php echo $states1['ID'] . "/";
+                                                                                                                        echo $states1['photo1']; ?>" alt="Изображение"></div>
+                                                        <div class="card-info">
+                                                            <div class="card-info__row">
+                                                                <div class="card-info__item item__title"><?php echo $states1['Title']; ?></div>
+                                                                <div class="card-info__item item__price"><?php echo $states1['Cost']; ?> руб.</div>
+                                                            </div>
+                                                            <div class="card-info__room"><?php if ($states1['QuantityRoom'] == 0) {
+                                                                                                echo "Студия";
+                                                                                            } else {
+                                                                                                echo $states1['QuantityRoom'] . " комнт. ";
+                                                                                            } ?> <?php echo $states1['square']; ?>м²
+                                                                <?php echo $states1['Floor']; ?>/ <?php echo $states1['totalFloor']; ?> эт. </div>
+                                                            <div class="card-info__line">
+                                                                <div class="card-info__column item__metro"><?php echo $states1['Metro']; ?></div>
+                                                                <div class="card-info__column item__foot"><?php echo $states1['foot']; ?> минут пешком</div>
+                                                            </div>
+                                                            <div class="card-info__description">
+                                                                <?php echo $states1['Description']; ?>
+                                                            </div>
+                                                            <div class="card-info__btn">
+                                                                <?php
+                                                                echo "<input type = \"submit\" value = \"Посмотреть\" class=\"btn__buy\" name = \"$states1[ID]\">";
+                                                                if (isset($_POST[$states1['ID']])) {
+                                                                    $_SESSION['SelectArticle'] = $states1['ID'];
+                                                                    header("Location: ad.php");
+                                                                }
+                                                                ?>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                <?php
+                                    }
+                                }
+                                ?>
+                            </form>
+                            <?php
+                            pagination(page(" Продажа", "Жилая"), ' Продажа');
+                            ?>
                         </div>
-                        <?php
-                            }
-                        }
-                        ?>
-                        </form>
                     </div>
                 </div>
-            </div>
-        </main>
-            <?php
-        }
-        elseif($_GET['type']=="area"){
-            ?>
+            </main>
+        <?php
+        } elseif ($_GET['type'] == "NewBuildings") {
+        ?>
             <main class="main">
-            <div class="main__container container">
-                <div class="main__navigation">
-                    <a href="../index.php" class="navigation__link">Главная</a>
-                    <span class="navigation__arrow">></span>
-                    <a href="ads.php?type=area" class="navigation__link">Дома и участки</a>
-                </div>
-                <?php
-                $sql = "SELECT *, (SELECT photo1 FROM photos WHERE announcementID=a.ID) as 'photo1' FROM announcement a WHERE transaction='Участок'";
-                $queryCount= "SELECT COUNT(*) FROM announcement WHERE transaction='Участок'";
-                if(!empty($_GET['room'])){
-                    $rooms=$_GET['room'];
-                    if(is_array($rooms)){ //проверка на массив
-                    $sql .= " and(";
-                    $queryCount.= " and(";
-                    $i=0;
-                    foreach($rooms as $room){ //перебор массива комнат
-                        if($i==0){
-                            $sql .= " QuantityRoom=".$room;
-                            $queryCount.= " QuantityRoom=".$room;
-                        }else{
-                        $sql .= " OR QuantityRoom=".$room;
-                        $queryCount.= " OR QuantityRoom=".$room;
+                <div class="main__container container">
+                    <div class="main__navigation">
+                        <a href="../index.php" class="navigation__link">Главная</a>
+                        <span class="navigation__arrow">></span>
+                        <a href="ads.php?type=NewBuildings" class="navigation__link">Новостройки</a>
+                    </div>
+                    <?php
+                    $sql = "SELECT *, (SELECT photo1 FROM photos WHERE announcementID=a.ID) as 'photo1' FROM announcement a WHERE typeRealty='Новостройка'";
+                    $queryCount = "SELECT COUNT(*) FROM announcement WHERE transaction='Новостройка'";
+                    if (!empty($_GET['room'])) {
+                        $rooms = $_GET['room'];
+                        if (is_array($rooms)) { //проверка на массив
+                            $sql .= " and(";
+                            $queryCount .= " and(";
+                            $i = 0;
+                            foreach ($rooms as $room) { //перебор массива комнат
+                                if ($i == 0) {
+                                    $sql .= " QuantityRoom=" . $room;
+                                    $queryCount .= " QuantityRoom=" . $room;
+                                } else {
+                                    $sql .= " OR QuantityRoom=" . $room;
+                                    $queryCount .= " OR QuantityRoom=" . $room;
+                                }
+                                $i++;
+                            }
+                            $sql .= ")";
+                            $queryCount .= ")";
+                        } else {
+                            $sql .= ' and QuantityRoom=' . $rooms;
+                            $queryCount .= ' and QuantityRoom=' . $rooms;
                         }
-                        $i++;
                     }
-                    $sql .= ")";
-                    $queryCount .= ")";
-                }else{
-                    $sql .= ' and QuantityRoom='.$rooms;
-                    $queryCount.= ' and QuantityRoom='.$rooms;
-                }
-                }
-                if(!empty($_GET['metro'])){
-                    $sql .=" and Metro='".$_GET['metro']."'";
-                    $queryCount.=" and Metro='".$_GET['metro']."'";
-                }
-                if(!empty($_GET['priceStart'])){
-                    $sql .=" and Cost>=".$_GET['priceStart'];
-                    $queryCount.=" and Cost>=".$_GET['priceStart'];
-                }
-                if(!empty($_GET['priceEnd'])){
-                    $sql .=" and Cost<=".$_GET['priceEnd'];
-                    $queryCount.=" and Cost<=".$_GET['priceEnd'];
-                }
-                if(!empty($_GET['costd'])){
-                    $sql .= " ORDER BY Cost " .$_GET['costd']. " LIMIT 10";
-                    $queryCount.= " ORDER BY Cost " .$_GET['costd']. " LIMIT 10";
-                }
-                else{
-                    $sql.= " ORDER BY Cost ASC LIMIT 10";
-                    $queryCount.= " ORDER BY Cost ASC LIMIT 10";
-                }
+                    if (!empty($_GET['metro'])) {
+                        $sql .= " and Metro='" . $_GET['metro'] . "'";
+                        $queryCount .= " and Metro='" . $_GET['metro'] . "'";
+                    }
+                    if (!empty($_GET['priceStart'])) {
+                        $sql .= " and Cost>=" . $_GET['priceStart'];
+                        $queryCount .= " and Cost>=" . $_GET['priceStart'];
+                    }
+                    if (!empty($_GET['priceEnd'])) {
+                        $sql .= " and Cost<=" . $_GET['priceEnd'];
+                        $queryCount .= " and Cost<=" . $_GET['priceEnd'];
+                    }
+                    if (!empty($_GET['costd'])) {
+                        $sql .= " ORDER BY Cost " . $_GET['costd'] . " LIMIT 10";
+                        $queryCount .= " ORDER BY Cost " . $_GET['costd'] . " LIMIT 10";
+                    } else {
+                        $sql .= " ORDER BY Cost ASC LIMIT 10";
+                        $queryCount .= " ORDER BY Cost ASC LIMIT 10";
+                    }
                     $quantity = mysqli_query($conection, $queryCount);
                     $row = $quantity->fetch_row();
-                    $count = $row[0];   
-                ?>
-                <div class="main__row">
-                    <div class="main__title">Участки</div>
-                    <div class="main__quantity"><?php if($count%10==1){
-                        echo $count . " объявление";
-                    }elseif($count%10>1 and $count%10<5){
-                        echo $count . " объявления";
-                    }elseif($count%10>4){
-                        echo $count . " объявлений";
-                    }?></div>
-                </div>
-                <div class="main__ads ads">
-                    <aside class="left-blok">
-                        <form method="post">
-                        <div class="left-block__item">
+                    $count = $row[0];
+                    ?>
+                    <div class="main__row">
+                        <div class="main__title">Новостройки</div>
+                        <div class="main__quantity"><?php if ($count % 10 == 1) {
+                                                        echo $count . " объявление";
+                                                    } elseif ($count % 10 > 1 and $count % 10 < 5) {
+                                                        echo $count . " объявления";
+                                                    } elseif ($count % 10 > 4) {
+                                                        echo $count . " объявлений";
+                                                    }  ?></div>
+                    </div>
+                    <div class="main__ads ads">
+                        <aside class="left-blok">
+                            <form method="get">
+                                <div class="left-block__item">
 
-                            <div class="left-block__title">Количество комнат</div>
-                            <div class="left-block__inputs">
-                                <div class="">
-                                    <label class="left-block__input">
-                                        <input type="checkbox" name="room[]" value="0">Студия
-                                    </label>
-                                </div>
-                                <div class="">
-                                    <label class="left-block__input">
-                                        <input type="checkbox" name="room[]" value="1">1 комната
-                                    </label>
-                                </div>
-                                <div class="">
-                                    <label class="left-block__input">
-                                        <input type="checkbox" name="room[]" value="2">2 комнаты
-                                    </label>
-                                </div>
-                                <div class="">
-                                    <label class="left-block__input">
-                                        <input type="checkbox" name="room[]" value="3">3 комнаты
-                                    </label>
-                                </div>
-                                <div class="">
-                                    <label class="left-block__input">
-                                        <input type="checkbox" name="room[]" value="4">3 комнаты
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="left-block__item">
-                            <div class="left-block__title">Метро</div>
-                            <div class="left-block__metro">
-                                <select name="metro">
-                                    <option></option>
-                                    <option>Войковская</option>
-                                    <option>Ховрино</option>
-                                    <option>Новокосино</option>
-                                    <option>Щелковская</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="left-block__item">
-                            <div class="left-block__title">Стоимость</div>
-                            <div class="left-block__cost">
-                                <div class="cost-item">
-                                    <input type="text" placeholder="от 3млн." name="priceStart" id="">
-                                </div>
-                                <div class="cost-item">
-                                    <input type="text" placeholder="до 20млн." name="priceEnd" id="">
-                                </div>
-                            </div>
-                        </div>
-                        <button type='submit' name="type" value="area" class="left-block__applybtn">Сохранить</button>
-                        </form>
-                        
-                    </aside>
-                    <div class="right-block">
-                        <form method="post">
-                        
-                        <?php
-                        $result = mysqli_query($conection, $sql) or die(mysqli_errno($conection));
-                        if (mysqli_num_rows(mysqli_query($conection, $sql)) > 0) {
-                            $states = mysqli_query($conection, $sql);
-                            while ($states1 = mysqli_fetch_array($states)) {
-
-                            
-                        ?>
-                        <div class="right-block__offers offers">
-                        <form method="post" class="rightForm">
-                            <div class="offers__card card">
-                                <div class="card__row">
-                                    <div class="card__img"><img src="../imgAppartments/announcement<?php echo $states1['ID']."/"; echo $states1['photo1']; ?>" alt="Изображение"></div>
-                                    <div class="card-info">
-                                        <div class="card-info__row">
-                                            <div class="card-info__item item__title"><?php echo $states1['Title']; ?></div>
-                                            <div class="card-info__item item__price"><?php echo $states1['Cost']; ?> руб.</div>
+                                    <div class="left-block__title">Количество комнат</div>
+                                    <div class="left-block__inputs">
+                                        <div class="">
+                                            <label class="left-block__input">
+                                                <input type="checkbox" name="room[]" value="0">Студия
+                                            </label>
                                         </div>
-                                        <div class="card-info__room"><?php echo $states1['QuantityRoom']; ?>-комнт. <?php echo $states1['square']; ?>м <?php echo $states1['Floor']; ?>/<?php echo $states1['totalFloor']; ?> эт.</div>
-                                        <div class="card-info__line">
-                                            <div class="card-info__column item__metro"><?php echo $states1['Metro']; ?></div>
-                                            <div class="card-info__column item__foot"><?php echo $states1['foot']; ?> минут пешком</div>
+                                        <div class="">
+                                            <label class="left-block__input">
+                                                <input type="checkbox" name="room[]" value="1">1 комната
+                                            </label>
                                         </div>
-                                        <div class="card-info__description">
-                                            <?php echo $states1['Description']; ?>
+                                        <div class="">
+                                            <label class="left-block__input">
+                                                <input type="checkbox" name="room[]" value="2">2 комнаты
+                                            </label>
                                         </div>
-                                        <div class="card-info__btn">
-                                            <?php
-                                                echo "<input type = \"submit\" value = \"Посмотреть\" class=\"btn__buy\" name = \"$states1[ID]\">";
-                                                if (isset($_POST[$states1['ID']])) {
-                                                    $_SESSION['SelectArticle'] = $states1['ID'];
-                                                    header("Location: ad.php");
-                                                }
-                                                ?>
+                                        <div class="">
+                                            <label class="left-block__input">
+                                                <input type="checkbox" name="room[]" value="3">3 комнаты
+                                            </label>
+                                        </div>
+                                        <div class="">
+                                            <label class="left-block__input">
+                                                <input type="checkbox" name="room[]" value="4">4 комнаты
+                                            </label>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                                <div class="left-block__item">
+                                    <div class="left-block__title">Метро</div>
+                                    <div class="left-block__metro">
+                                        <select name="metro">
+                                            <option></option><?php
+                                                                $queryBuy = "SELECT name FROM metroList";
+                                                                $mysqli_query = mysqli_query($conection, $queryBuy);
+                                                                while ($states1 = mysqli_fetch_array($mysqli_query)) { ?>
+                                                <option value="<?= $states1['name']; ?>"><?= $states1['name']; ?></option>
+                                            <?php
+                                                                }
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="left-block__item">
+                                    <div class="left-block__title">Стоимость</div>
+                                    <div class="left-block__cost">
+                                        <div class="cost-item">
+                                            <input type="text" placeholder="от 3млн." name="priceStart" id="">
+                                        </div>
+                                        <div class="cost-item">
+                                            <input type="text" placeholder="до 20млн." name="priceEnd" id="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type='submit' name="type" value="sale" class="left-block__applybtn">Сохранить</button>
                             </form>
+
+                        </aside>
+                        <div class="right-block">
+                            <form method="post">
+
+                                <?php
+
+                                $result = mysqli_query($conection, $sql) or die(mysqli_errno($conection));
+                                if (mysqli_num_rows(mysqli_query($conection, $sql)) > 0) {
+                                    $states = mysqli_query($conection, $sql);
+                                    while ($states1 = mysqli_fetch_array($states)) {
+
+
+                                ?>
+                                        <div class="right-block__offers offers">
+                                            <form method="post" class="rightForm">
+                                                <div class="offers__card card">
+                                                    <div class="card__row">
+                                                        <div class="card__img"><img src="../imgAppartments/announcement<?php echo $states1['ID'] . "/";
+                                                                                                                        echo $states1['photo1']; ?>" alt="Изображение"></div>
+                                                        <div class="card-info">
+                                                            <div class="card-info__row">
+                                                                <div class="card-info__item item__title"><?php echo $states1['Title']; ?></div>
+                                                                <div class="card-info__item item__price"><?php echo $states1['Cost']; ?> руб.</div>
+                                                            </div>
+                                                            <div class="card-info__room"><?php if ($states1['QuantityRoom'] == 0) {
+                                                                                                echo "Студия";
+                                                                                            } else {
+                                                                                                echo $states1['QuantityRoom'] . " комнт. ";
+                                                                                            } ?> <?php echo $states1['square']; ?>м²
+                                                                <?php echo $states1['Floor']; ?>/ <?php echo $states1['totalFloor']; ?> эт. </div>
+                                                            <div class="card-info__line">
+                                                                <div class="card-info__column item__metro"><?php echo $states1['Metro']; ?></div>
+                                                                <div class="card-info__column item__foot"><?php echo $states1['foot']; ?> минут пешком</div>
+                                                            </div>
+                                                            <div class="card-info__description">
+                                                                <?php echo $states1['Description']; ?>
+                                                            </div>
+                                                            <div class="card-info__btn">
+                                                                <?php
+                                                                echo "<input type = \"submit\" value = \"Посмотреть\" class=\"btn__buy\" name = \"$states1[ID]\">";
+                                                                if (isset($_POST[$states1['ID']])) {
+                                                                    $_SESSION['SelectArticle'] = $states1['ID'];
+                                                                    header("Location: ad.php");
+                                                                }
+                                                                ?>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                <?php
+                                    }
+                                }
+                                ?>
+                            </form>
+                            <?php
+                            pagination(page("", "Новостройка"), 'Новостройка');
+                            ?>
                         </div>
-                        <?php
-                            }
-                        }
-                        ?>
-                        </form>
                     </div>
                 </div>
-            </div>
-        </main>
-            <?php
+            </main>
+        <?php
+        } elseif ($_GET['type'] == "area") {
+        ?>
+            <main class="main">
+                <div class="main__container container">
+                    <div class="main__navigation">
+                        <a href="../index.php" class="navigation__link">Главная</a>
+                        <span class="navigation__arrow">></span>
+                        <a href="ads.php?type=area" class="navigation__link">Дома и участки</a>
+                    </div>
+                    <?php
+                    $sql = "SELECT *, (SELECT photo1 FROM photos WHERE announcementID=a.ID) as 'photo1' FROM announcement a WHERE typeRealty='Участок'";
+                    $queryCount = "SELECT COUNT(*) FROM announcement WHERE transaction='Участок'";
+
+                    if (!empty($_GET['priceStart'])) {
+                        $sql .= " and Cost>=" . $_GET['priceStart'];
+                        $queryCount .= " and Cost>=" . $_GET['priceStart'];
+                    }
+                    if (!empty($_GET['priceEnd'])) {
+                        $sql .= " and Cost<=" . $_GET['priceEnd'];
+                        $queryCount .= " and Cost<=" . $_GET['priceEnd'];
+                    }
+                    if (!empty($_GET['costd'])) {
+                        $sql .= " ORDER BY Cost " . $_GET['costd'] . " LIMIT 10";
+                        $queryCount .= " ORDER BY Cost " . $_GET['costd'] . " LIMIT 10";
+                    } else {
+                        $sql .= " ORDER BY Cost ASC LIMIT 10";
+                        $queryCount .= " ORDER BY Cost ASC LIMIT 10";
+                    }
+                    $quantity = mysqli_query($conection, $queryCount);
+                    $row = $quantity->fetch_row();
+                    $count = $row[0];
+                    ?>
+                    <div class="main__row">
+                        <div class="main__title">Участки</div>
+                        <div class="main__quantity"><?php if ($count % 10 == 1) {
+                                                        echo $count . " объявление";
+                                                    } elseif ($count % 10 > 1 and $count % 10 < 5) {
+                                                        echo $count . " объявления";
+                                                    } elseif ($count % 10 > 4) {
+                                                        echo $count . " объявлений";
+                                                    } ?></div>
+                    </div>
+                    <div class="main__ads ads">
+                        <aside class="left-blok">
+                            <form method="get">
+                                <div class="left-block__item">
+
+
+                                    <div class="left-block__item">
+                                        <div class="left-block__title">Стоимость</div>
+                                        <div class="left-block__cost">
+                                            <div class="cost-item">
+                                                <input type="text" placeholder="от 3млн." name="priceStart" id="">
+                                            </div>
+                                            <div class="cost-item">
+                                                <input type="text" placeholder="до 20млн." name="priceEnd" id="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type='submit' name="type" value="area" class="left-block__applybtn">Сохранить</button>
+                            </form>
+
+                        </aside>
+                        <div class="right-block">
+                            <form method="post">
+
+                                <?php
+                                $result = mysqli_query($conection, $sql) or die(mysqli_errno($conection));
+                                if (mysqli_num_rows(mysqli_query($conection, $sql)) > 0) {
+                                    $states = mysqli_query($conection, $sql);
+                                    while ($states1 = mysqli_fetch_array($states)) {
+
+
+                                ?>
+                                        <div class="right-block__offers offers">
+                                            <form method="post" class="rightForm">
+                                                <div class="offers__card card">
+                                                    <div class="card__row">
+                                                        <div class="card__img"><img src="../imgAppartments/announcement<?php echo $states1['ID'] . "/";
+                                                                                                                        echo $states1['photo1']; ?>" alt="Изображение"></div>
+                                                        <div class="card-info">
+                                                            <div class="card-info__row">
+                                                                <div class="card-info__item item__title"><?php echo $states1['Title']; ?></div>
+                                                                <div class="card-info__item item__price"><?php echo $states1['Cost']; ?> руб.</div>
+                                                            </div>
+                                                            <div class="card-info__room"><?php if ($states1['QuantityRoom'] != 0) {
+                                                                                                echo $states1['QuantityRoom'] . "  комнт. ";
+                                                                                            } ?> <?php echo $states1['square']; ?>м²
+                                                                <?php echo $states1['Floor']; ?>/ <?php echo $states1['totalFloor']; ?> эт. </div>
+                                                            <div class="card-info__line">
+
+                                                            </div>
+                                                            <div class="card-info__description">
+                                                                <?php echo $states1['Description']; ?>
+                                                            </div>
+                                                            <div class="card-info__btn">
+                                                                <?php
+                                                                echo "<input type = \"submit\" value = \"Посмотреть\" class=\"btn__buy\" name = \"$states1[ID]\">";
+                                                                if (isset($_POST[$states1['ID']])) {
+                                                                    $_SESSION['SelectArticle'] = $states1['ID'];
+                                                                    header("Location: ad.php");
+                                                                }
+                                                                ?>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                <?php
+                                    }
+                                }
+                                ?>
+                            </form>
+                            <?php
+                            pagination(page("", "Участок"), 'Участок');
+                            ?>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        <?php
         }
         ?>
         <footer class="footer">
@@ -879,7 +848,7 @@ if(!$conection->set_charset($charset)){
                     /
                     <span class="reg  notActive">Регистрация</span>
                 </div>
-                <input type="text" placeholder="Email" name="Email" class="input__form" required>
+                <input type="email" placeholder="Email" name="Email" class="input__form" required>
 
                 <input type="password" placeholder="Пароль" name="psw" class="input__form" required>
 
@@ -900,8 +869,8 @@ if(!$conection->set_charset($charset)){
                     <span class="reg">Регистрация</span>
                 </div>
                 <input type="text" placeholder="Имя" name="Name" class="input__form" required>
-                <input type="text" placeholder="Email" name="Email" class="input__form" required>
-                <input type="text" placeholder="Номер телефона" name="Number" class="input__form" required>
+                <input type="email" placeholder="Email" name="Email" class="input__form" required>
+                <input type="text" placeholder="Номер телефона" name="Number" class="input__form" id="phone" pattern="[\+]\d{1}\s[\(]\d{3}[\)]\s\d{3}[\-]\d{2}[\-]\d{2}" minlength="18" maxlength="18" required>
 
                 <input type="password" placeholder="Пароль" name="psw" class="input__form" required>
                 <input type="password" placeholder="Повторите пароль" name="psw2" class="input__form" required>
@@ -940,69 +909,137 @@ if(!$conection->set_charset($charset)){
             if (password_verify($pass, $row['Pass'])) {
                 $nameTable = "SELECT Name FROM `users` WHERE `Mail` = '$mail'";
                 $text = mysqli_fetch_array(mysqli_query($link, $nameTable));
-                $_SESSION['Id']=$row['ID'];
+                $_SESSION['Id'] = $row['ID'];
                 $_SESSION['Name'] = $text[0];
-                header('Location: ads.php?type='.$_GET['type'].'&room='.$_GET['room'].'&metro='.$_GET['metro'].'&priceStart='.$_GET['priceStart'].'&priceEnd='.$_GET['priceEnd']);
+                header('Location: ads.php?type=' . $_GET['type'] . '&room=' . $_GET['room'] . '&metro=' . $_GET['metro'] . '&priceStart=' . $_GET['priceStart'] . '&priceEnd=' . $_GET['priceEnd']);
             } else {
                 echo "<script>alert('Неверный логин и/или пароль')</script>";
                 echo "<meta http-equiv='refresh' content='0; url=http://high-tower/pages/ads.php'>";
             }
         }
-    
-}
+    }
 
-if (isset($_POST['regist'])) {
-    $name = $_POST['Name'];
-    $mail = $_POST['Email'];
-    $phone = $_POST['Number'];
-    $pass = $_POST['psw'];
-    $repPass = $_POST['psw2'];
-    $hash = password_hash($_POST['psw'], PASSWORD_BCRYPT);
-    $key = "GDSHG4385743HGSDHdkfgjdfk4653475JSGHDJSDSKJDF476354";
+    if (isset($_POST['regist'])) {
+        $name = $_POST['Name'];
+        $mail = $_POST['Email'];
+        $phone = $_POST['Number'];
+        $pass = $_POST['psw'];
+        $repPass = $_POST['psw2'];
+        $hash = password_hash($_POST['psw'], PASSWORD_BCRYPT);
+        $key = "GDSHG4385743HGSDHdkfgjdfk4653475JSGHDJSDSKJDF476354";
 
-    // error_reporting(0);
-    header('Content-Type: text/html; charset=utf-8');
-    $link = mysqli_connect('127.0.0.1', 'root', '', 'dbhightower');
-    if (strpos($mail, "@") !== false) {
-
-        if (strlen($pass) > 4) {
-
-            if ($pass == $repPass){
-                if (empty($_POST['Name']) || empty($_POST['Email']) || empty($_POST['psw']) || empty($_POST['psw2']) || empty($_POST['Number'])) {
-                    echo "<script>alert('Заполните все поля!')</script>";
-                    echo "<meta http-equiv='refresh' content='0; url=http://high-tower/pages/ads.php'>";
+        // error_reporting(0);
+        header('Content-Type: text/html; charset=utf-8');
+        $link = mysqli_connect('127.0.0.1', 'root', '', 'dbhightower');
+        if ($pass == $repPass) {
+            if (empty($_POST['Name']) || empty($_POST['Email']) || empty($_POST['psw']) || empty($_POST['psw2']) || empty($_POST['Number'])) {
+                echo "<script>alert('Заполните все поля!')</script>";
+                echo "<meta http-equiv='refresh' content='0; url=http://high-tower/pages/ads.php?type=rent'>";
+            } else {
+                $queryMail = "SELECT * FROM `users` WHERE `Mail` = '$mail'";
+                $tempMail = mysqli_query($link, $queryMail);
+                if (mysqli_num_rows($tempMail) > 0) {
+                    echo "<script>alert('Данная почта привязана к другому аккаунту!')</script>";
+                    echo "<meta http-equiv='refresh' content='0; url=http://high-tower/pages/ads.php?type=rent'>";
                 } else {
-                    $queryMail = "SELECT * FROM `users` WHERE `Mail` = '$mail'";
-                    $tempMail = mysqli_query($link, $queryMail);
-                    if (mysqli_num_rows($tempMail) > 0) {
-                        echo "<script>alert('Данная почта привязана к другому аккаунту!')</script>";
-                        echo "<meta http-equiv='refresh' content='0; url=http://high-tower/pages/ads.php'>";
+                    $query = "INSERT INTO `users` (Name, Mail, Pass, NumberPhone) VALUE ('$name', '$mail', '$hash', '$phone')";
+                    if (mysqli_query($link, $query)) {
+                        echo "<script>alert('Пользователь успешно добавлен')</script>";
+                        echo "<meta http-equiv='refresh' content='0; url=http://high-tower/pages/ads.php?type=rent'>";
                     } else {
-                        $query = "INSERT INTO `users` (Name, Mail, Pass, NumberPhone) VALUE ('$name', '$mail', '$hash', '$phone')";
-                        if (mysqli_query($link, $query)) {
-                            echo "<script>alert('Пользователь успешно добавлен')</script>";
-                            echo "<meta http-equiv='refresh' content='0; url=http://high-tower/pages/ads.php'>";
-                        } else {
-                            echo "Пользователь не добавлен и за ошибки: " . mysqli_error($link);
-                        }
+                        echo "Пользователь не добавлен и за ошибки: " . mysqli_error($link);
                     }
                 }
-            }else{
-                    echo "<script>alert('Пароли не совпадают')</script>";
-                }
-        }else{
-            echo "<script>alert('Пароли меньше 4')</script>";
+            }
+        } else {
+            echo "<script>alert('Пароли не совпадают')</script>";
         }
-    }else{
-        echo "<script>alert('Почта введена неправильно')</script>";
-    }         
-}
-?>
+    }
+    ?>
     <script src="../js/entry.js"></script>
     <script src="../js/hList.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="../js/menu.js"></script> 
+    <script src="../js/menu.js"></script>
     <script src="../js/select.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery.maskedinput@1.4.1/src/jquery.maskedinput.min.js" type="text/javascript"></script>
+    <script src="../js/phone.js"></script>
 </body>
+<?php
+function page($transact, $type)
+{
+    $link = new mysqli("127.0.0.1", "root", "", "dbhightower");
+    if ($type == 'Новостройка') {
+        $sq = "SELECT COUNT(*) FROM announcement WHERE typeRealty='Новостройка' order by Cost ";
+        if ($res = $link->query($sq)) {
+            $res = $res->fetch_assoc();
+            $res = ceil($res['COUNT(*)'] / 10);
+        }
+    } elseif ($type == 'Участок') {
+        $sq = "SELECT COUNT(*) FROM announcement WHERE typeRealty='Участок' order by Cost ";
+        if ($res = $link->query($sq)) {
+            $res = $res->fetch_assoc();
+            $res = ceil($res['COUNT(*)'] / 10);
+        }
+    } elseif ($type != 'Участок') {
+        $sq = "SELECT COUNT(*) FROM announcement WHERE transaction='" . $transact . "' AND typeRealty!='Участок' ";
+        if (!empty($_GET['room'])) {
+            $rooms = $_GET['room'];
+            if (is_array($rooms)) { //проверка на массив
+                $sq .= " and(";
+                $i = 0;
+                foreach ($rooms as $room) { //перебор массива комнат
+                    if ($i == 0) {
+                        $sq .= " QuantityRoom=" . $room;
+                    } else {
+                        $sq .= " OR QuantityRoom=" . $room;
+                    }
+                    $i++;
+                }
+                $sq .= ")";
+            } else {
+                $sq .= ' and QuantityRoom=' . $rooms;
+            }
+        }
+        if (!empty($_GET['metro'])) {
+            $sq .= " and Metro='" . $_GET['metro'] . "'";
+        }
+        if (!empty($_GET['priceStart'])) {
+            $sq .= " and Cost>=" . $_GET['priceStart'];
+        }
+        if (!empty($_GET['priceEnd'])) {
+            $sq .= " and Cost<=" . $_GET['priceEnd'];
+        }
+        if ($res = $link->query($sq)) {
+            $res = $res->fetch_assoc();
+            $res = ceil($res['COUNT(*)'] / 10);
+        }
+    }
+    return $res;
+}
+function pagination($pages, $type)
+{
+    if ($type == " Продажа") {
+        for ($i = 0; $i < $pages; $i++) {
+            echo '<a href="ads.php?type=sale&metro=' . $_GET['metro'] . '&priceStart=0
+            &priceEnd=' . $_GET['priceEnd'] . '&p=' . $i . '">' . ($i + 1) . " " . '</a>';
+        }
+    } elseif ($type == " Аренда") {
+        for ($i = 0; $i < $pages; $i++) {
+            echo '<a href="ads.php?type=rent&metro=' . $_GET['metro'] . '&priceStart=0
+            &priceEnd=' . $_GET['priceEnd'] . '&p=' . $i . '">' . ($i + 1) . " " . '</a>';
+        }
+    } elseif ($type == "Новостройка") {
+        for ($i = 0; $i < $pages; $i++) {
+            echo '<a href="ads.php?type=NewBuildings&metro=' . $_GET['metro'] . '&priceStart=0
+            &priceEnd=' . $_GET['priceEnd'] . '&p=' . $i . '">' . ($i + 1) . " " . '</a>';
+        }
+    } elseif ($type == "Участок") {
+        for ($i = 0; $i < $pages; $i++) {
+            echo '<a href="ads.php?type=area&metro=' . $_GET['metro'] . '&priceStart=0
+            &priceEnd=' . $_GET['priceEnd'] . '&p=' . $i . '">' . ($i + 1) . " " . '</a>';
+        }
+    }
+}
+?>
 
 </html>

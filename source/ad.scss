@@ -9,6 +9,7 @@ $opacity: .7;
     width: 100%;
     overflow: hidden;
 }
+
 .header {
     width: 100%;
     padding: 15px 0;
@@ -18,7 +19,8 @@ $opacity: .7;
     left: 0;
     z-index: 50;
 }
-.header::before{
+
+.header::before {
     content: '';
     position: absolute;
     top: 0;
@@ -28,6 +30,7 @@ $opacity: .7;
     background-color: #fff;
     z-index: 3;
 }
+
 .container {
     max-width: 1140px;
     margin: 0 auto;
@@ -46,6 +49,7 @@ $opacity: .7;
     align-items: center;
     justify-content: space-between;
 }
+
 .header__logo {
     font-size: 25px;
     font-family: "Roboto";
@@ -53,29 +57,36 @@ $opacity: .7;
     position: relative;
     z-index: 5;
     transition: all .3s ease 0s;
-    &:hover{
+
+    &:hover {
         color: #303030;
     }
 }
-.header__menu{
+
+.header__menu {
     flex: 0 1 75%;
     justify-content: space-between;
     display: flex;
     align-items: center;
     z-index: 5;
 }
+
 .header__nav {
     font-size: 20px;
     font-family: "Roboto";
     font-weight: 300;
     display: flex;
     margin-right: 16px;
-    & a{
+
+    & a {
         transition: all .3s ease 0s;
-        &:hover{
+
+        &:hover {
             color: #303030;
-        }}
+        }
+    }
 }
+
 .nav-btn {
     margin-right: 40px;
 }
@@ -94,7 +105,8 @@ $opacity: .7;
     color: white;
     position: relative;
     transition: all .3s ease 0s;
-    &:hover{
+
+    &:hover {
         color: #303030;
         opacity: 1;
     }
@@ -157,7 +169,8 @@ $opacity: .7;
     font-family: "Roboto";
     font-weight: 300;
     transition: all .3s ease 0s;
-    &:hover{
+
+    &:hover {
         color: #303030;
     }
 }
@@ -179,9 +192,11 @@ $opacity: .7;
     line-height: 18px;
     padding: 16px 0 24px 0;
 }
+
 .navigation__link {
     transition: all .3s ease 0s;
-    &:hover{
+
+    &:hover {
         color: #303030;
     }
 }
@@ -220,18 +235,22 @@ $opacity: .7;
     width: 28px;
     height: 23px;
 }
-.slider{
+
+.slider {
     position: relative;
     margin: auto;
     margin-bottom: 15px;
 }
+
 .slider .left-block__img img {
     object-fit: cover;
     width: 100%;
     border: none !important;
     box-shadow: none !important;
 }
-.slider .prev, .slider .next {
+
+.slider .prev,
+.slider .next {
     cursor: pointer;
     position: absolute;
     top: 0;
@@ -245,20 +264,24 @@ $opacity: .7;
     transition: 0.6s ease;
     border-radius: 0 3px 3px 0;
 }
+
 .slider .next {
     right: 0;
     border-radius: 3px 0 0 3px;
 }
+
 /* При наведении на кнопки добавляем фон кнопок */
 .slider .prev:hover,
 .slider .next:hover {
     background-color: rgba(0, 0, 0, 0.8);
 }
+
 /* Кружочки */
 .slider-dots {
     text-align: center;
 }
-.slider-dots_item{
+
+.slider-dots_item {
     cursor: pointer;
     height: 12px;
     width: 12px;
@@ -268,10 +291,12 @@ $opacity: .7;
     display: inline-block;
     transition: background-color 0.6s ease;
 }
+
 .active,
 .slider-dots_item:hover {
     background-color: #aaa;
 }
+
 /* Анимация слайдов */
 .slider .item {
     -webkit-animation-name: fade;
@@ -279,10 +304,12 @@ $opacity: .7;
     animation-name: fade;
     animation-duration: 1.5s;
 }
+
 .left-block__img {
     margin-bottom: 16px;
     width: 100%;
     height: 384px;
+
     & img {
         vertical-align: top;
         object-fit: cover;
@@ -457,10 +484,12 @@ $opacity: .7;
 .map__container {
     padding: 14px 8px;
 }
-#map{
+
+#map {
     width: 100%;
     height: 350px;
 }
+
 .right-block {
     margin-left: 16px;
     background: #FFFFFF;
@@ -503,11 +532,13 @@ $opacity: .7;
     margin: 24px 0;
     text-align: center;
     transition: all .3s ease 0s;
-    &:hover{
+
+    &:hover {
         color: #303030;
     }
 }
-.right-block__numberPhone{
+
+.right-block__numberPhone {
     display: none;
     font-family: "Roboto";
     font-style: normal;
@@ -517,6 +548,7 @@ $opacity: .7;
     color: #000000;
     padding-bottom: 16px;
 }
+
 .right-block__name {
     font-family: 'Roboto';
     font-style: normal;
@@ -561,6 +593,7 @@ $opacity: .7;
     color: #000000;
 
 }
+
 .right-block__time {
     font-family: 'Roboto';
     font-style: normal;
@@ -593,12 +626,15 @@ $opacity: .7;
 .footer__column {}
 
 .footer__item {}
+
 .footer__item a {
     color: #fff;
 }
+
 .footer__item li {
     padding: 0 0 8px 0;
 }
+
 .column__title {
     font-size: 29px;
     font-family: "Roboto";
@@ -642,8 +678,7 @@ input {
 }
 
 /* Full-width input fields */
-input[type=text],
-input[type=password] {
+.input__form {
     width: 100%;
     padding: 12px 20px;
     display: inline-block;
@@ -653,6 +688,8 @@ input[type=password] {
     font-size: 22px;
     font-family: "Roboto";
     font-weight: 300;
+    margin-bottom: 16px;
+
 }
 
 /* Set a style for all buttons */
@@ -784,36 +821,44 @@ button:hover {
         transform: scale(1)
     }
 }
+
 @media(max-width: 1200px) {
     .container {
         max-width: 900px;
         margin: 0 auto;
         padding: 0 16px;
     }
+
     .header__nav {
         align-items: center;
     }
 
 }
+
 @media(max-width: 767px) {
-    .announcement__row{
+    .announcement__row {
         display: block;
     }
-    .right-block{
+
+    .right-block {
         margin: 16px 0 0;
     }
-    .right-block__cotact{
+
+    .right-block__cotact {
         width: 45%;
     }
-    body.lock{
+
+    body.lock {
         overflow: hidden;
     }
-    .header__burger{
+
+    .header__burger {
         display: block;
         position: relative;
         width: 30px;
         height: 20px;
-        & span{
+
+        & span {
             background-color: #000;
             position: absolute;
             left: 0;
@@ -822,15 +867,18 @@ button:hover {
             top: 9px;
             transition: all 0.3s ease 0s;
         }
+
         position: relative;
         z-index: 6;
     }
-    .menu__button{
+
+    .menu__button {
         margin-top: 16px;
         font-weight: 400;
     }
+
     .header__burger::before,
-    .header__burger::after{
+    .header__burger::after {
         content: '';
         background-color: #000;
         position: absolute;
@@ -839,20 +887,25 @@ button:hover {
         left: 0;
         transition: all 0.3s ease 0s;
     }
-    .header__burger::before{
+
+    .header__burger::before {
         top: 0;
     }
-    .header__burger::after{
+
+    .header__burger::after {
         bottom: 0;
     }
-    .header__nav{
+
+    .header__nav {
         display: block;
-        & a{
+
+        & a {
             display: block;
             margin-bottom: 8px;
         }
     }
-    .header__menu{
+
+    .header__menu {
         position: fixed;
         top: -100%;
         left: 0;
@@ -864,45 +917,55 @@ button:hover {
         transition: all 0.3s ease 0s;
         overflow: auto;
     }
-    .header__menu.active{
+
+    .header__menu.active {
         top: 0;
     }
-    .header__burger.active{
-        & span{
+
+    .header__burger.active {
+        & span {
             transform: scale(0);
         }
     }
-    .header__burger.active::before{
+
+    .header__burger.active::before {
         transform: rotate(45deg);
         top: 9px;
     }
-    .header__burger.active::after{
+
+    .header__burger.active::after {
         transform: rotate(-45deg);
         bottom: 9px;
     }
+
     .announcement__navigation {
         font-size: 12px;
         padding: 13px 0 16px 0;
     }
-    .announcement{
+
+    .announcement {
         padding: 56px 0 64px 0;
     }
 }
+
 @media(max-width: 576px) {
-    
-    .right-block__cotact{
+
+    .right-block__cotact {
         width: 100%;
     }
-    .params__row{
+
+    .params__row {
         flex-wrap: wrap;
         align-items: center;
 
     }
+
     .characteristic-li span:first-child {
         flex: 1 1 50%;
         max-width: 121px;
-                margin-right: 16px;
+        margin-right: 16px;
     }
+
     .modal-content {
         width: 90%;
     }
@@ -912,9 +975,11 @@ button:hover {
     .h2__enter {
         margin-bottom: 18px;
     }
+
     .btn__submit {
         margin-top: 8px;
     }
+
     .container1 {
         padding: 32px 34px 50px;
     }

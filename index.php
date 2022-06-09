@@ -1,14 +1,14 @@
 <?php
 ob_start();
 session_start();
-$server= "127.0.0.1";
-$username='root';
-$password='';
-$db='dbhightower';
-$charset='utf8';
+$server = "127.0.0.1";
+$username = 'root';
+$password = '';
+$db = 'dbhightower';
+$charset = 'utf8';
 
-$conection=new mysqli($server, $username, $password, $db);
-if(!$conection->set_charset($charset)){
+$conection = new mysqli($server, $username, $password, $db);
+if (!$conection->set_charset($charset)) {
     echo "charset err";
 }
 ?>
@@ -41,18 +41,18 @@ if(!$conection->set_charset($charset)){
                             <a href="pages/ads.php?type=NewBuildings" class="nav-btn">Новостройки</a>
                             <a href="pages/ads.php?type=area" class="nav-btn">Дома и участки</a>
                         </nav>
-                    <?php
-                    if (!isset($_SESSION['Name'])) { ?>
-                        <button class="header__btn">Войти</button>
+                        <?php
+                        if (!isset($_SESSION['Name'])) { ?>
+                            <button class="header__btn">Войти</button>
                     </div>
-                    
-                    <?php
-                } else{
-                    ?>
+
+                <?php
+                        } else {
+                ?>
                     <div class="header__hi">
                         <div class="menu">
                             <button class="menu__button" type="button">
-                                <span>Привет, <?php echo $_SESSION['Name'];?></span>
+                                <span>Привет, <?php echo $_SESSION['Name']; ?></span>
                             </button>
                             <ul hidden class="menu__list">
                                 <li><a href="pages/adding.php" class="menu__link">Разместить объявление</a></li>
@@ -63,16 +63,16 @@ if(!$conection->set_charset($charset)){
                                 </li>
                             </ul>
                         </div>
-                        
+
                         <?php
-                            if(isset($_POST['exit'])){
+                            if (isset($_POST['exit'])) {
                                 $_SESSION = [];
                                 header('Location: index.php');
                             }
                         ?>
                     </div>
                 <?php
-                }
+                        }
                 ?>
                 </div>
             </div>
@@ -85,55 +85,54 @@ if(!$conection->set_charset($charset)){
                 <div class="search__title">Квартира вашей мечты</div>
                 <div class="search__content">
                     <form method="get" action="pages/ads.php">
-                    <div class="search__row">
-                        <div class="row__column1">
-                            <div class="column1">
-                                <select class="row__apart row-item" name="type">
-                                <option value="rent">Аренда</option>
-                                <option value="sale">Продажа</option>
-                                <option value="NewBuildings">Новостройку</option>
-                                <option value="area">Дом и участок</option>
-                            </select>
-                            <select class="row__room row-item" name="room">
-                                <option value="0">Студия</option>
-                                <option value="1">1 команат</option>
-                                <option value="2">2 команат</option>
-                                <option value="3">3 команат</option>
-                                <option value="4">4 команат</option>
-                            </select>
-                            </div>
-                            <div class="column2">
-                                <select class="row__dist row-item" name="metro">
-                                <option value="Алексеевская">Алексеевская</option>
-                                <option value="Бауманская">Бауманская</option>
-                                <option value="Войковская">Войковская</option>
-                                <option value="Коломенская">Коломенская</option>
-                                <option value="Лефортово">Лефортово</option>
-                                <option value="Ховрино">Ховрино</option>
-                                <option value="Новокосино">Новокосино</option>
-                                <option value="Щелковская">Щелковская</option>
-                            </select>
-                            <div class="cost-btn  row-item">
-                                <button type="button" class="btn-cost noHover" value="">Стоимость</button>
-                                <div class="cost__inputs">
-                                    <div class="cost__row">
-                                        <div class="cost__item">
-                                            <input type="text" placeholder="От" name="priceStart" value="0" class="cost__from input__cost">
-                                        </div>
-                                        <div class="cost__item">
-                                            <input type="text" placeholder="До" name="priceEnd" value="99999999" class="cost__to input__cost">
+                        <div class="search__row">
+                            <div class="row__column1">
+                                <div class="column1">
+                                    <select class="row__apart row-item" name="type">
+                                        <option value="rent">Аренда</option>
+                                        <option value="sale">Продажа</option>
+                                        <option value="NewBuildings">Новостройку</option>
+                                    </select>
+                                    <select class="row__room row-item" name="room">
+                                        <option value="0">Студия</option>
+                                        <option value="1">1 команат</option>
+                                        <option value="2">2 команат</option>
+                                        <option value="3">3 команат</option>
+                                        <option value="4">4 команат</option>
+                                    </select>
+                                </div>
+                                <div class="column2">
+                                    <select class="row__dist row-item" name="metro">
+                                        <?php
+                                        $queryBuy = "SELECT name FROM metroList";
+                                        $mysqli_query = mysqli_query($conection, $queryBuy);
+                                        while ($states1 = mysqli_fetch_array($mysqli_query)) { ?>
+                                            <option value="<?= $states1['name']; ?>"><?= $states1['name']; ?></option>
+                                        <?php
+                                        }
+                                        ?>
+                                    </select>
+                                    <div class="cost-btn  row-item">
+                                        <button type="button" class="btn-cost noHover" value="">Стоимость</button>
+                                        <div class="cost__inputs">
+                                            <div class="cost__row">
+                                                <div class="cost__item">
+                                                    <input type="text" placeholder="От" name="priceStart" value="0" class="cost__from input__cost">
+                                                </div>
+                                                <div class="cost__item">
+                                                    <input type="text" placeholder="До" name="priceEnd" value="99999999" class="cost__to input__cost">
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
+                            <div class="row__column2">
+                                <input type="submit" value="Найти" class="btn__search" />
                             </div>
-                            
                         </div>
-                        <div class="row__column2">
-                            <input type="submit" value="Найти" class="btn__search"/>
-                        </div>
-                    </div>
-                </form>
+                    </form>
                 </div>
             </div>
 
@@ -145,53 +144,56 @@ if(!$conection->set_charset($charset)){
                     <div class="offers">
                         <div class="offer__row">
                             <?php
-                                $queryBuy= "SELECT *, (SELECT photo1 FROM photos WHERE announcementID=a.ID) as 'photo1'
-                                FROM announcement a WHERE transaction=' Продажа' ORDER BY ID DESC LIMIT 8";
-                                mysqli_query($conection, $queryBuy) or die(mysqli_errno($conection));
-                                $mysqli_query=mysqli_query($conection,$queryBuy); 
-                                $i=0;
-                                while($states1=mysqli_fetch_array($mysqli_query)) {  
-                                    
-                                    if($i<2){                
-                             ?>
-                            <div class="offer__column">
-                                <div class="offer__item">
-                                    <div class="offer__img"><img src="/imgAppartments/announcement<?php echo $states1['ID']."/"; echo $states1['photo1']; ?>" alt=""></div>
-                                    <div class="offer__content">
-                                        <div class="offer__title title"><a href="pages/ad.php?selectedArticle=<?php echo $states1['ID']; ?>"><?php echo $states1['Title']; ?></a></div>
-                                        <div class="offer__cost cost"><?php echo $states1['Cost']; ?> рублей</div>
-                                        <div class="location__row">
-                                            <div class="location__metro metro">Метро <?php echo $states1['Metro']; ?></div>
-                                            <div class="location__foot foot"><?php echo $states1['foot']; ?> минут от метро</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        <?php
-                                    }elseif($i==3){
-                                    ?>
-                                    
+                            $queryBuy = "SELECT *, (SELECT photo1 FROM photos WHERE announcementID=a.ID) as 'photo1'
+                                FROM announcement a WHERE transaction=' Продажа' AND typeRealty!='Участок' ORDER BY ID DESC LIMIT 8";
+                            mysqli_query($conection, $queryBuy) or die(mysqli_errno($conection));
+                            $mysqli_query = mysqli_query($conection, $queryBuy);
+                            $i = 0;
+                            while ($states1 = mysqli_fetch_array($mysqli_query)) {
+
+                                if ($i < 2) {
+                            ?>
                                     <div class="offer__column">
-                                <div class="offer__item">
-                                    <div class="offer__img"><img src="/imgAppartments/announcement<?php echo $states1['ID']."/"; echo $states1['photo1']; ?>" alt=""></div>
-                                    <div class="offer__content">
-                                        <div class="offer__title title"><a href="pages/ad.php?selectedArticle=<?php echo $states1['ID']; ?>"><?php echo $states1['Title']; ?></a></div>
-                                        <div class="offer__cost cost"><?php echo $states1['Cost']; ?> рублей</div>
-                                        <div class="location__row">
-                                            <div class="location__metro metro">Метро <?php echo $states1['Metro']; ?></div>
-                                            <div class="location__foot foot"><?php echo $states1['foot']; ?> минут от метро</div>
+                                        <div class="offer__item">
+                                            <div class="offer__img"><img src="/imgAppartments/announcement<?php echo $states1['ID'] . "/";
+                                                                                                            echo $states1['photo1']; ?>" alt=""></div>
+                                            <div class="offer__content">
+                                                <div class="offer__title title"><a href="pages/ad.php?selectedArticle=<?php echo $states1['ID']; ?>"><?php echo $states1['Title']; ?></a></div>
+                                                <div class="offer__cost cost"><?php echo $states1['Cost']; ?> рублей</div>
+                                                <div class="location__row">
+                                                    <div class="location__metro metro">Метро <?php echo $states1['Metro']; ?></div>
+                                                    <div class="location__foot foot"><?php echo $states1['foot']; ?> минут от метро</div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                            <div class="offer__row">
                                 <?php
-                                    } else{
+                                } elseif ($i == 3) {
+                                ?>
+
+                                    <div class="offer__column">
+                                        <div class="offer__item">
+                                            <div class="offer__img"><img src="/imgAppartments/announcement<?php echo $states1['ID'] . "/";
+                                                                                                            echo $states1['photo1']; ?>" alt=""></div>
+                                            <div class="offer__content">
+                                                <div class="offer__title title"><a href="pages/ad.php?selectedArticle=<?php echo $states1['ID']; ?>"><?php echo $states1['Title']; ?></a></div>
+                                                <div class="offer__cost cost"><?php echo $states1['Cost']; ?> рублей</div>
+                                                <div class="location__row">
+                                                    <div class="location__metro metro">Метро <?php echo $states1['Metro']; ?></div>
+                                                    <div class="location__foot foot"><?php echo $states1['foot']; ?> минут от метро</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                        </div>
+                        <div class="offer__row">
+                        <?php
+                                } else {
                         ?>
                             <div class="offer__column">
                                 <div class="offer__item">
-                                    <div class="offer__img"><img src="/imgAppartments/announcement<?php echo $states1['ID']."/"; echo $states1['photo1']; ?>" alt=""></div>
+                                    <div class="offer__img"><img src="/imgAppartments/announcement<?php echo $states1['ID'] . "/";
+                                                                                                    echo $states1['photo1']; ?>" alt=""></div>
                                     <div class="offer__content">
                                         <div class="offer__title title"><a href="pages/ad.php?selectedArticle=<?php echo $states1['ID']; ?>"><?php echo $states1['Title']; ?></a></div>
                                         <div class="offer__cost cost"><?php echo $states1['Cost']; ?> рублей</div>
@@ -202,14 +204,14 @@ if(!$conection->set_charset($charset)){
                                     </div>
                                 </div>
                             </div>
-                            
-                        
-                        <?php
-                                    }
-                        $i++;
+
+
+                    <?php
                                 }
-                        ?>
-                    </div>
+                                $i++;
+                            }
+                    ?>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -220,53 +222,57 @@ if(!$conection->set_charset($charset)){
                     <a href="/pages/ads.php?type=rent" class="rent__logo logo">Арендовать квартиру</a>
                     <div class="offers">
                         <div class="offer__row">
-                        <?php
-                                $queryBuy= "SELECT *, (SELECT photo1 FROM photos WHERE announcementID=a.ID) as 'photo1' FROM announcement a WHERE transaction=' Аренда' ORDER BY ID DESC LIMIT 8";
-                                mysqli_query($conection, $queryBuy) or die(mysqli_errno($conection));
-                                $mysqli_query=mysqli_query($conection,$queryBuy); 
-                                $i=0;
-                                while($states1=mysqli_fetch_array($mysqli_query)) {  
-                                    
-                                    if($i<2){                
-                             ?>
-                            <div class="offer__column">
-                                <div class="offer__item">
-                                    <div class="offer__img"><img src="/imgAppartments/announcement<?php echo $states1['ID']."/"; echo $states1['photo1']; ?>" alt=""></div>
-                                    <div class="offer__content">
-                                        <div class="offer__title title"><a href="pages/ad.php?selectedArticle=<?php echo $states1['ID']; ?>"><?php echo $states1['Title']; ?></a></div>
-                                        <div class="offer__cost cost"><?php echo $states1['Cost']; ?> рублей</div>
-                                        <div class="location__row">
-                                            <div class="location__metro metro">Метро <?php echo $states1['Metro']; ?></div>
-                                            <div class="location__foot foot"><?php echo $states1['foot']; ?> минут от метро</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        <?php
-                                    }elseif($i==3){
-                                    ?>
-                                    
+                            <?php
+                            $queryBuy = "SELECT *, (SELECT photo1 FROM photos WHERE announcementID=a.ID) as 'photo1' 
+                            FROM announcement a WHERE transaction=' Аренда' AND typeRealty!='Участок' ORDER BY ID DESC LIMIT 8";
+                            mysqli_query($conection, $queryBuy) or die(mysqli_errno($conection));
+                            $mysqli_query = mysqli_query($conection, $queryBuy);
+                            $i = 0;
+                            while ($states1 = mysqli_fetch_array($mysqli_query)) {
+
+                                if ($i < 2) {
+                            ?>
                                     <div class="offer__column">
-                                <div class="offer__item">
-                                    <div class="offer__img"><img src="/imgAppartments/announcement<?php echo $states1['ID']."/"; echo $states1['photo1']; ?>" alt=""></div>
-                                    <div class="offer__content">
-                                        <div class="offer__title title"><a href="pages/ad.php?selectedArticle=<?php echo $states1['ID']; ?>"><?php echo $states1['Title']; ?></a></div>
-                                        <div class="offer__cost cost"><?php echo $states1['Cost']; ?> рублей</div>
-                                        <div class="location__row">
-                                            <div class="location__metro metro">Метро <?php echo $states1['Metro']; ?></div>
-                                            <div class="location__foot foot"><?php echo $states1['foot']; ?> минут от метро</div>
+                                        <div class="offer__item">
+                                            <div class="offer__img"><img src="/imgAppartments/announcement<?php echo $states1['ID'] . "/";
+                                                                                                            echo $states1['photo1']; ?>" alt=""></div>
+                                            <div class="offer__content">
+                                                <div class="offer__title title"><a href="pages/ad.php?selectedArticle=<?php echo $states1['ID']; ?>"><?php echo $states1['Title']; ?></a></div>
+                                                <div class="offer__cost cost"><?php echo $states1['Cost']; ?> рублей</div>
+                                                <div class="location__row">
+                                                    <div class="location__metro metro">Метро <?php echo $states1['Metro']; ?></div>
+                                                    <div class="location__foot foot"><?php echo $states1['foot']; ?> минут от метро</div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                            <div class="offer__row">
                                 <?php
-                                    } else{
+                                } elseif ($i == 3) {
+                                ?>
+
+                                    <div class="offer__column">
+                                        <div class="offer__item">
+                                            <div class="offer__img"><img src="/imgAppartments/announcement<?php echo $states1['ID'] . "/";
+                                                                                                            echo $states1['photo1']; ?>" alt=""></div>
+                                            <div class="offer__content">
+                                                <div class="offer__title title"><a href="pages/ad.php?selectedArticle=<?php echo $states1['ID']; ?>"><?php echo $states1['Title']; ?></a></div>
+                                                <div class="offer__cost cost"><?php echo $states1['Cost']; ?> рублей</div>
+                                                <div class="location__row">
+                                                    <div class="location__metro metro">Метро <?php echo $states1['Metro']; ?></div>
+                                                    <div class="location__foot foot"><?php echo $states1['foot']; ?> минут от метро</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                        </div>
+                        <div class="offer__row">
+                        <?php
+                                } else {
                         ?>
                             <div class="offer__column">
                                 <div class="offer__item">
-                                    <div class="offer__img"><img src="/imgAppartments/announcement<?php echo $states1['ID']."/"; echo $states1['photo1']; ?>" alt=""></div>
+                                    <div class="offer__img"><img src="/imgAppartments/announcement<?php echo $states1['ID'] . "/";
+                                                                                                    echo $states1['photo1']; ?>" alt=""></div>
                                     <div class="offer__content">
                                         <div class="offer__title title"><a href="pages/ad.php?selectedArticle=<?php echo $states1['ID']; ?>"><?php echo $states1['Title']; ?></a></div>
                                         <div class="offer__cost cost"><?php echo $states1['Cost']; ?> рублей</div>
@@ -277,13 +283,13 @@ if(!$conection->set_charset($charset)){
                                     </div>
                                 </div>
                             </div>
-                            
-                        
-                        <?php
-                                    }
-                        $i++;
+
+
+                    <?php
                                 }
-                        ?>
+                                $i++;
+                            }
+                    ?>
                         </div>
                     </div>
                 </div>
@@ -336,7 +342,7 @@ if(!$conection->set_charset($charset)){
                 <div class="about__content">
                     <div class="about__logo logo">Агенство недвижимости High Tower</div>
                     <div class="about__text">
-                        <p> Ищете надежные квартиры в Москве? Обратитесь в к нам. Мы предоставляем все 
+                        <p> Ищете надежные квартиры в Москве? Обратитесь в к нам. Мы предоставляем все
                             типы объявлений начиная от продажи заканчивая арендой. Мы оказывает услуги на рынке с 2022 года.</p>
 
                         <p> Наш сайт позволяет удобно выбирать квартиры. С нашей помощью вы можете осуществить поиск и регистрацию недвижимости.</p>
@@ -415,10 +421,10 @@ if(!$conection->set_charset($charset)){
                     <span class="reg">Регистрация</span>
                 </div>
                 <input type="text" placeholder="Имя" name="Name" class="input__form" required>
-                <input type="text" placeholder="Email" name="Email" class="input__form" required>
-                <input type="text" placeholder="Номер телефона" name="Number" class="input__form" required>
+                <input type="email" placeholder="Email" name="Email" class="input__form" required>
+                <input type="text" placeholder="Номер телефона" name="Number" class="input__form" id="phone" pattern="[\+]\d{1}\s[\(]\d{3}[\)]\s\d{3}[\-]\d{2}[\-]\d{2}" minlength="18" maxlength="18" required>
 
-                <input type="password" placeholder="Пароль" name="psw" class="input__form" required>
+                <input type="password" placeholder="Пароль" name="psw" class="input__form" minlength="4" required>
                 <input type="password" placeholder="Повторите пароль" name="psw2" class="input__form" required>
 
                 <button type="submit" class="btn__submit" name="regist">Регистрация</button>
@@ -444,47 +450,46 @@ if(!$conection->set_charset($charset)){
 
 
 
-    if (isset($_POST['entry'])) {
-        if (empty($_POST['Email']) || empty($_POST['psw'])) {
-            echo "<script>alert('Заполните все поля')</script>";
-            echo "<meta http-equiv='refresh' content='0; url=http://high-tower/index.php'>";
-        } else {
-            $queryHash = "SELECT * FROM `users` WHERE `Mail` = '$mail'";
-            $temp1 = mysqli_query($link, $queryHash);
-            $row = mysqli_fetch_array($temp1);
-
-            if (password_verify($pass, $row['Pass'])) {
-                $nameTable = "SELECT Name FROM `users` WHERE `Mail` = '$mail'";
-                $text = mysqli_fetch_array(mysqli_query($link, $nameTable));
-
-                $_SESSION['Name'] = $text[0];
-                $_SESSION['Id']=$row['ID'];
-                header('Location: index.php');
-            } else {
-                echo "<script>alert('Неверный логин и/или пароль')</script>";
+        if (isset($_POST['entry'])) {
+            if (empty($_POST['Email']) || empty($_POST['psw'])) {
+                echo "<script>alert('Заполните все поля')</script>";
                 echo "<meta http-equiv='refresh' content='0; url=http://high-tower/index.php'>";
+            } else {
+                $queryHash = "SELECT * FROM `users` WHERE `Mail` = '$mail'";
+                $temp1 = mysqli_query($link, $queryHash);
+                $row = mysqli_fetch_array($temp1);
+
+                if (password_verify($pass, $row['Pass'])) {
+                    $nameTable = "SELECT Name FROM `users` WHERE `Mail` = '$mail'";
+                    $text = mysqli_fetch_array(mysqli_query($link, $nameTable));
+
+                    $_SESSION['Name'] = $text[0];
+                    $_SESSION['Id'] = $row['ID'];
+                    header('Location: index.php');
+                } else {
+                    echo "<script>alert('Неверный логин и/или пароль')</script>";
+                    echo "<meta http-equiv='refresh' content='0; url=http://high-tower/index.php'>";
+                }
             }
         }
     }
-}
 
-if (isset($_POST['regist'])) {
-    $name = $_POST['Name'];
-    $mail = $_POST['Email'];
-    $phone = $_POST['Number'];
-    $pass = $_POST['psw'];
-    $repPass = $_POST['psw2'];
-    $hash = password_hash($_POST['psw'], PASSWORD_BCRYPT);
-    $key = "GDSHG4385743HGSDHdkfgjdfk4653475JSGHDJSDSKJDF476354";
+    if (isset($_POST['regist'])) {
+        $name = $_POST['Name'];
+        $mail = $_POST['Email'];
+        $phone = $_POST['Number'];
+        $pass = $_POST['psw'];
+        $repPass = $_POST['psw2'];
+        $hash = password_hash($_POST['psw'], PASSWORD_BCRYPT);
+        $key = "GDSHG4385743HGSDHdkfgjdfk4653475JSGHDJSDSKJDF476354";
 
-    // error_reporting(0);
-    header('Content-Type: text/html; charset=utf-8');
-    $link = mysqli_connect('127.0.0.1', 'root', '', 'dbhightower');
-    if (strpos($mail, "@") !== false) {
+        // error_reporting(0);
+        header('Content-Type: text/html; charset=utf-8');
+        $link = mysqli_connect('127.0.0.1', 'root', '', 'dbhightower');
+        if (strpos($mail, "@") !== false) {
 
-        if (strlen($pass) > 4) {
 
-            if ($pass == $repPass){
+            if ($pass == $repPass) {
                 if (empty($_POST['Name']) || empty($_POST['Email']) || empty($_POST['psw']) || empty($_POST['psw2']) || empty($_POST['Number'])) {
                     echo "<script>alert('Заполните все поля!')</script>";
                     echo "<meta http-equiv='refresh' content='0; url=http://high-tower/index.php'>";
@@ -504,22 +509,21 @@ if (isset($_POST['regist'])) {
                         }
                     }
                 }
-            }else{
-                    echo "<script>alert('Пароли не совпадают')</script>";
-                }
-        }else{
-            echo "<script>alert('Пароли меньше 4')</script>";
+            } else {
+                echo "<script>alert('Пароли не совпадают')</script>";
+            }
+        } else {
+            echo "<script>alert('Почта введена неправильно')</script>";
         }
-    }else{
-        echo "<script>alert('Почта введена неправильно')</script>";
-    }         
-}
-?>
+    }
+    ?>
     <script src="js/entry.js"></script>
     <script src="js/hList.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="js/menu.js"></script>
-    <script src="js/priceList.js"></script> 
+    <script src="js/priceList.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery.maskedinput@1.4.1/src/jquery.maskedinput.min.js" type="text/javascript"></script>
+    <script src="js/phone.js"></script>
 </body>
 
 </html>

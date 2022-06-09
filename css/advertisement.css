@@ -360,7 +360,8 @@ h6 {
           box-shadow: none !important;
 }
 
-.slider .prev, .slider .next {
+.slider .prev,
+.slider .next {
   cursor: pointer;
   position: absolute;
   top: 0;
@@ -787,8 +788,7 @@ input {
 }
 
 /* Full-width input fields */
-input[type=text],
-input[type=password] {
+.input__form {
   width: 100%;
   padding: 12px 20px;
   display: inline-block;
@@ -799,6 +799,7 @@ input[type=password] {
   font-size: 22px;
   font-family: "Roboto";
   font-weight: 300;
+  margin-bottom: 16px;
 }
 
 /* Set a style for all buttons */

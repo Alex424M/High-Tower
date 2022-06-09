@@ -15,7 +15,7 @@ session_start();
 
 <body>
     <div class="wrapper">
-    <header class="header">
+        <header class="header">
             <div class="header__container container">
                 <div class="header__content">
                     <a href="../index.php" class="header__logo">High Tower</a>
@@ -29,18 +29,18 @@ session_start();
                             <a href="ads.php?type=NewBuildings" class="nav-btn">Новостройки</a>
                             <a href="ads.php?type=area" class="nav-btn">Дома и участки</a>
                         </nav>
-                    <?php
-                    if (!isset($_SESSION['Name'])) { ?>
-                        <button class="header__btn">Войти</button>
+                        <?php
+                        if (!isset($_SESSION['Name'])) { ?>
+                            <button class="header__btn">Войти</button>
                     </div>
-                    
-                    <?php
-                } else{
-                    ?>
+
+                <?php
+                        } else {
+                ?>
                     <div class="header__hi">
                         <div class="menu">
                             <button class="menu__button" type="button">
-                                <span>Привет, <?php echo $_SESSION['Name'];?></span>
+                                <span>Привет, <?php echo $_SESSION['Name']; ?></span>
                             </button>
                             <ul hidden class="menu__list">
                                 <li><a href="adding.php" class="menu__link">Разместить объявление</a></li>
@@ -51,16 +51,16 @@ session_start();
                                 </li>
                             </ul>
                         </div>
-                        
+
                         <?php
-                            if(isset($_POST['exit'])){
+                            if (isset($_POST['exit'])) {
                                 $_SESSION = [];
                                 header('Location: ../index.php');
                             }
                         ?>
                     </div>
                 <?php
-                }
+                        }
                 ?>
                 </div>
             </div>
@@ -73,19 +73,18 @@ session_start();
                     <a href="./adding.php" class="navigation__link">Разместить объявление</a>
                 </div>
                 <div class="main__row">
-                <div class="left-block">
+                    <div class="left-block">
                         <div class="left-block__title">Новое объявление</div>
                         <form method="post" class="left-block__form" enctype="multipart/form-data">
                             <div class="left-block__first">
                                 <div class="left-block__subtitle subtitle">Название объявления</div>
-                                <input type="text" class="input__name" name="input__name">
+                                <input type="text" class="input__name" name="input__name" minlength="3" maxlength="100">
                                 <div class="left-block__subtitle subtitle">Описание объявления</div>
-                                <textarea type="text" class="input__description" name="input__description"
-                                    placeholder="Расскажите в каком состоянии квартира, была ли перепланировка, сколько было хозяев, какие соседи и т.д."></textarea>
+                                <textarea type="text" class="input__description" name="input__description" placeholder="Расскажите в каком состоянии квартира, была ли перепланировка, сколько было хозяев, какие соседи и т.д."></textarea>
                                 <div class="left-block__subtitle subtitle">Цена</div>
                                 <div class="left-block__cost-row">
                                     <label for="cost" class="row__cost">Цена</label>
-                                    <input type="text" name="input__cost" class="input__cost">
+                                    <input type="text" name="input__cost" class="input__cost" minlength="3">
                                     <label for="cost" class="row__cost">руб.</label>
                                 </div>
                             </div>
@@ -114,42 +113,12 @@ session_start();
                                                 <input id="radio-4" type="radio" name="radio1" value="Новостройка">
                                                 <label for="radio-4">Новостройка</label>
                                             </div>
-                                        </li>
-                                        <li class="characteristic-li">
-                                            <div class="li__items">
-                                                <span>Недвижимость</span>
-                                            </div>
-                                            <div class="li__items li__items2">
-                                                <div class="item__row">
-                                                    <div class="li__radio"><input id="radio-5" type="radio"
-                                                            name="radio3" value="Квартира" checked>
-                                                        <label for="radio-5">Квартира</label>
-                                                    </div>
-                                                    <div class="li__radio"><input id="radio-6" type="radio"
-                                                            name="radio3" value="Новостройка">
-                                                        <label for="radio-6">Новостройка</label>
-                                                    </div>
-                                                </div>
-                                                <div class="break"></div>
-                                                <div class="item__row">
-                                                    <div class="li__radio"><input id="radio-7" type="radio"
-                                                            name="radio3" value="Комната">
-                                                        <label for="radio-7">Комната</label>
-                                                    </div>
-                                                    <div class="li__radio"><input id="radio-8" type="radio"
-                                                            name="radio3" value="Дом">
-                                                        <label for="radio-8">Дом</label>
-                                                    </div>
-                                                </div>
-                                                <div class="break"></div>
-                                                <div>
-                                                    <div class="li__radio"><input id="radio-9" type="radio"
-                                                            name="radio3" value="Участок">
-                                                        <label for="radio-9">Участок</label>
-                                                    </div>
-                                                </div>
+                                            <div class="li__radio">
+                                                <input id="radio-9" type="radio" name="radio1" value="Участок">
+                                                <label for="radio-9">Участок</label>
                                             </div>
                                         </li>
+
 
                                     </ul>
                                 </div>
@@ -163,15 +132,27 @@ session_start();
                                 <div class="left-block__metro">
                                     <div class="metro__row">
                                         <div class="metro__station">
-                                            <div class="station__metro">Станция метро</div>
-                                            <div>
-                                                <input type="text" class="metro__input" name="metro__input">
-                                            </div>
+                                            <div class="station__metro">Станция метро(железнодорожная)</div>
+                                            <select name="metro__input" class="metro__input">
+                                                <option></option><?php
+                                                                    $server = $_SERVER['SERVER_ADDR'];
+                                                                    $username = 'root';
+                                                                    $password = '';
+                                                                    $db = 'dbhightower';
+                                                                    $conection = new mysqli($server, $username, $password, $db);
+                                                                    $queryBuy = "SELECT name FROM metroList";
+                                                                    $mysqli_query = mysqli_query($conection, $queryBuy);
+                                                                    while ($states1 = mysqli_fetch_array($mysqli_query)) { ?>
+                                                    <option value="<?= $states1['name']; ?>"><?= $states1['name']; ?></option>
+                                                <?php
+                                                                    }
+                                                ?>
+                                            </select>
                                         </div>
                                         <div class="metro__foot">
                                             <div class="foot__metro">Минут до метро(пешком)</div>
                                             <div>
-                                                <input type="text" class="foot__input" name="foot__input">
+                                                <input type="text" class="foot__input" name="foot__input" maxlength="3">
                                             </div>
                                         </div>
                                     </div>
@@ -182,23 +163,23 @@ session_start();
                                 <div class="params__container">
                                     <div class="params__row">
                                         <label for="quantity">Количество комнат</label>
-                                        <input type="text" name="params__quantity" id="">
+                                        <input type="text" name="params__quantity" id="" maxlength="2">
                                     </div>
                                     <div class="params__row">
-                                        <label for="square">Площадь</label>
-                                        <input type="text" name="params__square" id="">
+                                        <label for="square">Площадь(м²)</label>
+                                        <input type="text" name="params__square" id="" maxlength="5">
                                     </div>
-                                    <div class="params__row">
+                                    <div class="params__row" id="params__floor">
                                         <label for="floor">Этаж</label>
-                                        <input type="text" name="params__floor" id="">
+                                        <input type="text" name="params__floor" maxlength="3">
                                     </div>
                                     <div class="params__row">
                                         <label for="totalFloor">Этажей в доме</label>
-                                        <input type="text" name="params__totalFloor" id="">
+                                        <input type="text" name="params__totalFloor" id="" maxlength="3">
                                     </div>
                                     <div class="params__row">
                                         <label for="ceilHeight">Высота потолков</label>
-                                        <input type="text" name="params__ceilHeight" id="">
+                                        <input type="text" name="params__ceilHeight" id="" maxlength="2">
                                     </div>
                                     <div class="params__row">
                                         <div class="params__renovation">Ремонт</div>
@@ -222,73 +203,115 @@ session_start();
                                 <div class="photo__description">Не допускаются к размещению фотографии с водяными
                                     знаками, чужих объектов и рекламные баннеры.
                                     JPG, PNG или GIF. Максимальный размер файла 10 мб</div>
-                                    <div class="photo__content">
-                                            <div class="photo__img"><img src="../img/icons/photo.svg" alt=""></div>
-                                            <div class="photo__btn">
-                                                <input type="file" name="file[]" multiple accept="image/*">
-                                            </div>
+                                <div class="photo__content">
+                                    <div class="photo__img"><img src="../img/icons/photo.svg" alt=""></div>
+                                    <div class="photo__btn">
+                                        <input type="file" name="file[]" multiple accept="image/*">
                                     </div>
+                                </div>
                             </div>
                             <input type="submit" name="upload" class="submit" value="Опубликовать">
                         </form>
                     </div>
                     <?php
-                     $server= $_SERVER['SERVER_ADDR'];
-                     $username='root';
-                     $password='';
-                     $db='dbhightower';
-                     $charset='utf8';
+                    $server = $_SERVER['SERVER_ADDR'];
+                    $username = 'root';
+                    $password = '';
+                    $db = 'dbhightower';
+                    $charset = 'utf8';
 
-                     $conection=new mysqli($server, $username, $password, $db);
-                     if(!$conection->set_charset($charset)){
-                         echo "charset err";
-                     }
-                        if(isset($_POST["upload"])){
-                           
-                            $name=$_POST['input__name'];
-                            $description=$_POST['input__description'];
-                            $cost=$_POST['input__cost'];
-                            $metro=$_POST['metro__input'];
-                            $transaction=$_POST['radio'];
-                            $typeRealty=$_POST['radio1'];
-                            $realty=$_POST['radio3'];
-                            $address=$_POST['input__address'];
-                            $foot=$_POST['foot__input'];
+                    $conection = new mysqli($server, $username, $password, $db);
+                    if (!$conection->set_charset($charset)) {
+                        echo "charset err";
+                    }
+                    if (isset($_POST["upload"])) {
 
-                            $quantity=$_POST['params__quantity'];
-                            $floor=$_POST['params__floor'];
-                            $square=$_POST['params__square'];
-                            $totalFloor=$_POST['params__totalFloor'];
-                            $ceilHeight=$_POST['params__ceilHeight'];
-                            $repair=$_POST['radio10'];
-                            $user=$_SESSION['Id'];
-                            $conection->query("INSERT INTO announcement (Title, Description, Cost, Metro, transaction, typeRealty, realty, address, foot, QuantityRoom, Floor, square, totalFloor, ceilHeight, repair, IDUser)
-                            VALUE ('$name', '$description', '$cost', '$metro', ' $transaction', '$typeRealty', '$realty', '$address', '$foot', '$quantity', '$floor', '$square', '$totalFloor', '$ceilHeight', '$repair', '$user')");
-                           
-                            $iii=$conection->query("SELECT MAX(id) as 'id' FROM announcement");
+                        $name = $_POST['input__name'];
+                        $description = $_POST['input__description'];
+                        $cost = $_POST['input__cost'];
+                        $metro = $_POST['metro__input'];
+                        $transaction = $_POST['radio'];
+                        $typeRealty = $_POST['radio1'];
+                        $address = $_POST['input__address'];
+                        $foot = $_POST['foot__input'];
+
+                        $quantity = $_POST['params__quantity'];
+                        $floor = $_POST['params__floor'];
+                        $square = $_POST['params__square'];
+                        $totalFloor = $_POST['params__totalFloor'];
+                        $ceilHeight = $_POST['params__ceilHeight'];
+                        $repair = $_POST['radio10'];
+                        $user = $_SESSION['Id'];
+                        $file = $_FILES['file'];
+                        $name1 = $file['size'][0];
+
+                        if (
+                            $name == "" or $description == "" or $cost == "" or (($metro == "" or !is_numeric($foot)) and $typeRealty != "Участок")
+                            or $address == "" or $quantity == "" or $square == "" or $totalFloor == "" or $ceilHeight == "" or $repair == ""
+                            or $name1 == 0 or !is_numeric($cost)  or !is_numeric($quantity)
+                            or !is_numeric($square) or (!is_numeric($floor) and $typeRealty != "Участок") or !is_numeric($totalFloor) or !is_numeric($ceilHeight)
+                        ) {
+                            if (
+                                $name == "" or $description == "" or $cost == "" or ($metro == ""  and $typeRealty != "Участок") or $transaction == "" or $typeRealty == ""
+                                or $address == "" or $foot == "" or $name1 == 0 or $quantity == "" or ($floor == "" and $typeRealty != "Участок") or $square == "" or $totalFloor == "" or $ceilHeight == "" or $repair == ""
+                            ) {
+                                echo "<script>alert('Заполните все поля!')</script>";
+                            }
+                            if (!is_numeric($cost)) {
+                                echo "<script>alert('В поле цена должны содержаться только цифры!')</script>";
+                            }
+                            if (!is_numeric($foot and $typeRealty != "Участок")) {
+                                echo "<script>alert('В поле минут до метро должны содержаться только цифры!')</script>";
+                            }
+                            if (!is_numeric($quantity)) {
+                                echo "<script>alert('В поле количество комнат должны содержаться только цифры!')</script>";
+                            }
+                            if (!is_numeric($square)) {
+                                echo "<script>alert('В поле площадь должны содержаться только цифры!')</script>";
+                            }
+                            if (!is_numeric($floor) and $typeRealty != "Участок") {
+                                echo "<script>alert('В поле этаж должны содержаться только цифры!')</script>";
+                            }
+                            if (!is_numeric($totalFloor)) {
+                                echo "<script>alert('В поле этаж должны содержаться только цифры!')</script>";
+                            }
+                            if (!is_numeric($ceilHeight)) {
+                                echo "<script>alert('В поле высота потолков должны содержаться только цифры!')</script>";
+                            }
+                        } else {
+                            if ($typeRealty == "Участок") {
+                                $conection->query("INSERT INTO announcement (Title, Description, Cost, transaction, typeRealty, address, QuantityRoom, square, totalFloor, ceilHeight, repair, IDUser)
+                                VALUE ('$name', '$description', '$cost', ' $transaction', '$typeRealty', '$address', '$quantity', '$square', '$totalFloor', '$ceilHeight', '$repair', '$user')");
+                            }
+                            $conection->query("INSERT INTO announcement (Title, Description, Cost, Metro, transaction, typeRealty, address, foot, QuantityRoom, Floor, square, totalFloor, ceilHeight, repair, IDUser)
+                            VALUE ('$name', '$description', '$cost', '$metro', ' $transaction', '$typeRealty', '$address', '$foot', '$quantity', '$floor', '$square', '$totalFloor', '$ceilHeight', '$repair', '$user')");
+
+                            $iii = $conection->query("SELECT MAX(id) as 'id' FROM announcement");
                             $row = mysqli_fetch_array($iii);
                             $conection->close();
-                            $db=new PDO("mysql:host=127.0.0.1;dbname=dbhightower", "root", "");
+                            $db = new PDO("mysql:host=127.0.0.1;dbname=dbhightower", "root", "");
                             $increment = 0;
-                            foreach($_FILES['file']['name'] as $k=>$f) {
+                            $pathdir = __DIR__ . "/../imgAppartments/announcement" . $row['id'];
+                            mkdir($pathdir, 0777, true);
+                            foreach ($_FILES['file']['name'] as $k => $f) {
                                 $increment++;
-                                $file=$_FILES['file'];
-                                $name=$file['name'][$k];
-                                $pathFile= __DIR__ .'/../imgAppartments/'.mkdir("announcement".(int)$row['id']).$name;
-                                if(!move_uploaded_file($file['tmp_name'][$k], $pathFile)){
+                                $file = $_FILES['file'];
+                                $name = $file['name'][$k];
+                                $pathFile = __DIR__ . '/../imgAppartments/announcement' . $row['id'] . "/" . $name;
+                                if (!move_uploaded_file($file['tmp_name'][$k], $pathFile)) {
                                     echo 'Файл не смог загрузится';
                                 }
-                                if($increment==1){
-                                    $data=$db->prepare("INSERT INTO `photos` (announcementID, photo1) VALUE (?,'$name')");
+                                if ($increment == 1) {
+                                    $data = $db->prepare("INSERT INTO `photos` (announcementID, photo1) VALUE (?,'$name')");
                                     $data->execute([(int)$row['id']]);
-                                }else{
-                                    $data=$db->prepare("UPDATE `photos` SET `photo$increment`='$name' WHERE announcementID=?");
+                                } else {
+                                    $data = $db->prepare("UPDATE `photos` SET `photo$increment`='$name' WHERE announcementID=?");
                                     $data->execute([(int)$row['id']]);
                                 }
                             }
-                            
-                            //echo "<meta http-equiv='refresh' content='0; url=http://high-tower/pages/ads.php'>";
                         }
+                        echo "<meta http-equiv='refresh' content='0; url=http://high-tower/index.php'>";
+                    }
                     ?>
                     <div class="right-block">
                         <div class="right-block__container">
@@ -348,7 +371,8 @@ session_start();
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=565f0af0-7c62-45bb-8626-681498eea6ee" type="text/javascript"></script>
     <script src="../js/suggest.js" type="text/javascript"></script>
-    <script src="../js/menu.js"></script> 
+    <script src="../js/menu.js"></script>
+    <script src="../js/radioHide.js"></script>
 </body>
 
 </html>

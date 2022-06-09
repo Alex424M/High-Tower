@@ -15,7 +15,7 @@ session_start();
 
 <body>
     <div class="wrapper">
-    <header class="header">
+        <header class="header">
             <div class="header__container container">
                 <div class="header__content">
                     <a href="../index.php" class="header__logo">High Tower</a>
@@ -29,18 +29,18 @@ session_start();
                             <a href="ads.php?type=NewBuildings" class="nav-btn">Новостройки</a>
                             <a href="ads.php?type=area" class="nav-btn">Дома и участки</a>
                         </nav>
-                    <?php
-                    if (!isset($_SESSION['Name'])) { ?>
-                        <button class="header__btn">Войти</button>
+                        <?php
+                        if (!isset($_SESSION['Name'])) { ?>
+                            <button class="header__btn">Войти</button>
                     </div>
-                    
-                    <?php
-                } else{
-                    ?>
+
+                <?php
+                        } else {
+                ?>
                     <div class="header__hi">
                         <div class="menu">
                             <button class="menu__button" type="button">
-                                <span>Привет, <?php echo $_SESSION['Name'];?></span>
+                                <span>Привет, <?php echo $_SESSION['Name']; ?></span>
                             </button>
                             <ul hidden class="menu__list">
                                 <li><a href="adding.php" class="menu__link">Разместить объявление</a></li>
@@ -51,31 +51,31 @@ session_start();
                                 </li>
                             </ul>
                         </div>
-                        
+
                         <?php
-                            if(isset($_POST['exit'])){
+                            if (isset($_POST['exit'])) {
                                 $_SESSION = [];
                                 header('Location: ../index.php');
                             }
                         ?>
                     </div>
                 <?php
-                }
+                        }
                 ?>
                 </div>
             </div>
         </header>
         <div class="announcement">
             <div class="announcement__container container">
-                 <?php
-                        if ($_SESSION['SelectArticle'] != -1 or isset($_GET['selectedArticle'])) { 
-                            if(isset($_GET['selectedArticle'])){
-                                $articleId=$_GET['selectedArticle'];
-                            }elseif($_SESSION['SelectArticle']!=-1){
-                                $articleId=$_SESSION['SelectArticle'];
-                            }
-                            $mysqli = new mysqli("127.0.0.1", "root", "", "dbhightower");
-                            $query = "SELECT *, 
+                <?php
+                if ($_SESSION['SelectArticle'] != -1 or isset($_GET['selectedArticle'])) {
+                    if (isset($_GET['selectedArticle'])) {
+                        $articleId = $_GET['selectedArticle'];
+                    } elseif ($_SESSION['SelectArticle'] != -1) {
+                        $articleId = $_SESSION['SelectArticle'];
+                    }
+                    $mysqli = new mysqli("127.0.0.1", "root", "", "dbhightower");
+                    $query = "SELECT *, 
                             (SELECT photo1 FROM photos WHERE announcementID='$articleId') as 'photo1', 
                             (SELECT photo2 FROM photos WHERE announcementID='$articleId') as 'photo2', 
                             (SELECT photo3 FROM photos WHERE announcementID='$articleId') as 'photo3', 
@@ -90,251 +90,268 @@ session_start();
                             (SELECT NumberPhone FROM users WHERE ID=a.IDUser) as 'numberPhone',
                             (SELECT Name FROM users WHERE ID=a.IDUser) as 'user'
                             FROM announcement a WHERE ID='$articleId'";
-                            if (mysqli_num_rows(mysqli_query($mysqli, $query)) > 0) {
-                                $comment = mysqli_fetch_array(mysqli_query($mysqli, $query));
-                                
-                ?>
-                <div class="announcement__navigation">
-                    <a href="../index.php" class="navigation__link">Главная</a>
-                    <span class="navigation__arrow">></span>
-                    <a <?php if($comment['transaction']==" Продажа"){?>
-                    href="ads.php?type=sale" <?php }
-                    elseif($comment['transaction']==" Аренда"){?>
-                    href="ads.php?type=rent" <?php }?>
-                    class="navigation__link"><?php echo $comment['transaction'] ?></a>
-                    <span class="navigation__arrow">></span>
-                    <a href="ad.php" class="navigation__link"><?php echo $comment['Title'] ?></a>
-                </div>
-               
-                <div class="announcement__row">
-                    <main class="left-block">
-                        <div class="left-block__row">
-                            <div class="left-block__title">
-                                <h1><?php echo $comment['Title'] ?></h1>
-                            </div>
-                        </div>
-                        <div class="slider">
-                        <?php
-                        $count=0;
-                            if(!is_null($comment['photo1']))
-                                {
-                                    $count++;
-                        ?>
-                            <div class="left-block__column">
-                                <div class="left-block__img">
-                                    <img src="../imgAppartments/announcement<?php echo $comment['ID']."/"; echo $comment['photo1']; ?>" >
-                                </div>
-                            </div>
+                    if (mysqli_num_rows(mysqli_query($mysqli, $query)) > 0) {
+                        $comment = mysqli_fetch_array(mysqli_query($mysqli, $query));
 
-                            <?php
-                                }
-                                if(!is_null($comment['photo2'])){
-                                    $count++;
-                                    ?>
-                            <div class="left-block__column">
-                                <div class="left-block__img">
-                                    <img src="../imgAppartments/announcement<?php echo $comment['ID']."/"; echo $comment['photo2']; ?>" onerror="this.style.visibility = 'hidden'">
-                                </div>
-                            </div>
-                            <?php
-                                }
-                                if(!is_null($comment['photo3'])){
-                                    $count++;
-                                    ?>
-                            <div class="left-block__column">
-                                <div class="left-block__img">
-                                    <img src="../imgAppartments/announcement<?php echo $comment['ID']."/"; echo $comment['photo3']; ?>" onerror="this.style.visibility = 'hidden'">
-                                </div>
-                            </div>
-                            <?php
-                                }
-                                if(!is_null($comment['photo4'])){
-                                    $count++;
-                                    ?>
-                            <div class="left-block__column">
-                                <div class="left-block__img">
-                                    <img src="../imgAppartments/announcement<?php echo $comment['ID']."/"; echo $comment['photo4']; ?>" onerror="this.style.visibility = 'hidden'">
-                                </div>
-                            </div>
-                            <?php
-                                }
-                                if(!is_null($comment['photo5'])){
-                                    $count++;
-                                    ?>
-                            <div class="left-block__column">
-                                <div class="left-block__img">
-                                    <img src="../imgAppartments/announcement<?php echo $comment['ID']."/"; echo $comment['photo5']; ?>" onerror="this.style.visibility = 'hidden'">
-                                </div>
-                            </div>
-                            <?php
-                                }
-                                if(!is_null($comment['photo6'])){
-                                    $count++;
-                                    ?>
-                            <div class="left-block__column">
-                                <div class="left-block__img">
-                                    <img src="../imgAppartments/announcement<?php echo $comment['ID']."/"; echo $comment['photo6']; ?>" onerror="this.style.visibility = 'hidden'">
-                                </div>
-                            </div>
-                            <?php
-                                }
-                                if(!is_null($comment['photo7'])){
-                                    $count++;
-                                    ?>
-                            <div class="left-block__column">
-                                <div class="left-block__img">
-                                    <img src="../imgAppartments/announcement<?php echo $comment['ID']."/"; echo $comment['photo7']; ?>" onerror="this.style.visibility = 'hidden'">
-                                </div>
-                            </div>
-                            <?php
-                                }
-                                if(!is_null($comment['photo8'])){
-                                    $count++;
-                                    ?>
-                            <div class="left-block__column">
-                                <div class="left-block__img">
-                                    <img src="../imgAppartments/announcement<?php echo $comment['ID']."/"; echo $comment['photo8']; ?>" onerror="this.style.visibility = 'hidden'">
-                                </div>
-                            </div>
-                            <?php
-                                }
-                                if(!is_null($comment['photo9'])){
-                                    $count++;
-                                    ?>
-                            <div class="left-block__column">
-                                <div class="left-block__img">
-                                    <img src="../imgAppartments/announcement<?php echo $comment['ID']."/"; echo $comment['photo9']; ?>" onerror="this.style.visibility = 'hidden'">
-                                </div>
-                            </div>
-                            <?php
-                                }
-                                if(!is_null($comment['photo10'])){
-                                    $count++;
-                                    ?>
-                            <div class="left-block__column">
-                                <div class="left-block__img">
-                                    <img src="../imgAppartments/announcement<?php echo $comment['ID']."/"; echo $comment['photo10']; ?>" onerror="this.style.visibility = 'hidden'">
-                                </div>
-                            </div>
-                            <?php
-                                }
-                                if(!is_null($comment['photo11'])){
-                                    $count++;
-                                    ?>
-                            <div class="left-block__column">
-                                <div class="left-block__img">
-                                    <img src="../imgAppartments/announcement<?php echo $comment['ID']."/"; echo $comment['photo11']; ?>" onerror="this.style.visibility = 'hidden'">
-                                </div>
-                            </div>
-                            <?php
-                                }
-                                ?>
-                            <a class="prev" onclick="minusSlide()">&#10094;</a>
-                            <a class="next" onclick="plusSlide()">&#10095;</a>
+                ?>
+                        <div class="announcement__navigation">
+                            <a href="../index.php" class="navigation__link">Главная</a>
+                            <span class="navigation__arrow">></span>
+                            <a <?php if ($comment['transaction'] == " Продажа") { ?> href="ads.php?type=sale" <?php } elseif ($comment['transaction'] == " Аренда") { ?> href="ads.php?type=rent" <?php } ?> class="navigation__link"><?php echo $comment['transaction'] ?></a>
+                            <span class="navigation__arrow">></span>
+                            <a href="ad.php" class="navigation__link"><?php echo $comment['Title'] ?></a>
                         </div>
-                        <div class="slider-dots">
-                            <?php
-                                for ($i = 1; $i <= $count; $i++) {?>
-                                    <span class="slider-dots_item" onclick="currentSlide(<?= $count?>)"></span> 
+
+                        <div class="announcement__row">
+                            <main class="left-block">
+                                <div class="left-block__row">
+                                    <div class="left-block__title">
+                                        <h1><?php echo $comment['Title'] ?></h1>
+                                    </div>
+                                </div>
+                                <div class="slider">
                                     <?php
-                                }
-                            ?>
-                            
-                        </div>
-                        <div class="left-block__params params">
-                            <div class="params__row">
-                                <div class="params__column">
-                                    <div class="params__item">
-                                        <div class="params__title"><?php echo $comment['square'] ?></div>
-                                        <div class="params__subtitle">Площадь</div>
+                                    $count = 0;
+                                    if (!is_null($comment['photo1'])) {
+                                        $count++;
+                                    ?>
+                                        <div class="left-block__column">
+                                            <div class="left-block__img">
+                                                <img src="../imgAppartments/announcement<?php echo $comment['ID'] . "/";
+                                                                                        echo $comment['photo1']; ?>">
+                                            </div>
+                                        </div>
+
+                                    <?php
+                                    }
+                                    if (!is_null($comment['photo2'])) {
+                                        $count++;
+                                    ?>
+                                        <div class="left-block__column">
+                                            <div class="left-block__img">
+                                                <img src="../imgAppartments/announcement<?php echo $comment['ID'] . "/";
+                                                                                        echo $comment['photo2']; ?>" onerror="this.style.visibility = 'hidden'">
+                                            </div>
+                                        </div>
+                                    <?php
+                                    }
+                                    if (!is_null($comment['photo3'])) {
+                                        $count++;
+                                    ?>
+                                        <div class="left-block__column">
+                                            <div class="left-block__img">
+                                                <img src="../imgAppartments/announcement<?php echo $comment['ID'] . "/";
+                                                                                        echo $comment['photo3']; ?>" onerror="this.style.visibility = 'hidden'">
+                                            </div>
+                                        </div>
+                                    <?php
+                                    }
+                                    if (!is_null($comment['photo4'])) {
+                                        $count++;
+                                    ?>
+                                        <div class="left-block__column">
+                                            <div class="left-block__img">
+                                                <img src="../imgAppartments/announcement<?php echo $comment['ID'] . "/";
+                                                                                        echo $comment['photo4']; ?>" onerror="this.style.visibility = 'hidden'">
+                                            </div>
+                                        </div>
+                                    <?php
+                                    }
+                                    if (!is_null($comment['photo5'])) {
+                                        $count++;
+                                    ?>
+                                        <div class="left-block__column">
+                                            <div class="left-block__img">
+                                                <img src="../imgAppartments/announcement<?php echo $comment['ID'] . "/";
+                                                                                        echo $comment['photo5']; ?>" onerror="this.style.visibility = 'hidden'">
+                                            </div>
+                                        </div>
+                                    <?php
+                                    }
+                                    if (!is_null($comment['photo6'])) {
+                                        $count++;
+                                    ?>
+                                        <div class="left-block__column">
+                                            <div class="left-block__img">
+                                                <img src="../imgAppartments/announcement<?php echo $comment['ID'] . "/";
+                                                                                        echo $comment['photo6']; ?>" onerror="this.style.visibility = 'hidden'">
+                                            </div>
+                                        </div>
+                                    <?php
+                                    }
+                                    if (!is_null($comment['photo7'])) {
+                                        $count++;
+                                    ?>
+                                        <div class="left-block__column">
+                                            <div class="left-block__img">
+                                                <img src="../imgAppartments/announcement<?php echo $comment['ID'] . "/";
+                                                                                        echo $comment['photo7']; ?>" onerror="this.style.visibility = 'hidden'">
+                                            </div>
+                                        </div>
+                                    <?php
+                                    }
+                                    if (!is_null($comment['photo8'])) {
+                                        $count++;
+                                    ?>
+                                        <div class="left-block__column">
+                                            <div class="left-block__img">
+                                                <img src="../imgAppartments/announcement<?php echo $comment['ID'] . "/";
+                                                                                        echo $comment['photo8']; ?>" onerror="this.style.visibility = 'hidden'">
+                                            </div>
+                                        </div>
+                                    <?php
+                                    }
+                                    if (!is_null($comment['photo9'])) {
+                                        $count++;
+                                    ?>
+                                        <div class="left-block__column">
+                                            <div class="left-block__img">
+                                                <img src="../imgAppartments/announcement<?php echo $comment['ID'] . "/";
+                                                                                        echo $comment['photo9']; ?>" onerror="this.style.visibility = 'hidden'">
+                                            </div>
+                                        </div>
+                                    <?php
+                                    }
+                                    if (!is_null($comment['photo10'])) {
+                                        $count++;
+                                    ?>
+                                        <div class="left-block__column">
+                                            <div class="left-block__img">
+                                                <img src="../imgAppartments/announcement<?php echo $comment['ID'] . "/";
+                                                                                        echo $comment['photo10']; ?>" onerror="this.style.visibility = 'hidden'">
+                                            </div>
+                                        </div>
+                                    <?php
+                                    }
+                                    if (!is_null($comment['photo11'])) {
+                                        $count++;
+                                    ?>
+                                        <div class="left-block__column">
+                                            <div class="left-block__img">
+                                                <img src="../imgAppartments/announcement<?php echo $comment['ID'] . "/";
+                                                                                        echo $comment['photo11']; ?>" onerror="this.style.visibility = 'hidden'">
+                                            </div>
+                                        </div>
+                                    <?php
+                                    }
+                                    ?>
+                                    <a class="prev" onclick="minusSlide()">&#10094;</a>
+                                    <a class="next" onclick="plusSlide()">&#10095;</a>
+                                </div>
+                                <div class="slider-dots">
+                                    <?php
+                                    for ($i = 1; $i <= $count; $i++) { ?>
+                                        <span class="slider-dots_item" onclick="currentSlide(<?= $count ?>)"></span>
+                                    <?php
+                                    }
+                                    ?>
+
+                                </div>
+                                <div class="left-block__params params">
+                                    <div class="params__row">
+                                        <div class="params__column">
+                                            <div class="params__item">
+                                                <div class="params__title"><?php echo $comment['square'] ?>м²</div>
+                                                <div class="params__subtitle">Площадь</div>
+                                            </div>
+                                        </div>
+                                        <?php
+                                        if ($comment['typeRealty'] != 'Участок') { ?>
+                                            <div class="params__column">
+                                                <div class="params__item">
+                                                    <div class="params__title"><?php echo $comment['Floor'] ?></div>
+                                                    <div class="params__subtitle">Этаж</div>
+                                                </div>
+                                            </div>
+                                        <?php
+                                        }
+                                        ?>
+                                        <div class="params__column">
+                                            <div class="params__item">
+                                                <div class="params__title"><?php echo $comment['totalFloor'] ?></div>
+                                                <div class="params__subtitle">Этажей</div>
+                                            </div>
+                                        </div>
+                                        <div class="params__column">
+                                            <div class="params__item">
+                                                <div class="params__title"><?php echo $comment['ceilHeight'] ?>м</div>
+                                                <div class="params__subtitle">Высота потолка</div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="params__column">
-                                    <div class="params__item">
-                                        <div class="params__title"><?php echo $comment['Floor'] ?></div>
-                                        <div class="params__subtitle">Этаж</div>
+                                <div class="left-block__characteristic characteristic">
+                                    <div class="characteristic__title title">Характеристика</div>
+                                    <div class="characteristic__characteristics">
+                                        <ul class="characteristic-ul">
+                                            <li class="characteristic-li">
+                                                <span>Тип недвижимости</span>
+                                                <span><?php echo $comment['typeRealty'] ?></span>
+                                            </li>
+                                            <li class="characteristic-li">
+                                                <span>Тип сделки</span>
+                                                <span><?php echo $comment['transaction'] ?></span>
+                                            </li>
+                                            <li class="characteristic-li">
+                                                <span>Высота потолков</span>
+                                                <span><?php echo $comment['ceilHeight'] ?> м</span>
+                                            </li>
+                                            <li class="characteristic-li">
+                                                <span>Количество комнат</span>
+                                                <span><?php if ($comment['QuantityRoom'] == 0) {
+                                                            echo "Студия";
+                                                        } else {
+                                                            echo $comment['QuantityRoom'];
+                                                        } ?></span>
+                                            </li>
+                                            <li class="characteristic-li">
+                                                <span>Площадь</span>
+                                                <span><?php echo $comment['square'] ?>м²</span>
+                                            </li>
+                                            <li class="characteristic-li">
+                                                <span>Ремонт</span>
+                                                <span><?php echo $comment['repair'] ?></span>
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
-                                <div class="params__column">
-                                    <div class="params__item">
-                                        <div class="params__title"><?php echo $comment['totalFloor'] ?></div>
-                                        <div class="params__subtitle">Этажей</div>
+                                <div class="left-block__description description">
+                                    <div class="description__title title">Описание</div>
+                                    <div class="description__text"><?php echo $comment['Description'] ?></div>
+                                </div>
+                                <div class="left-block__map map">
+                                    <div class="map__title title">Адрес</div>
+                                    <div class="map__addres"><?php echo $comment['address'] ?></div>
+                                    <div class="map__container" id="map">
                                     </div>
                                 </div>
-                                <div class="params__column">
-                                    <div class="params__item">
-                                        <div class="params__title"><?php echo $comment['ceilHeight'] ?>м</div>
-                                        <div class="params__subtitle">Высота потолка</div>
-                                    </div>
+                            </main>
+                            <aside class="right-block">
+                                <div class="right-block__price"><?php echo $comment['Cost'] ?> руб.</div>
+                                <div class="right-block__costMeter">
+                                    <?php
+                                    $costMetr = $comment['Cost'] / $comment['square'];
+                                    echo round($costMetr, 0);; ?> руб./м²
                                 </div>
-                            </div>
-                        </div>
-                        <div class="left-block__characteristic characteristic">
-                            <div class="characteristic__title title">Характеристика</div>
-                            <div class="characteristic__characteristics">
-                                <ul class="characteristic-ul">
-                                    <li class="characteristic-li">
-                                        <span>Тип недвижимости</span>
-                                        <span><?php echo $comment['typeRealty'] ?></span>
-                                    </li>
-                                    <li class="characteristic-li">
-                                        <span>Тип сделки</span>
-                                        <span><?php echo $comment['transaction'] ?></span>
-                                    </li>
-                                    <li class="characteristic-li">
-                                        <span>Недвижимость</span>
-                                        <span><?php echo $comment['realty'] ?></span>
-                                    </li>
-                                    <li class="characteristic-li">
-                                        <span>Высота потолков</span>
-                                        <span><?php echo $comment['ceilHeight'] ?> м</span>
-                                    </li>
-                                    <li class="characteristic-li">
-                                        <span>Количество комнат</span>
-                                        <span><?php echo $comment['QuantityRoom'] ?></span>
-                                    </li>
-                                    <li class="characteristic-li">
-                                        <span>Площадь</span>
-                                        <span><?php echo $comment['square'] ?>м</span>
-                                    </li>
-                                    <li class="characteristic-li">
-                                        <span>Ремонт</span>
-                                        <span><?php echo $comment['repair'] ?></span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="left-block__description description">
-                            <div class="description__title title">Описание</div>
-                            <div class="description__text"><?php echo $comment['Description'] ?></div>
-                        </div>
-                        <div class="left-block__map map">
-                            <div class="map__title title">Адрес</div>
-                            <div class="map__addres"><?php echo $comment['address'] ?></div>
-                            <div class="map__container" id="map">
-                            </div>
-                        </div>
-                    </main>
-                    <aside class="right-block">
-                        <div class="right-block__price"><?php echo $comment['Cost'] ?> руб.</div>
-                        <div class="right-block__costMeter">
-                            <?php 
-                            $costMetr = $comment['Cost']/$comment['square'];
-                            echo round ($costMetr, 0);;?> руб./м
-                        </div>
-                        <button class="right-block__cotact">Показать контакты</button>
-                        <div class="right-block__numberPhone"><?php echo $comment['numberPhone'] ?></div>
-                        <div class="right-block__name"><?php echo $comment['user'] ?></div>
-                        <div class="right-block__address"><?php echo $comment['address'] ?></div>
-                        <div class="right-block__row">
-                            <div class="right-block__metro">м.<?php echo $comment['Metro'] ?></div>
-                            <div class="right-block__time"><?php echo $comment['foot'] ?> минут пешком</div>
-                        </div>
-                    </aside>
+                                <button class="right-block__cotact">Показать контакты</button>
+                                <div class="right-block__numberPhone"><?php echo $comment['numberPhone'] ?></div>
+                                <div class="right-block__name"><?php echo $comment['user'] ?></div>
+                                <div class="right-block__address"><?php echo $comment['address'] ?></div>
+                                <div class="right-block__row">
+                                    <?php
+                                    if ($comment['typeRealty'] != 'Участок') { ?>
+                                        <div class="right-block__metro">м.<?php echo $comment['Metro'] ?></div>
+                                        <div class="right-block__time"><?php echo $comment['foot'] ?> минут пешком</div>
+                                    <?php
+                                    }
+                                    ?>
+                                </div>
+                            </aside>
                     <?php
-                            }}
+                    }
+                }
                     ?>
-                </div>
+                        </div>
             </div>
         </div>
         <footer class="footer">
@@ -387,9 +404,9 @@ session_start();
                     /
                     <span class="reg  notActive">Регистрация</span>
                 </div>
-                <input type="text" placeholder="Email" name="Email" required>
+                <input type="email" placeholder="Email" name="Email" class="input__form" required>
 
-                <input type="password" placeholder="Пароль" name="psw" required>
+                <input type="password" placeholder="Пароль" name="psw" class="input__form" required>
 
                 <button type="submit" class="btn__submit" name="entry">Вход</button>
             </div>
@@ -407,12 +424,12 @@ session_start();
                     /
                     <span class="reg">Регистрация</span>
                 </div>
-                <input type="text" placeholder="Имя" name="Name" required>
-                <input type="text" placeholder="Email" name="Email" required>
-                <input type="text" placeholder="Номер телефона" name="Number" required>
+                <input type="text" placeholder="Имя" name="Name" class="input__form" required>
+                <input type="email" placeholder="Email" name="Email" class="input__form" required>
+                <input type="text" placeholder="Номер телефона" name="Number" class="input__form" id="phone" pattern="[\+]\d{1}\s[\(]\d{3}[\)]\s\d{3}[\-]\d{2}[\-]\d{2}" minlength="18" maxlength="18" required>
 
-                <input type="password" placeholder="Пароль" name="psw" required>
-                <input type="password" placeholder="Повторите пароль" name="psw2" required>
+                <input type="password" placeholder="Пароль" name="psw" class="input__form" minlength="4" required>
+                <input type="password" placeholder="Повторите пароль" name="psw2" class="input__form" required>
 
                 <button type="submit" class="btn__submit" name="regist">Регистрация</button>
             </div>
@@ -448,7 +465,7 @@ session_start();
             if (password_verify($pass, $row['Pass'])) {
                 $nameTable = "SELECT Name FROM `users` WHERE `Mail` = '$mail'";
                 $text = mysqli_fetch_array(mysqli_query($link, $nameTable));
-                $_SESSION['Id']=$row['ID'];
+                $_SESSION['Id'] = $row['ID'];
                 $_SESSION['Name'] = $text[0];
                 header('Location: ad.php');
             } else {
@@ -456,56 +473,45 @@ session_start();
                 echo "<meta http-equiv='refresh' content='0; url=http://high-tower/pages/ad.php'>";
             }
         }
-    
-}
+    }
 
-if (isset($_POST['regist'])) {
-    $name = $_POST['Name'];
-    $mail = $_POST['Email'];
-    $phone = $_POST['Number'];
-    $pass = $_POST['psw'];
-    $repPass = $_POST['psw2'];
-    $hash = password_hash($_POST['psw'], PASSWORD_BCRYPT);
-    $key = "GDSHG4385743HGSDHdkfgjdfk4653475JSGHDJSDSKJDF476354";
+    if (isset($_POST['regist'])) {
+        $name = $_POST['Name'];
+        $mail = $_POST['Email'];
+        $phone = $_POST['Number'];
+        $pass = $_POST['psw'];
+        $repPass = $_POST['psw2'];
+        $hash = password_hash($_POST['psw'], PASSWORD_BCRYPT);
+        $key = "GDSHG4385743HGSDHdkfgjdfk4653475JSGHDJSDSKJDF476354";
 
-    // error_reporting(0);
-    header('Content-Type: text/html; charset=utf-8');
-    $link = mysqli_connect('127.0.0.1', 'root', '', 'dbhightower');
-    if (strpos($mail, "@") !== false) {
-
-        if (strlen($pass) > 4) {
-
-            if ($pass == $repPass){
-                if (empty($_POST['Name']) || empty($_POST['Email']) || empty($_POST['psw']) || empty($_POST['psw2']) || empty($_POST['Number'])) {
-                    echo "<script>alert('Заполните все поля!')</script>";
+        // error_reporting(0);
+        header('Content-Type: text/html; charset=utf-8');
+        $link = mysqli_connect('127.0.0.1', 'root', '', 'dbhightower');
+        if ($pass == $repPass) {
+            if (empty($_POST['Name']) || empty($_POST['Email']) || empty($_POST['psw']) || empty($_POST['psw2']) || empty($_POST['Number'])) {
+                echo "<script>alert('Заполните все поля!')</script>";
+                echo "<meta http-equiv='refresh' content='0; url=http://high-tower/pages/ad.php'>";
+            } else {
+                $queryMail = "SELECT * FROM `users` WHERE `Mail` = '$mail'";
+                $tempMail = mysqli_query($link, $queryMail);
+                if (mysqli_num_rows($tempMail) > 0) {
+                    echo "<script>alert('Данная почта привязана к другому аккаунту!')</script>";
                     echo "<meta http-equiv='refresh' content='0; url=http://high-tower/pages/ad.php'>";
                 } else {
-                    $queryMail = "SELECT * FROM `users` WHERE `Mail` = '$mail'";
-                    $tempMail = mysqli_query($link, $queryMail);
-                    if (mysqli_num_rows($tempMail) > 0) {
-                        echo "<script>alert('Данная почта привязана к другому аккаунту!')</script>";
+                    $query = "INSERT INTO `users` (Name, Mail, Pass, NumberPhone) VALUE ('$name', '$mail', '$hash', '$phone')";
+                    if (mysqli_query($link, $query)) {
+                        echo "<script>alert('Пользователь успешно добавлен')</script>";
                         echo "<meta http-equiv='refresh' content='0; url=http://high-tower/pages/ad.php'>";
                     } else {
-                        $query = "INSERT INTO `users` (Name, Mail, Pass, NumberPhone) VALUE ('$name', '$mail', '$hash', '$phone')";
-                        if (mysqli_query($link, $query)) {
-                            echo "<script>alert('Пользователь успешно добавлен')</script>";
-                            echo "<meta http-equiv='refresh' content='0; url=http://high-tower/pages/ad.php'>";
-                        } else {
-                            echo "Пользователь не добавлен и за ошибки: " . mysqli_error($link);
-                        }
+                        echo "Пользователь не добавлен и за ошибки: " . mysqli_error($link);
                     }
                 }
-            }else{
-                    echo "<script>alert('Пароли не совпадают')</script>";
-                }
-        }else{
-            echo "<script>alert('Пароли меньше 4')</script>";
+            }
+        } else {
+            echo "<script>alert('Пароли не совпадают')</script>";
         }
-    }else{
-        echo "<script>alert('Почта введена неправильно')</script>";
-    }         
-}
-?>
+    }
+    ?>
     <script src="../js/entry.js"></script>
     <script src="../js/hList.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -514,6 +520,8 @@ if (isset($_POST['regist'])) {
     <script src="../js/search_control_ppo.js" type="text/javascript"></script>
     <script src="../js/slider.js"></script>
     <script src="../js/contacts.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery.maskedinput@1.4.1/src/jquery.maskedinput.min.js" type="text/javascript"></script>
+    <script src="../js/phone.js"></script>
 </body>
 
 </html>
