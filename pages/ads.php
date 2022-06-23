@@ -139,11 +139,11 @@ if (!$conection->set_charset($charset)) {
                         $queryCount .= " and Cost<=" . $_GET['priceEnd'];
                     }
                     if (!empty($_GET['costd'])) {
-                        $sql .= " ORDER BY Cost " . $_GET['costd'] . " LIMIT 0, 10";
-                        $queryCount .= " ORDER BY Cost " . $_GET['costd'] . " LIMIT 0, 10";
+                        $sql .= " ORDER BY Cost " . $_GET['costd'] . "";
+                        $queryCount .= " ORDER BY Cost " . $_GET['costd'] . "";
                     } else {
-                        $sql .= " ORDER BY Cost ASC LIMIT 0, 10";
-                        $queryCount .= " ORDER BY Cost ASC LIMIT 0, 10";
+                        $sql .= " ORDER BY Cost ASC";
+                        $queryCount .= " ORDER BY Cost ASC";
                     }
                     $quantity = mysqli_query($conection, $queryCount);
                     $row = $quantity->fetch_row();
@@ -279,10 +279,6 @@ if (!$conection->set_charset($charset)) {
                                 }
                                 ?>
                             </form>
-                            <?php
-                            pagination(page(" Аренда", "Жилая"), ' Аренда');
-
-                            ?>
                         </div>
 
                     </div>
@@ -338,8 +334,8 @@ if (!$conection->set_charset($charset)) {
                         $queryCount .= " and Cost<=" . $_GET['priceEnd'];
                     }
                     $p = (!isset($_GET['p'])) ? $p = 0 : $p = $_GET['p'];
-                    $sql .= " ORDER BY Cost ASC LIMIT " . $_GET['p'] * 10 . ", 10";
-                    $queryCount .= " ORDER BY Cost ASC LIMIT " . $_GET['p'] * 10  . ", 10";
+                    $sql .= " ORDER BY Cost ASC";
+                    $queryCount .= " ORDER BY Cost";
                     $quantity = mysqli_query($conection, $queryCount);
                     $row = $quantity->fetch_row();
                     $count = $row[0];
@@ -471,9 +467,6 @@ if (!$conection->set_charset($charset)) {
                                 }
                                 ?>
                             </form>
-                            <?php
-                            pagination(page(" Продажа", "Жилая"), ' Продажа');
-                            ?>
                         </div>
                     </div>
                 </div>
@@ -527,11 +520,11 @@ if (!$conection->set_charset($charset)) {
                         $queryCount .= " and Cost<=" . $_GET['priceEnd'];
                     }
                     if (!empty($_GET['costd'])) {
-                        $sql .= " ORDER BY Cost " . $_GET['costd'] . " LIMIT 10";
-                        $queryCount .= " ORDER BY Cost " . $_GET['costd'] . " LIMIT 10";
+                        $sql .= " ORDER BY Cost " . $_GET['costd'] . "";
+                        $queryCount .= " ORDER BY Cost " . $_GET['costd'] . "";
                     } else {
-                        $sql .= " ORDER BY Cost ASC LIMIT 10";
-                        $queryCount .= " ORDER BY Cost ASC LIMIT 10";
+                        $sql .= " ORDER BY Cost ASC";
+                        $queryCount .= " ORDER BY Cost ASC";
                     }
                     $quantity = mysqli_query($conection, $queryCount);
                     $row = $quantity->fetch_row();
@@ -666,9 +659,6 @@ if (!$conection->set_charset($charset)) {
                                 }
                                 ?>
                             </form>
-                            <?php
-                            pagination(page("", "Новостройка"), 'Новостройка');
-                            ?>
                         </div>
                     </div>
                 </div>
@@ -696,11 +686,11 @@ if (!$conection->set_charset($charset)) {
                         $queryCount .= " and Cost<=" . $_GET['priceEnd'];
                     }
                     if (!empty($_GET['costd'])) {
-                        $sql .= " ORDER BY Cost " . $_GET['costd'] . " LIMIT 10";
-                        $queryCount .= " ORDER BY Cost " . $_GET['costd'] . " LIMIT 10";
+                        $sql .= " ORDER BY Cost " . $_GET['costd'] . "";
+                        $queryCount .= " ORDER BY Cost " . $_GET['costd'] . "";
                     } else {
-                        $sql .= " ORDER BY Cost ASC LIMIT 10";
-                        $queryCount .= " ORDER BY Cost ASC LIMIT 10";
+                        $sql .= " ORDER BY Cost ASC";
+                        $queryCount .= " ORDER BY Cost ASC";
                     }
                     $quantity = mysqli_query($conection, $queryCount);
                     $row = $quantity->fetch_row();
@@ -789,7 +779,7 @@ if (!$conection->set_charset($charset)) {
                                 ?>
                             </form>
                             <?php
-                            pagination(page("", "Участок"), 'Участок');
+
                             ?>
                         </div>
                     </div>
