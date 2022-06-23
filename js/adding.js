@@ -35,3 +35,7 @@ function deleteClass() {
 
 }
 
+function noDigits(event) {
+    if ("-+=_!№;%:?*()\".,".indexOf(event.key) != -1)
+        event.preventDefault();
+}

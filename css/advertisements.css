@@ -385,6 +385,7 @@ h6 {
 }
 
 .left-block__metro select {
+  background: #fff;
   border: 1px solid rgba(0, 0, 0, 0.25);
   border-radius: 5px;
   padding: 8px 24px;

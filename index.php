@@ -420,7 +420,7 @@ if (!$conection->set_charset($charset)) {
                     /
                     <span class="reg">Регистрация</span>
                 </div>
-                <input type="text" placeholder="Имя" name="Name" class="input__form" required>
+                <input type="text" placeholder="Имя" name="Name" class="input__form" required onkeypress="noDigits(event)">
                 <input type="email" placeholder="Email" name="Email" class="input__form" required>
                 <input type="text" placeholder="Номер телефона" name="Number" class="input__form" id="phone" pattern="[\+]\d{1}\s[\(]\d{3}[\)]\s\d{3}[\-]\d{2}[\-]\d{2}" minlength="18" maxlength="18" required>
 

@@ -94,7 +94,7 @@ if (!$conection->set_charset($charset)) {
                                 <div class="left-block__subtitle subtitle">Цена</div>
                                 <div class="left-block__cost-row">
                                     <label for="cost" class="row__cost">Цена</label>
-                                    <input type="text" name="input__cost" class="input__cost" minlength="3">
+                                    <input type="text" name="input__cost" class="input__cost" minlength="3" onkeypress="noDigits(event)">
                                     <label for="cost" class="row__cost">руб.</label>
                                 </div>
                             </div>
@@ -157,7 +157,7 @@ if (!$conection->set_charset($charset)) {
                                         <div class="metro__foot">
                                             <div class="foot__metro">Минут до метро(пешком)</div>
                                             <div>
-                                                <input type="text" class="foot__input" name="foot__input" maxlength="3">
+                                                <input type="text" class="foot__input" name="foot__input" maxlength="3" onkeypress="noDigits(event)">
                                             </div>
                                         </div>
                                     </div>
@@ -168,23 +168,23 @@ if (!$conection->set_charset($charset)) {
                                 <div class="params__container">
                                     <div class="params__row">
                                         <label for="quantity">Количество комнат</label>
-                                        <input type="text" name="params__quantity" id="" maxlength="2">
+                                        <input type="text" name="params__quantity" id="" maxlength="2" onkeypress="noDigits(event)">
                                     </div>
                                     <div class="params__row">
                                         <label for="square">Площадь(м²)</label>
-                                        <input type="text" name="params__square" id="" maxlength="5">
+                                        <input type="text" name="params__square" id="" maxlength="5" onkeypress="noDigits(event)">
                                     </div>
                                     <div class="params__row" id="params__floor">
                                         <label for="floor">Этаж</label>
-                                        <input type="text" name="params__floor" maxlength="3">
+                                        <input type="text" name="params__floor" maxlength="3" onkeypress="noDigits(event)">
                                     </div>
                                     <div class="params__row">
                                         <label for="totalFloor">Этажей в доме</label>
-                                        <input type="text" name="params__totalFloor" id="" maxlength="3">
+                                        <input type="text" name="params__totalFloor" id="" maxlength="3" onkeypress="noDigits(event)">
                                     </div>
                                     <div class="params__row">
                                         <label for="ceilHeight">Высота потолков</label>
-                                        <input type="text" name="params__ceilHeight" id="" maxlength="2">
+                                        <input type="text" name="params__ceilHeight" id="" maxlength="2" onkeypress="noDigits(event)">
                                     </div>
                                     <div class="params__row">
                                         <div class="params__renovation">Ремонт</div>

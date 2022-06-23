@@ -43,3 +43,8 @@ window.onclick = function (event) {
         modal1.style.display = "none";
     }
 }
+
+function noDigits(event) {
+    if ("1234567890".indexOf(event.key) != -1)
+        event.preventDefault();
+}

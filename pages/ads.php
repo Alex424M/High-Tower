@@ -199,7 +199,7 @@ if (!$conection->set_charset($charset)) {
                                     <div class="left-block__metro">
                                         <select name="metro">
                                             <option></option><?php
-                                                                $queryBuy = "SELECT name FROM metroList";
+                                                                $queryBuy = "SELECT name FROM metrolist";
                                                                 $mysqli_query = mysqli_query($conection, $queryBuy);
                                                                 while ($states1 = mysqli_fetch_array($mysqli_query)) { ?>
                                                 <option value="<?= $states1['name']; ?>"><?= $states1['name']; ?></option>
@@ -868,7 +868,7 @@ if (!$conection->set_charset($charset)) {
                     /
                     <span class="reg">Регистрация</span>
                 </div>
-                <input type="text" placeholder="Имя" name="Name" class="input__form" required>
+                <input type="text" placeholder="Имя" name="Name" class="input__form" required onkeypress="noDigits(event)">
                 <input type="email" placeholder="Email" name="Email" class="input__form" required>
                 <input type="text" placeholder="Номер телефона" name="Number" class="input__form" id="phone" pattern="[\+]\d{1}\s[\(]\d{3}[\)]\s\d{3}[\-]\d{2}[\-]\d{2}" minlength="18" maxlength="18" required>
 
