@@ -1,6 +1,16 @@
 <?php
 ob_start();
 session_start();
+$server = "127.0.0.1";
+$username = 'root';
+$password = '';
+$db = 'dbhightower';
+$charset = 'utf8';
+
+$conection = new mysqli($server, $username, $password, $db);
+if (!$conection->set_charset($charset)) {
+    echo "charset err";
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -74,7 +84,6 @@ session_start();
                     } elseif ($_SESSION['SelectArticle'] != -1) {
                         $articleId = $_SESSION['SelectArticle'];
                     }
-                    $mysqli = new mysqli("127.0.0.1", "root", "", "dbhightower");
                     $query = "SELECT *, 
                             (SELECT photo1 FROM photos WHERE announcementID='$articleId') as 'photo1', 
                             (SELECT photo2 FROM photos WHERE announcementID='$articleId') as 'photo2', 
@@ -90,8 +99,8 @@ session_start();
                             (SELECT NumberPhone FROM users WHERE ID=a.IDUser) as 'numberPhone',
                             (SELECT Name FROM users WHERE ID=a.IDUser) as 'user'
                             FROM announcement a WHERE ID='$articleId'";
-                    if (mysqli_num_rows(mysqli_query($mysqli, $query)) > 0) {
-                        $comment = mysqli_fetch_array(mysqli_query($mysqli, $query));
+                    if (mysqli_num_rows(mysqli_query($conection, $query)) > 0) {
+                        $comment = mysqli_fetch_array(mysqli_query($conection, $query));
 
                 ?>
                         <div class="announcement__navigation">
@@ -442,29 +451,18 @@ session_start();
         $pass = $_POST['psw'];
         $key = "GDSHG4385743HGSDHdkfgjdfk4653475JSGHDJSDSKJDF476354";
 
-        header('Content-Type: text/html; charset=utf-8');
-        $link = mysqli_connect('127.0.0.1', 'root', '', 'dbhightower');
-
-
-        if (!$link) die("Error");
-        if (!mysqli_set_charset($link, "utf8")) {
-            printf("Error loading character set utf8: %s\n", mysqli_error($link));
-            exit;
-        }
-
-
 
         if (empty($_POST['Email']) || empty($_POST['psw'])) {
             echo "<script>alert('Заполните все поля')</script>";
             echo "<meta http-equiv='refresh' content='0; url=http://high-tower/pages/ad.php'>";
         } else {
             $queryHash = "SELECT * FROM `users` WHERE `Mail` = '$mail'";
-            $temp1 = mysqli_query($link, $queryHash);
+            $temp1 = mysqli_query($conection, $queryHash);
             $row = mysqli_fetch_array($temp1);
 
             if (password_verify($pass, $row['Pass'])) {
                 $nameTable = "SELECT Name FROM `users` WHERE `Mail` = '$mail'";
-                $text = mysqli_fetch_array(mysqli_query($link, $nameTable));
+                $text = mysqli_fetch_array(mysqli_query($conection, $nameTable));
                 $_SESSION['Id'] = $row['ID'];
                 $_SESSION['Name'] = $text[0];
                 header('Location: ad.php');
@@ -484,26 +482,23 @@ session_start();
         $hash = password_hash($_POST['psw'], PASSWORD_BCRYPT);
         $key = "GDSHG4385743HGSDHdkfgjdfk4653475JSGHDJSDSKJDF476354";
 
-        // error_reporting(0);
-        header('Content-Type: text/html; charset=utf-8');
-        $link = mysqli_connect('127.0.0.1', 'root', '', 'dbhightower');
         if ($pass == $repPass) {
             if (empty($_POST['Name']) || empty($_POST['Email']) || empty($_POST['psw']) || empty($_POST['psw2']) || empty($_POST['Number'])) {
                 echo "<script>alert('Заполните все поля!')</script>";
                 echo "<meta http-equiv='refresh' content='0; url=http://high-tower/pages/ad.php'>";
             } else {
                 $queryMail = "SELECT * FROM `users` WHERE `Mail` = '$mail'";
-                $tempMail = mysqli_query($link, $queryMail);
+                $tempMail = mysqli_query($conection, $queryMail);
                 if (mysqli_num_rows($tempMail) > 0) {
                     echo "<script>alert('Данная почта привязана к другому аккаунту!')</script>";
                     echo "<meta http-equiv='refresh' content='0; url=http://high-tower/pages/ad.php'>";
                 } else {
                     $query = "INSERT INTO `users` (Name, Mail, Pass, NumberPhone) VALUE ('$name', '$mail', '$hash', '$phone')";
-                    if (mysqli_query($link, $query)) {
+                    if (mysqli_query($conection, $query)) {
                         echo "<script>alert('Пользователь успешно добавлен')</script>";
                         echo "<meta http-equiv='refresh' content='0; url=http://high-tower/pages/ad.php'>";
                     } else {
-                        echo "Пользователь не добавлен и за ошибки: " . mysqli_error($link);
+                        echo "Пользователь не добавлен и за ошибки: " . mysqli_error($conection);
                     }
                 }
             }

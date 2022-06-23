@@ -1,6 +1,16 @@
 <?php
 ob_start();
 session_start();
+$server = "127.0.0.1";
+$username = 'root';
+$password = '';
+$db = 'dbhightower';
+$charset = 'utf8';
+
+$conection = new mysqli($server, $username, $password, $db);
+if (!$conection->set_charset($charset)) {
+    echo "charset err";
+}
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -135,11 +145,6 @@ session_start();
                                             <div class="station__metro">Станция метро(железнодорожная)</div>
                                             <select name="metro__input" class="metro__input">
                                                 <option></option><?php
-                                                                    $server = $_SERVER['SERVER_ADDR'];
-                                                                    $username = 'root';
-                                                                    $password = '';
-                                                                    $db = 'dbhightower';
-                                                                    $conection = new mysqli($server, $username, $password, $db);
                                                                     $queryBuy = "SELECT name FROM metroList";
                                                                     $mysqli_query = mysqli_query($conection, $queryBuy);
                                                                     while ($states1 = mysqli_fetch_array($mysqli_query)) { ?>
@@ -214,16 +219,6 @@ session_start();
                         </form>
                     </div>
                     <?php
-                    $server = $_SERVER['SERVER_ADDR'];
-                    $username = 'root';
-                    $password = '';
-                    $db = 'dbhightower';
-                    $charset = 'utf8';
-
-                    $conection = new mysqli($server, $username, $password, $db);
-                    if (!$conection->set_charset($charset)) {
-                        echo "charset err";
-                    }
                     if (isset($_POST["upload"])) {
 
                         $name = $_POST['input__name'];
@@ -289,6 +284,7 @@ session_start();
                             $iii = $conection->query("SELECT MAX(id) as 'id' FROM announcement");
                             $row = mysqli_fetch_array($iii);
                             $conection->close();
+                            //?????????????????????   $db   ?????????????????????????????????
                             $db = new PDO("mysql:host=127.0.0.1;dbname=dbhightower", "root", "");
                             $increment = 0;
                             $pathdir = __DIR__ . "/../imgAppartments/announcement" . $row['id'];
