@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Июн 09 2022 г., 11:33
+-- Время создания: Июн 23 2022 г., 14:26
 -- Версия сервера: 8.0.24
 -- Версия PHP: 7.1.33
 
@@ -31,7 +31,7 @@ CREATE TABLE `announcement` (
   `ID` int NOT NULL,
   `Title` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `Description` text NOT NULL,
-  `Cost` int NOT NULL,
+  `Cost` bigint NOT NULL,
   `Metro` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `transaction` varchar(8) NOT NULL,
   `typeRealty` varchar(12) NOT NULL,
@@ -53,7 +53,6 @@ CREATE TABLE `announcement` (
 INSERT INTO `announcement` (`ID`, `Title`, `Description`, `Cost`, `Metro`, `transaction`, `typeRealty`, `address`, `foot`, `QuantityRoom`, `Floor`, `square`, `totalFloor`, `ceilHeight`, `repair`, `IDUser`) VALUES
 (10, 'Квартира в Новокосино', 'Удобная квартира рядом с метро Новокосино', 12900000, 'Новокосино', ' Продажа', 'Жилая', 'Новокосинская улица, 17к3', 15, 3, 3, 55, 21, 3, 'Евро', 1),
 (11, 'Квартира на Щелковская', 'Квартира на Щелковская', 40000, 'Щелковская', ' Аренда', 'Квартира', 'Уральская улица, 6к4', 15, 2, 3, 36, 5, 3, 'Евро', 1),
-(12, 'Квартира в Ховрино', 'ry jryjb ydhbyedy6vby 64w u76uery jryjb ydhbyedy6vby 64w u76uery jryjb ydhbyedy6vby 64w u76uery jryjb ydhbyedy6vby 64w u76uery jryjb ydhbyedy6vby 64w u76uery jryjb ydhbyedy6vby 64w u76uery jryjb ydhbyedy6vby 64w u76uery jryjb ydhbyedy6vby 64w u76uery jryjb ydhbyedy6vby 64w u76uery jryjb ydhbyedy6vby 64w u76uery jryjb ydhbyedy6vby 64w u76ue', 12300000, 'Ховрино', ' Продажа', 'Новостройка', 'улица Дыбенко, 36к3', 5, 2, 21, 31, 21, 3, 'Косметический', 1),
 (13, 'Продаю квартиру в Москве', 'Продаю квартиру в МосквеПродаю квартиру в МосквеПродаю квартиру в МосквеПродаю квартиру в МосквеПродаю квартиру в МосквеПродаю квартиру в МосквеПродаю квартиру в МосквеПродаю квартиру в Москве', 12000000, 'Стахановская', ' Продажа', 'Жилая', 'улица Михайлова, 25', 15, 3, 3, 80, 33, 3, 'Евро', 1),
 (14, 'квартира на соколе', 'квартира на соколеквартира на соколеквартира на соколеквартира на соколеквартира на соколеквартира на соколеквартира на соколеквартира на соколеквартира на соколеквартира на соколеквартира на соколеквартира на соколе', 12078063, 'Сокол', ' Продажа', 'Жилая', 'улица Усиевича, 31Ас3', 5, 3, 4, 90, 5, 3, 'Евро', 1),
 (15, '3х комнатная квартира на площадь ильича', '3х комнатная квартира на площадь ильича3х комнатная квартира на площадь ильича3х комнатная квартира на площадь ильича3х комнатная квартира на площадь ильича3х комнатная квартира на площадь ильича3х комнатная квартира на площадь ильича3х комнатная квартира на площадь ильича3х комнатная квартира на площадь ильича', 30000000, 'Площадь Иьича', ' Продажа', 'Жилая', 'шоссе Энтузиастов, 3Ак1', 20, 3, 20, 100, 21, 3, 'Косметический', 2),
@@ -76,7 +75,8 @@ INSERT INTO `announcement` (`ID`, `Title`, `Description`, `Cost`, `Metro`, `tran
 (50, 'Продам участок', 'Продам участокП родам участокПрода м участокПро дам участокПро дам участок', 10000000, 'Ликино', ' Продажа', 'Участок', 'Ликино', 50, 3, 2, 100, 3, 3, 'Косметический', 1),
 (61, 'Новостройка', 'НовостройкаН овостройкаНово стройкаНовостройка', 15000000, 'Строгино', ' Продажа', 'Новостройка', 'Россия, Москва, метро Строгино ', 12, 0, 3, 3, 21, 3, 'Евро', 5),
 (62, 'Сдам квартиру', 'Сдам квартируСдам квартируСдам квартируСдам квартируСдам квартируСдам квартируСдам квартируСдам квартируСдам квартиру', 30000, 'Щукинская', ' Аренда', 'Жилая', 'Россия, Москва, улица Паршина, 10 ', 20, 2, 3, 60, 5, 3, 'Евро', 5),
-(63, 'Аренда квартиры', 'Аренда квартир ыАренда квартирыАренда квартирыАренда квартиры', 30000, 'Молодежная', ' Аренда', 'Жилая', 'Россия, Москва, Молодогвардейская улица, 61 ', 30, 1, 4, 40, 9, 3, 'Евро', 5);
+(63, 'Аренда квартиры', 'Аренда квартир ыАренда квартирыАренда квартирыАренда квартиры', 30000, 'Молодежная', ' Аренда', 'Жилая', 'Россия, Москва, Молодогвардейская улица, 61 ', 30, 1, 4, 40, 9, 3, 'Евро', 5),
+(68, 'Продам квартиру почти новая', 'Продам квартиру почти новая', 120000090, 'Строгино', ' Продажа', 'Жилая', 'Россия, Москва, метро Строгино ', 13, 3, 4, 90, 24, 3, 'Евро', 6);
 
 -- --------------------------------------------------------
 
@@ -427,7 +427,6 @@ INSERT INTO `photos` (`announcementID`, `photo1`, `photo2`, `photo3`, `photo4`, 
 (15, '4.png', '5.png', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (14, '6.png', '7.png', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (13, '8.png', '9.png', '1294146969-1.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(12, 'gt.png', '1.png', '1294147062-1.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (10, '1.png', '1.png', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (25, '1.png', '2.png', '3.png', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (24, '4.png', '5.png', '6.png', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -446,7 +445,8 @@ INSERT INTO `photos` (`announcementID`, `photo1`, `photo2`, `photo3`, `photo4`, 
 (50, 'uchastok-dmitrovka-layf-1298550445-1.jpg', 'uchastok-dmitrovka-layf-1301842444-1.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (61, '1148109952-1.jpg', '1148110040-1.jpg', '1172354088-1.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (62, '9.png', '10.png', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(63, '1.png', '2.png', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+(63, '1.png', '2.png', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(68, '7.png', '8.png', '9.png', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -471,7 +471,8 @@ INSERT INTO `users` (`ID`, `Name`, `Mail`, `Pass`, `NumberPhone`) VALUES
 (2, 'Анастасия', 'nastya@mail.ru', '$2y$10$Qfc5QlKu4CW0N7i6UxFP7.JmYc2WRwJ8sHIgf8A7w8AjVDPjzD2cG', '+7 (903) 432-21-12'),
 (3, 'Сергей', 'serj@mail.ru', '$2y$10$WB6dvwu2oF82UuuoTCem5O1L6Ny7M8nnOX7e1M4KzRUVMUxFt25wO', '+7 (903) 112-31-23'),
 (4, 'Михаил', 'mih@mail.ru', '$2y$10$nRo8/h1BWkS2BpTYrsDZ0.pQoJfM0N3IqAynt2ac1Hqyi8PXZFkjO', '+7 (905) 987-12-31'),
-(5, 'Людмила', 'lud@mail.ru', '$2y$10$d.WCYh35lNfgu45uRfmv2u4ocp9LVp5GcipoeZDA25xoGOn/2ZltW', '+7 (983) 123-12-12');
+(5, 'Людмила', 'lud@mail.ru', '$2y$10$d.WCYh35lNfgu45uRfmv2u4ocp9LVp5GcipoeZDA25xoGOn/2ZltW', '+7 (983) 123-12-12'),
+(6, 'Павел', 'pavel@mail.ru', '$2y$10$NHbl5KQ9LeylMluzszngb.hE7YWwwDsiCf5bfKY3sbalo3l8xQLrW', '+7 (998) 988-79-78');
 
 --
 -- Индексы сохранённых таблиц
@@ -510,7 +511,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `announcement`
 --
 ALTER TABLE `announcement`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
 -- AUTO_INCREMENT для таблицы `metrolist`
@@ -522,7 +523,7 @@ ALTER TABLE `metrolist`
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц
